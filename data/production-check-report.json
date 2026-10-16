@@ -1,0 +1,11 @@
+{
+  "httpResourcesVerified": 2396,
+  "contentPackages": 87,
+  "photoRecords": 594,
+  "grammarPackages": 215,
+  "responsivePhotos": 1188,
+  "audioLookupShards": 256,
+  "sampleMp3OverHttp": 24,
+  "requiredMp3PresentInBuild": 49825,
+  "browserRenderingVerified": false
+}

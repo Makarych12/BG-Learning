@@ -1,0 +1,80 @@
+{
+  "phase": "before",
+  "environment": "Node performance API; not browser paint, FPS, interaction latency or device RAM",
+  "railBuildAllSections": {
+    "firstMs": 130.87658299999998,
+    "medianMs": 92.920797,
+    "maxMs": 130.87658299999998
+  },
+  "railSelect15": {
+    "firstMs": 6.143293000000085,
+    "medianMs": 2.439927000000125,
+    "maxMs": 6.143293000000085
+  },
+  "verbSearchSixQueries": {
+    "firstMs": 6.3206219999999576,
+    "medianMs": 5.856800999999905,
+    "maxMs": 6.804347000000007
+  },
+  "initialStaticJS": {
+    "bytes": 1556936,
+    "gzipBytes": 264891,
+    "modules": [
+      "index-CbQKo7PJ.js",
+      "learning-vendor-Cbtz-A0M.js",
+      "motion-vendor-CTKTYSB5.js",
+      "react-vendor-RfO68FCT.js"
+    ]
+  },
+  "totalJS": {
+    "bytes": 3650210,
+    "gzipBytes": 686772
+  },
+  "assets": [
+    {
+      "name": "ContentHub-yf9WwYfh.js",
+      "bytes": 83063,
+      "gzipBytes": 24095
+    },
+    {
+      "name": "CorpusCards-CKBcZwFl.js",
+      "bytes": 15090,
+      "gzipBytes": 5600
+    },
+    {
+      "name": "PracticePlayer-CvjLhPHV.js",
+      "bytes": 1143662,
+      "gzipBytes": 266800
+    },
+    {
+      "name": "grammar-data-DsMhGuOH.js",
+      "bytes": 845711,
+      "gzipBytes": 123026
+    },
+    {
+      "name": "index-CbQKo7PJ.js",
+      "bytes": 1299207,
+      "gzipBytes": 179525
+    },
+    {
+      "name": "learning-vendor-Cbtz-A0M.js",
+      "bytes": 117946,
+      "gzipBytes": 39083
+    },
+    {
+      "name": "motion-vendor-CTKTYSB5.js",
+      "bytes": 135804,
+      "gzipBytes": 44846
+    },
+    {
+      "name": "react-vendor-RfO68FCT.js",
+      "bytes": 3979,
+      "gzipBytes": 1437
+    },
+    {
+      "name": "workbox-window.prod.es5-BBnX5xw4.js",
+      "bytes": 5748,
+      "gzipBytes": 2360
+    }
+  ]
+}

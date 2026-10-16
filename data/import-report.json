@@ -1,0 +1,14 @@
+{
+  "counts": {
+    "words": 10981,
+    "sentences": 2242,
+    "licensedAudio": 0,
+    "stress": 1553
+  },
+  "rejected": {
+    "affix-or-unknown": 19,
+    "no-lexical-definition": 49,
+    "non-cyrillic": 68
+  },
+  "sentenceUsers": 48
+}

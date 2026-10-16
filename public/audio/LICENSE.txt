@@ -1,0 +1,2 @@
+Bulgarian synthesized speech: Piper bg_BG-dimitar-medium. Source voice dataset: CC0. Model card: https://huggingface.co/rhasspy/piper-voices/blob/main/bg/bg_BG/dimitar/medium/MODEL_CARD
+Text licenses: Wiktionary CC BY-SA 4.0, Tatoeba CC BY 2.0 FR; see per-item source attribution in the application. No phonetic accuracy certification.

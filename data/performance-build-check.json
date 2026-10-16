@@ -1,0 +1,13 @@
+{
+  "initialStaticModules": [
+    "assets/index-CzFzsB9S.js",
+    "assets/motion-vendor-CTKTYSB5.js",
+    "assets/react-vendor-RfO68FCT.js",
+    "assets/learning-vendor-Cbtz-A0M.js"
+  ],
+  "precacheEntries": 22,
+  "precacheBytes": 1261092,
+  "largeDatasetsInInitialGraph": false,
+  "bulkMediaInPrecache": false,
+  "browserRenderingVerified": false
+}

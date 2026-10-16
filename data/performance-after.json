@@ -1,0 +1,170 @@
+{
+  "phase": "after",
+  "environment": "Node performance API; not browser paint, FPS, interaction latency or device RAM",
+  "railBuildAllSections": {
+    "firstMs": 45.651733000000036,
+    "medianMs": 0.008101000000010572,
+    "maxMs": 45.651733000000036
+  },
+  "railSelect15": {
+    "firstMs": 6.99648099999996,
+    "medianMs": 1.584922000000006,
+    "maxMs": 6.99648099999996
+  },
+  "verbSearchSixQueries": {
+    "firstMs": 1.1261299999999892,
+    "medianMs": 0.6817960000000198,
+    "maxMs": 1.1261299999999892
+  },
+  "initialStaticJS": {
+    "bytes": 662174,
+    "gzipBytes": 219210,
+    "modules": [
+      "index-CzFzsB9S.js",
+      "learning-vendor-Cbtz-A0M.js",
+      "motion-vendor-CTKTYSB5.js",
+      "react-vendor-RfO68FCT.js"
+    ]
+  },
+  "totalJS": {
+    "bytes": 4111576,
+    "gzipBytes": 803631
+  },
+  "assets": [
+    {
+      "name": "ContentHub-7hexV5_0.js",
+      "bytes": 44814,
+      "gzipBytes": 13161
+    },
+    {
+      "name": "CorpusCards-DyxYh_do.js",
+      "bytes": 15314,
+      "gzipBytes": 5694
+    },
+    {
+      "name": "ListeningLab-B6XrAPL5.js",
+      "bytes": 565710,
+      "gzipBytes": 22933
+    },
+    {
+      "name": "PhotoGallery-hZ1-K2K9.js",
+      "bytes": 2547,
+      "gzipBytes": 1307
+    },
+    {
+      "name": "RailAcademy-B-_nOvuv.js",
+      "bytes": 4550,
+      "gzipBytes": 2262
+    },
+    {
+      "name": "RailLessons-8XepMrjp.js",
+      "bytes": 23214,
+      "gzipBytes": 7632
+    },
+    {
+      "name": "VerbReference-mk2STgrR.js",
+      "bytes": 12208,
+      "gzipBytes": 4885
+    },
+    {
+      "name": "VoiceLab-ii1S1Znb.js",
+      "bytes": 335921,
+      "gzipBytes": 25001
+    },
+    {
+      "name": "content-worker-DO6L8NHc.js",
+      "bytes": 998,
+      "gzipBytes": 681
+    },
+    {
+      "name": "curriculum-CwPa4kTs.js",
+      "bytes": 845741,
+      "gzipBytes": 123048
+    },
+    {
+      "name": "dialogues-t9cMNe_A.js",
+      "bytes": 589636,
+      "gzipBytes": 142444
+    },
+    {
+      "name": "grammar-practice-BjKYU6Rf.js",
+      "bytes": 2500,
+      "gzipBytes": 1370
+    },
+    {
+      "name": "index-CzFzsB9S.js",
+      "bytes": 404445,
+      "gzipBytes": 133844
+    },
+    {
+      "name": "json-resource-CR1vxY_9.js",
+      "bytes": 371,
+      "gzipBytes": 272
+    },
+    {
+      "name": "learning-vendor-Cbtz-A0M.js",
+      "bytes": 117946,
+      "gzipBytes": 39083
+    },
+    {
+      "name": "library-CIIjvinM.js",
+      "bytes": 37545,
+      "gzipBytes": 10529
+    },
+    {
+      "name": "motion-vendor-CTKTYSB5.js",
+      "bytes": 135804,
+      "gzipBytes": 44846
+    },
+    {
+      "name": "photo-data-27xMOnZ2.js",
+      "bytes": 57,
+      "gzipBytes": 75
+    },
+    {
+      "name": "photos-DEuIRpL4.js",
+      "bytes": 288411,
+      "gzipBytes": 66286
+    },
+    {
+      "name": "practice-BxrUY30B.js",
+      "bytes": 8676,
+      "gzipBytes": 3523
+    },
+    {
+      "name": "rail-conversations-BAnuN79z.js",
+      "bytes": 28185,
+      "gzipBytes": 7794
+    },
+    {
+      "name": "rail-dialogues-Cl_VhlrK.js",
+      "bytes": 56515,
+      "gzipBytes": 10476
+    },
+    {
+      "name": "rail-practice-BYzSm_Vk.js",
+      "bytes": 9622,
+      "gzipBytes": 3628
+    },
+    {
+      "name": "rail-worker-e_d_HMhd.js",
+      "bytes": 362317,
+      "gzipBytes": 89568
+    },
+    {
+      "name": "railway-BnVhcHZt.js",
+      "bytes": 208802,
+      "gzipBytes": 39492
+    },
+    {
+      "name": "react-vendor-RfO68FCT.js",
+      "bytes": 3979,
+      "gzipBytes": 1437
+    },
+    {
+      "name": "workbox-window.prod.es5-BBnX5xw4.js",
+      "bytes": 5748,
+      "gzipBytes": 2360
+    }
+  ]
+}

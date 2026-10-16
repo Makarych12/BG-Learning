@@ -1,0 +1,831 @@
+{
+  "schema": 1,
+  "version": "0.3.0",
+  "builtAt": "2026-10-16",
+  "counts": {
+    "words": 16658,
+    "sentences": 18239,
+    "licensedAudio": 0,
+    "stress": 4388,
+    "directTranslationEntries": 5677,
+    "activeWords": 1395,
+    "contextLinks": 19692
+  },
+  "packages": [
+    {
+      "id": "dictionary-001",
+      "kind": "dictionary",
+      "title": "а — алпинизъм",
+      "count": 400,
+      "bytes": 882232,
+      "sha256": "272513b5dba311caeabc96a9d8cbca4257c785b9bf8f4049fd1edbc26faa5984",
+      "url": "/content/dictionary-001.json"
+    },
+    {
+      "id": "dictionary-002",
+      "kind": "dictionary",
+      "title": "алпинист — Баал",
+      "count": 400,
+      "bytes": 480369,
+      "sha256": "4f6ff4269910cc4c1f73a0dd5e1620f5ffb8052590dd48ab33851d51e49bab4e",
+      "url": "/content/dictionary-002.json"
+    },
+    {
+      "id": "dictionary-003",
+      "kind": "dictionary",
+      "title": "Баб ел-Мандеб — боб",
+      "count": 400,
+      "bytes": 639703,
+      "sha256": "c6224eb4b420b52adeacbd6cff4fe343cc748f724275b90802abcf5d37cdbcea",
+      "url": "/content/dictionary-003.json"
+    },
+    {
+      "id": "dictionary-004",
+      "kind": "dictionary",
+      "title": "бобслей — вещица",
+      "count": 400,
+      "bytes": 721174,
+      "sha256": "f969a31ac838400cc0a949b5d7c188ebe8882b5d67b3036094ffe938f8a85e22",
+      "url": "/content/dictionary-004.json"
+    },
+    {
+      "id": "dictionary-005",
+      "kind": "dictionary",
+      "title": "взвод — гамета",
+      "count": 400,
+      "bytes": 597369,
+      "sha256": "679a25673695396f753898ee86e73e43f1d6c130820521dcac160c13fb156763",
+      "url": "/content/dictionary-005.json"
+    },
+    {
+      "id": "dictionary-006",
+      "kind": "dictionary",
+      "title": "Гана — гълъбица",
+      "count": 400,
+      "bytes": 724797,
+      "sha256": "d1df36032335600c374b1af7de5a1493975020e72fb14a6531378bc9c6d3da47",
+      "url": "/content/dictionary-006.json"
+    },
+    {
+      "id": "dictionary-007",
+      "kind": "dictionary",
+      "title": "Гълъбово — доброта",
+      "count": 400,
+      "bytes": 455177,
+      "sha256": "0c9affd3392f446d0756c371a49847cc04fbddaf1d9a9f9ca7818ee1e9811856",
+      "url": "/content/dictionary-007.json"
+    },
+    {
+      "id": "dictionary-008",
+      "kind": "dictionary",
+      "title": "доброчестина — елемент",
+      "count": 400,
+      "bytes": 589528,
+      "sha256": "3667da329ab6d0108e1e30382240e563097a70ad0adbdd2ce07e621a4c2dd16e",
+      "url": "/content/dictionary-008.json"
+    },
+    {
+      "id": "dictionary-009",
+      "kind": "dictionary",
+      "title": "елементарна функция — захарна тръстика",
+      "count": 400,
+      "bytes": 571262,
+      "sha256": "ad396747463e2e941ac3571fb47ae7336b4302a3830d5be7d76246dfd67ad3ab",
+      "url": "/content/dictionary-009.json"
+    },
+    {
+      "id": "dictionary-010",
+      "kind": "dictionary",
+      "title": "захарница — индонезийски",
+      "count": 400,
+      "bytes": 662264,
+      "sha256": "27b9e83983483cb0583a789156199d852738cf92c5df1b1140a2208671c4c3b4",
+      "url": "/content/dictionary-010.json"
+    },
+    {
+      "id": "dictionary-011",
+      "kind": "dictionary",
+      "title": "индуизъм — кератоскопия",
+      "count": 400,
+      "bytes": 490428,
+      "sha256": "52511af3a91b7714af45c632b59ab9702d667da769d4a98ab6b55e44538fd390",
+      "url": "/content/dictionary-011.json"
+    },
+    {
+      "id": "dictionary-012",
+      "kind": "dictionary",
+      "title": "керван — космос",
+      "count": 400,
+      "bytes": 495037,
+      "sha256": "dc626f4453e46b008e36f56564bb45ca0d46c1812af78f5ac77456e54f8c0731",
+      "url": "/content/dictionary-012.json"
+    },
+    {
+      "id": "dictionary-013",
+      "kind": "dictionary",
+      "title": "косопад — либерализъм",
+      "count": 400,
+      "bytes": 647310,
+      "sha256": "ffb1861ae43301db94b966f5dd8e1b892eaf936764cd3519caafeedccce40154",
+      "url": "/content/dictionary-013.json"
+    },
+    {
+      "id": "dictionary-014",
+      "kind": "dictionary",
+      "title": "либидо — Медногорск",
+      "count": 400,
+      "bytes": 467794,
+      "sha256": "9b2c6b9c7934bcf4577720dfbab7053e72d7f6544748c1972f7c55b7c0401281",
+      "url": "/content/dictionary-014.json"
+    },
+    {
+      "id": "dictionary-015",
+      "kind": "dictionary",
+      "title": "медовина — мочур",
+      "count": 400,
+      "bytes": 528110,
+      "sha256": "ae35a5553a36c31c16c1c5624dfa66ec613e1fabe9330fb7287c3d5d79614b78",
+      "url": "/content/dictionary-015.json"
+    },
+    {
+      "id": "dictionary-016",
+      "kind": "dictionary",
+      "title": "мочурлив — неутрон",
+      "count": 400,
+      "bytes": 730830,
+      "sha256": "2dc7aab10c41f8e49ac11ed8117187d0ec23a07ed54feb043c0d16de95f03cb0",
+      "url": "/content/dictionary-016.json"
+    },
+    {
+      "id": "dictionary-017",
+      "kind": "dictionary",
+      "title": "неучтив — отнасям",
+      "count": 400,
+      "bytes": 585016,
+      "sha256": "2d8d3cb7b739628379eafff7101750819322ddcad447cf0dd6fb5ef3555c4d03",
+      "url": "/content/dictionary-017.json"
+    },
+    {
+      "id": "dictionary-018",
+      "kind": "dictionary",
+      "title": "относителен — пламък",
+      "count": 400,
+      "bytes": 511612,
+      "sha256": "8107d91f289130c129b2b836d0bcb7bee561ed3266dc51312630fd974f3d1235",
+      "url": "/content/dictionary-018.json"
+    },
+    {
+      "id": "dictionary-019",
+      "kind": "dictionary",
+      "title": "планета — прашинка",
+      "count": 400,
+      "bytes": 687828,
+      "sha256": "585f9f8a58706d45349acf6e35cb7814b70e60a46a3be5c65f0593bc101b8aa3",
+      "url": "/content/dictionary-019.json"
+    },
+    {
+      "id": "dictionary-020",
+      "kind": "dictionary",
+      "title": "прашка — работилница",
+      "count": 400,
+      "bytes": 782002,
+      "sha256": "b6640a8a336fd22f2682db49e0b2ac09419ba9a52f888a7fad23a699d24df053",
+      "url": "/content/dictionary-020.json"
+    },
+    {
+      "id": "dictionary-021",
+      "kind": "dictionary",
+      "title": "работлив — сакрализирам",
+      "count": 400,
+      "bytes": 581823,
+      "sha256": "6fe7f3a4f66266bac7bec34b2d0816f8fb2d90273216ddcfc9b79e7538029290",
+      "url": "/content/dictionary-021.json"
+    },
+    {
+      "id": "dictionary-022",
+      "kind": "dictionary",
+      "title": "сакралност — слънце",
+      "count": 400,
+      "bytes": 492730,
+      "sha256": "d92391b9b813bb881f77e330aea843ac39fb565196481c2b3b442aae882484b3",
+      "url": "/content/dictionary-022.json"
+    },
+    {
+      "id": "dictionary-023",
+      "kind": "dictionary",
+      "title": "слънцестоене — съответствие",
+      "count": 400,
+      "bytes": 725285,
+      "sha256": "3aab42c8396c44e3017cbb5fb95254488aebc5928b2452151422f34ab7244205",
+      "url": "/content/dictionary-023.json"
+    },
+    {
+      "id": "dictionary-024",
+      "kind": "dictionary",
+      "title": "съотечественик — трибагреник",
+      "count": 400,
+      "bytes": 480905,
+      "sha256": "932c77f41621066ff68309968d402426eee6881747b2a977c47ac18bd8f25028",
+      "url": "/content/dictionary-024.json"
+    },
+    {
+      "id": "dictionary-025",
+      "kind": "dictionary",
+      "title": "триглиф — филателист",
+      "count": 400,
+      "bytes": 612919,
+      "sha256": "70bd956eec2f6fa4a9c19afadb0c3320a5e601a2735e9000cd71df4fc1cf4a71",
+      "url": "/content/dictionary-025.json"
+    },
+    {
+      "id": "dictionary-026",
+      "kind": "dictionary",
+      "title": "филателия — ход",
+      "count": 400,
+      "bytes": 458735,
+      "sha256": "6057f9f4555e357c5d1c68c0a1cf25e5a78060915e0b4ec767c3e189c2580b28",
+      "url": "/content/dictionary-026.json"
+    },
+    {
+      "id": "dictionary-027",
+      "kind": "dictionary",
+      "title": "ходене — шептя",
+      "count": 400,
+      "bytes": 586140,
+      "sha256": "d0e4989e976967fe479fefe0f443c3600c8f225f0a3335d096e05898d3f0354d",
+      "url": "/content/dictionary-027.json"
+    },
+    {
+      "id": "dictionary-028",
+      "kind": "dictionary",
+      "title": "шериат — яхър",
+      "count": 181,
+      "bytes": 269166,
+      "sha256": "827215c2deae31c4846378715245bab9c8ecf623e60c294c6430ec720f80cbfd",
+      "url": "/content/dictionary-028.json"
+    },
+    {
+      "id": "sentences-001",
+      "kind": "sentences",
+      "title": "Контексты 1–300",
+      "count": 300,
+      "bytes": 243646,
+      "sha256": "cc9b8c8a20b30b5e9009f85e28e943e30c083d9061624e8463790b77e992244f",
+      "url": "/content/sentences-001.json"
+    },
+    {
+      "id": "sentences-002",
+      "kind": "sentences",
+      "title": "Контексты 301–600",
+      "count": 300,
+      "bytes": 253668,
+      "sha256": "fa175e76f3d671fb8b8a6d4782b723be8cde54ae54ef181be463629bb74c5e5e",
+      "url": "/content/sentences-002.json"
+    },
+    {
+      "id": "sentences-003",
+      "kind": "sentences",
+      "title": "Контексты 601–900",
+      "count": 300,
+      "bytes": 248169,
+      "sha256": "fddaf8ac5fec3d32196213488bb61090bf0eda8650e0ef34acc51724a3e199fa",
+      "url": "/content/sentences-003.json"
+    },
+    {
+      "id": "sentences-004",
+      "kind": "sentences",
+      "title": "Контексты 901–1200",
+      "count": 300,
+      "bytes": 266967,
+      "sha256": "33022efa01ff753409cda9a1d89fb59a48a23bedf65f3b6d9b760ad0a1b55a28",
+      "url": "/content/sentences-004.json"
+    },
+    {
+      "id": "sentences-005",
+      "kind": "sentences",
+      "title": "Контексты 1201–1500",
+      "count": 300,
+      "bytes": 252341,
+      "sha256": "aecad294d5c9c5c77077e5bf753e990bf867328336200a229c83283078b463df",
+      "url": "/content/sentences-005.json"
+    },
+    {
+      "id": "sentences-006",
+      "kind": "sentences",
+      "title": "Контексты 1501–1800",
+      "count": 300,
+      "bytes": 235956,
+      "sha256": "c4040cf6f9298923a303fa10a9705e92abcca3c3afea9cf885c86f8a53736495",
+      "url": "/content/sentences-006.json"
+    },
+    {
+      "id": "sentences-007",
+      "kind": "sentences",
+      "title": "Контексты 1801–2100",
+      "count": 300,
+      "bytes": 235039,
+      "sha256": "2b137fbfafae3c2f70b4f302afb274a9331129aa470df7d30bc3135f16693071",
+      "url": "/content/sentences-007.json"
+    },
+    {
+      "id": "sentences-008",
+      "kind": "sentences",
+      "title": "Контексты 2101–2242",
+      "count": 142,
+      "bytes": 114906,
+      "sha256": "c609e2cb8f0abfe5b3c7e789626abd131391a2d3910c1c2f1c9a12b4f4f55e9e",
+      "url": "/content/sentences-008.json"
+    },
+    {
+      "id": "dictionary-reverse-001",
+      "kind": "dictionary",
+      "title": "-изъм — бедрена кост",
+      "count": 400,
+      "bytes": 329655,
+      "sha256": "e59f7778ba395c1b6ce1bced883294a75f04b4d3dd42c19733f5bc7739cbbdaa",
+      "url": "/content/dictionary-reverse-001.json"
+    },
+    {
+      "id": "dictionary-reverse-002",
+      "kind": "dictionary",
+      "title": "Беер Шева — Войчех",
+      "count": 400,
+      "bytes": 337649,
+      "sha256": "4f93c6eb50afad9cfb6910e171e1141544e1ea5d7886b6e620afd14745f1f30e",
+      "url": "/content/dictionary-reverse-002.json"
+    },
+    {
+      "id": "dictionary-reverse-003",
+      "kind": "dictionary",
+      "title": "вокализ — Диана",
+      "count": 400,
+      "bytes": 342322,
+      "sha256": "47d682ed923c02175b7b1f2759dfb724a141643e135fc4db7ee7fb95366e4fce",
+      "url": "/content/dictionary-reverse-003.json"
+    },
+    {
+      "id": "dictionary-reverse-004",
+      "kind": "dictionary",
+      "title": "диархия — замбийски",
+      "count": 400,
+      "bytes": 346992,
+      "sha256": "cd4f7edf50531d2ac2935136fcbf98dae4bf320a6768c7f90524ec2c336a9cdb",
+      "url": "/content/dictionary-reverse-004.json"
+    },
+    {
+      "id": "dictionary-reverse-005",
+      "kind": "dictionary",
+      "title": "замисъл — картина",
+      "count": 400,
+      "bytes": 345706,
+      "sha256": "d8fd46116b2eded3c25d429e599a2c4ef8bc7f7ff3f910a992584375416ee376",
+      "url": "/content/dictionary-reverse-005.json"
+    },
+    {
+      "id": "dictionary-reverse-006",
+      "kind": "dictionary",
+      "title": "картинг — лаоски",
+      "count": 400,
+      "bytes": 357807,
+      "sha256": "33ccf5c6b5225832b2c3456997f9f5d502ce11405f3106353cdfa71b14e470bd",
+      "url": "/content/dictionary-reverse-006.json"
+    },
+    {
+      "id": "dictionary-reverse-007",
+      "kind": "dictionary",
+      "title": "лапаротомия — молла",
+      "count": 400,
+      "bytes": 343885,
+      "sha256": "139a22ef13197caa90060c492c1b76b10c2b2d841a7572eb6f76cb8eab74f39b",
+      "url": "/content/dictionary-reverse-007.json"
+    },
+    {
+      "id": "dictionary-reverse-008",
+      "kind": "dictionary",
+      "title": "Молукски острови — нитроцелулоза",
+      "count": 400,
+      "bytes": 363464,
+      "sha256": "f3827fcbcbcffff9912379ae912acd793c5fa5e89419634f209d08ce59eecc6a",
+      "url": "/content/dictionary-reverse-008.json"
+    },
+    {
+      "id": "dictionary-reverse-009",
+      "kind": "dictionary",
+      "title": "нихоний — пасбище",
+      "count": 400,
+      "bytes": 353490,
+      "sha256": "8414c7d41c1fd8c28496bad2a841af003ec75759d59e44ec60053492527c79f2",
+      "url": "/content/dictionary-reverse-009.json"
+    },
+    {
+      "id": "dictionary-reverse-010",
+      "kind": "dictionary",
+      "title": "пасивно пушене — прехвърлям товар",
+      "count": 400,
+      "bytes": 359210,
+      "sha256": "a1dcb6b55daf3b0a04eb5dc9f660c29f12f57f0647535046025ec0403ce5640d",
+      "url": "/content/dictionary-reverse-010.json"
+    },
+    {
+      "id": "dictionary-reverse-011",
+      "kind": "dictionary",
+      "title": "преходна икономика — Самарска област",
+      "count": 400,
+      "bytes": 361439,
+      "sha256": "82fda074bf3be709babf9ef801706a34d9acd8a13513e2d54ea6ace75f5f611a",
+      "url": "/content/dictionary-reverse-011.json"
+    },
+    {
+      "id": "dictionary-reverse-012",
+      "kind": "dictionary",
+      "title": "самец — сфера",
+      "count": 400,
+      "bytes": 351248,
+      "sha256": "444cb22ec82ebfb44d8651ea58c7c072173d6b09ccb02aaad98163e1286b8f20",
+      "url": "/content/dictionary-reverse-012.json"
+    },
+    {
+      "id": "dictionary-reverse-013",
+      "kind": "dictionary",
+      "title": "сфинктер — ушкуйник",
+      "count": 400,
+      "bytes": 342419,
+      "sha256": "1b4b09d58031e42663d2068c63178468b2ca66cb4b7f7f6bcc3ad1335c8dae1a",
+      "url": "/content/dictionary-reverse-013.json"
+    },
+    {
+      "id": "dictionary-reverse-014",
+      "kind": "dictionary",
+      "title": "ушна тъпанка — Шри Ланка",
+      "count": 400,
+      "bytes": 338060,
+      "sha256": "cb9771e6ee832bcbae79780f88845a18338621ccd06491c7de5573aad78d3d10",
+      "url": "/content/dictionary-reverse-014.json"
+    },
+    {
+      "id": "dictionary-reverse-015",
+      "kind": "dictionary",
+      "title": "шугаринг — Яуза",
+      "count": 77,
+      "bytes": 63867,
+      "sha256": "f6aab0bec001cd6e805c5c9c716bad5964c5f33a6003c23d99bc79907575e81f",
+      "url": "/content/dictionary-reverse-015.json"
+    },
+    {
+      "id": "sentences-wiktionary-001",
+      "kind": "sentences",
+      "title": "Контексты Викисловаря",
+      "url": "/content/sentences-wiktionary-001.json",
+      "count": 300,
+      "bytes": 366072,
+      "sha256": "1a64f73d34fdfc6b2ddecd0257adf2dbe457296d2168448873a9717dc2ba96a6"
+    },
+    {
+      "id": "sentences-wiktionary-002",
+      "kind": "sentences",
+      "title": "Контексты Викисловаря",
+      "url": "/content/sentences-wiktionary-002.json",
+      "count": 117,
+      "bytes": 178064,
+      "sha256": "1bc06c502bc56240a550df76537d97b82e8dabd00b0261c6e020cdb0bc75d9e3"
+    },
+    {
+      "id": "sentences-professional-001",
+      "kind": "sentences",
+      "title": "Профессиональные учебные разговоры",
+      "count": 200,
+      "bytes": 188343,
+      "sha256": "fa3d470a9fb2726fd078d41a9d03c2e11624b290e17f41b0e7e93046388954ef",
+      "url": "/content/sentences-professional-001.json"
+    },
+    {
+      "id": "sentences-flores-001",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 671238,
+      "sha256": "bce5b1e27b3dd4ee17be6dd2deca6f81372bbfefac2809154d1999bea9b148c7",
+      "url": "/content/sentences-flores-001.json"
+    },
+    {
+      "id": "sentences-flores-002",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 670738,
+      "sha256": "a7f13b731a800d313925312eb4b18603829fe4a26609e97bb37d1da44e851cd0",
+      "url": "/content/sentences-flores-002.json"
+    },
+    {
+      "id": "sentences-flores-003",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 673660,
+      "sha256": "14affd639b0f28ce352af9f4216b77e0898883ecde49694d7e5888f9194a120f",
+      "url": "/content/sentences-flores-003.json"
+    },
+    {
+      "id": "sentences-flores-004",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 701080,
+      "sha256": "c4fff18f4ec9e3220a07c0e6a54dfb026fa16bf87d89a31ec2f81f0e13059664",
+      "url": "/content/sentences-flores-004.json"
+    },
+    {
+      "id": "sentences-flores-005",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 690078,
+      "sha256": "9710424199bf66122641beafc7abb50f07ae589557d312e750912e2e86b3a960",
+      "url": "/content/sentences-flores-005.json"
+    },
+    {
+      "id": "sentences-flores-006",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 300,
+      "bytes": 691298,
+      "sha256": "959b1b61013983f2adbf3f30038dfcfa5a21f7e4756da4b8640f51746f60701b",
+      "url": "/content/sentences-flores-006.json"
+    },
+    {
+      "id": "sentences-flores-007",
+      "kind": "sentences",
+      "title": "FLORES-200 · переводные контексты",
+      "count": 209,
+      "bytes": 471619,
+      "sha256": "2f81dea6043c9f0c36c4b4e90beaa932eab9227e46f66fc9de4f2263d0e8f29a",
+      "url": "/content/sentences-flores-007.json"
+    },
+    {
+      "id": "sentences-linked-001",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-001.json",
+      "count": 500,
+      "bytes": 438695,
+      "sha256": "caf16bb66578b097037d09e714793f3366446061636ca010a36a764aafc2ae7f"
+    },
+    {
+      "id": "sentences-linked-002",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-002.json",
+      "count": 500,
+      "bytes": 408503,
+      "sha256": "74c7be2a07cb6da934bd4a1944f841390c0c2f7293e6d30b56dc407b576bcf44"
+    },
+    {
+      "id": "sentences-linked-003",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-003.json",
+      "count": 500,
+      "bytes": 396540,
+      "sha256": "3fad35af71c4d1538df2c58858a2a7c924cfa0da563bb0f7f32b27099efede56"
+    },
+    {
+      "id": "sentences-linked-004",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-004.json",
+      "count": 500,
+      "bytes": 438394,
+      "sha256": "ab3e950555472ae068a250f17b35f7b240070ae5adbf6f13cb068dac78e1b0b8"
+    },
+    {
+      "id": "sentences-linked-005",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-005.json",
+      "count": 500,
+      "bytes": 402596,
+      "sha256": "647b9edb682adc258b2a7942866b82041bbee7f312009ec5b886abe86ff52865"
+    },
+    {
+      "id": "sentences-linked-006",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-006.json",
+      "count": 500,
+      "bytes": 395252,
+      "sha256": "9143076b60b8dcbd8e0e122dc07aa5f89e194223ed7db6720b9eabe48f9dcbc3"
+    },
+    {
+      "id": "sentences-linked-007",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-007.json",
+      "count": 500,
+      "bytes": 437236,
+      "sha256": "7e5e7112711b8db888e58cfabc895a4298ffc81ce0bf966a384303c59bcf1a13"
+    },
+    {
+      "id": "sentences-linked-008",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-008.json",
+      "count": 500,
+      "bytes": 449222,
+      "sha256": "724661004d5cc4b3d1e47945f22d52f426aeaf6f0a2c77e1a1f98890a9365e5d"
+    },
+    {
+      "id": "sentences-linked-009",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-009.json",
+      "count": 500,
+      "bytes": 438783,
+      "sha256": "70c5fa00b44e5720b22b4fb186e0b10b47d20e361ed59f0b7f05548a2d87c1f3"
+    },
+    {
+      "id": "sentences-linked-010",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-010.json",
+      "count": 500,
+      "bytes": 426507,
+      "sha256": "97b876ac0a980ae5ebeb9b89e62596a2ed9def499a92143609dff1e165cb310c"
+    },
+    {
+      "id": "sentences-linked-011",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-011.json",
+      "count": 500,
+      "bytes": 451499,
+      "sha256": "07f89543350a12b82e395124f33ecab149bc9e4df123cc306342aae9d32b2c14"
+    },
+    {
+      "id": "sentences-linked-012",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-012.json",
+      "count": 500,
+      "bytes": 483789,
+      "sha256": "ec4b41bc0efb5e3482b6d3eebe0ed42f18bf22c238b89f5b9187b434db0f7eb9"
+    },
+    {
+      "id": "sentences-linked-013",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-013.json",
+      "count": 500,
+      "bytes": 444227,
+      "sha256": "f6b0cdd08cc0e3908db96e45689c0ca35e2b9cac534b28828d56d0d8367fd061"
+    },
+    {
+      "id": "sentences-linked-014",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-014.json",
+      "count": 500,
+      "bytes": 441747,
+      "sha256": "dc301eee9763e679e1e08219759a1bf8507c096688e3ce2f6e35f01ed51d9b03"
+    },
+    {
+      "id": "sentences-linked-015",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-015.json",
+      "count": 500,
+      "bytes": 444102,
+      "sha256": "db966a615ed7e521a121f6cfcdfabd99b49a1c888d24c5fc54b29cc2e0687c60"
+    },
+    {
+      "id": "sentences-linked-016",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-016.json",
+      "count": 500,
+      "bytes": 434615,
+      "sha256": "e8b9e3c7eb648ee99c83375b8c736607fb61d7f325aa1f0592795bf11ba9e7f7"
+    },
+    {
+      "id": "sentences-linked-017",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-017.json",
+      "count": 500,
+      "bytes": 437069,
+      "sha256": "d789aa2c5ebe39ae7f91ffb80fe99cba7e82d2776575d7435ed499f9b0531df8"
+    },
+    {
+      "id": "sentences-linked-018",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-018.json",
+      "count": 500,
+      "bytes": 422915,
+      "sha256": "3d855a5b68bb6286c17c25bc9b23342fee4bea48f3fb28c20d8d342b9c9ccc29"
+    },
+    {
+      "id": "sentences-linked-019",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-019.json",
+      "count": 500,
+      "bytes": 405449,
+      "sha256": "01d8a85e63b36677ecd77793595a632d28f5530c37a1d73989fe9d6b747788cb"
+    },
+    {
+      "id": "sentences-linked-020",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-020.json",
+      "count": 500,
+      "bytes": 439196,
+      "sha256": "9a07b7edef94e3e7da9f8631245d6942b9b4bd47c4c4d547e7e95e1258700a0f"
+    },
+    {
+      "id": "sentences-linked-021",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-021.json",
+      "count": 500,
+      "bytes": 418049,
+      "sha256": "bc82eb2844519f9e569014b14394871eade4ab8d89fdffc6e7ca30284b73072e"
+    },
+    {
+      "id": "sentences-linked-022",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-022.json",
+      "count": 500,
+      "bytes": 431943,
+      "sha256": "e7d58d12c64fd0b1871c4dcc3f6608073456d32d61e2f2f7435f0c1bc7f063cc"
+    },
+    {
+      "id": "sentences-linked-023",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-023.json",
+      "count": 500,
+      "bytes": 400261,
+      "sha256": "f21471e64fd67aa429c1e121f28423da6557fd8a0faee2af219b5d7e3e80accc"
+    },
+    {
+      "id": "sentences-linked-024",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-024.json",
+      "count": 500,
+      "bytes": 411058,
+      "sha256": "96198ebda334734489e5ea8ec74f0821c25e5db2029d00e957400fe1673df0b1"
+    },
+    {
+      "id": "sentences-linked-025",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-025.json",
+      "count": 500,
+      "bytes": 414704,
+      "sha256": "061bfb533ff4f90c9389c0de97b3e9f4f0343e99da67c8497f7fa26756f5932f"
+    },
+    {
+      "id": "sentences-linked-026",
+      "kind": "sentences",
+      "title": "Контексты Tatoeba (перевод через общее предложение)",
+      "url": "/content/sentences-linked-026.json",
+      "count": 451,
+      "bytes": 367974,
+      "sha256": "6a9a1c84266e38df78054a201c266878d15cdbe24b393b6f07b75edb55fcd419"
+    },
+    {
+      "id": "sentences-editorial-001",
+      "kind": "sentences",
+      "title": "Авторские учебные предложения",
+      "count": 420,
+      "bytes": 315640,
+      "sha256": "96e3ea8f168a4f64b161a68f4e8ee72bf7f60f0fe8365fb0b2ab174f1c67e505",
+      "url": "/content/sentences-editorial-001.json"
+    }
+  ],
+  "sources": [
+    {
+      "name": "Русский Викисловарь / Kaikki",
+      "url": "https://kaikki.org/ruwiktionary/Болгарский/",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Авторы русского Викисловаря; извлечение Wiktextract / Kaikki, дамп 2026-10-01. Болгарские статьи и прямые болгарские переводные ссылки из русских статей. Словоформы и ударения показываются только при наличии в источнике. Независимая редактура не заявляется."
+    },
+    {
+      "name": "Tatoeba",
+      "url": "https://tatoeba.org/en/downloads",
+      "license": "CC BY 2.0 FR",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/fr/",
+      "attribution": "Авторы болгарских и русских предложений указаны у каждого примера. Основная часть — прямые переводные связи; дополнительные пары (review=tatoeba-linked-via-intermediate) получены по двум человеческим связям Tatoeba через общее предложение другого языка, без машинного перевода; такие переводы могут быть менее буквальными."
+    },
+    {
+      "name": "FLORES-200 / NLLB Team, 2022",
+      "url": "https://github.com/facebookresearch/flores",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "attribution": "Профессиональные человеческие переводы; общая исходная статья и номер строки сохраняются. Из оригинального открытого архива FLORES-200; не FLORES+."
+    }
+  ]
+}

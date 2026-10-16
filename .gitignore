@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.local
+playwright-report/
+test-results/
+*.tsbuildinfo
+data/sources/
+data/voices/
+.venv/
+
+__pycache__/
+data/photo-review/*.jpg
+backups/
+scratch/
+.DS_Store

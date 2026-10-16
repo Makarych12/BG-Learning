@@ -1,0 +1,43 @@
+npm notice run chameleon-bg@0.3.0 dev
+npm notice run vite --host 0.0.0.0
+
+  VITE v7.3.7  ready in 456 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.1.6:5173/
+  ➜  Network: http://100.89.160.83:5173/
+1:35:40 PM [vite] http proxy error: /api/tts/health
+Error: connect ECONNREFUSED 127.0.0.1:8791
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16)
+1:35:40 PM [vite] http proxy error: /api/tts/health
+Error: connect ECONNREFUSED 127.0.0.1:8791
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16)
+Bulgarian Piper on 127.0.0.1:8791
+1:37:01 PM [vite] (client) hmr update /src/ReactiveKeyboard.tsx
+1:37:45 PM [vite] (client) hmr update /src/App.tsx, /src/Atmosphere.tsx
+1:39:42 PM [vite] (client) hmr update /src/App.tsx, /src/Atmosphere.tsx
+1:41:28 PM [vite] (client) hmr update /src/App.tsx
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/content/manifest.json instead of /public/content/manifest.json.
+If you intend to use the URL of that asset, use /content/manifest.json?url.
+1:53:46 PM [vite] (client) hmr update /src/App.tsx, /src/ContentHub.tsx, /src/PhotoGallery.tsx, /src/PracticePlayer.tsx
+1:53:46 PM [vite] (client) hmr update /src/App.tsx
+1:53:46 PM [vite] (client) hmr update /src/styles.css
+1:55:12 PM [vite] (client) hmr update /src/Atmosphere.tsx
+1:55:12 PM [vite] (client) hmr update /src/App.tsx, /src/ContentHub.tsx, /src/PhotoGallery.tsx, /src/PracticePlayer.tsx
+1:55:12 PM [vite] (client) hmr update /src/styles.css
+1:55:51 PM [vite] (client) hmr update /src/ContentHub.tsx, /src/PhotoGallery.tsx, /src/PracticePlayer.tsx
+1:57:11 PM [vite] (client) hmr update /src/App.tsx
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/content/manifest.json instead of /public/content/manifest.json.
+If you intend to use the URL of that asset, use /content/manifest.json?url.
+1:57:15 PM [vite] (client) hmr update /src/ContentHub.tsx, /src/PhotoGallery.tsx, /src/PracticePlayer.tsx
+1:57:15 PM [vite] (client) hmr update /src/App.tsx
+Assets in public directory cannot be imported from JavaScript.
+If you intend to import that asset, put the file in the src directory, and use /src/content/manifest.json instead of /public/content/manifest.json.
+If you intend to use the URL of that asset, use /content/manifest.json?url.
+1:58:58 PM [vite] (client) hmr update /src/ContentHub.tsx
+1:58:58 PM [vite] vite.config.ts changed, restarting server...
+1:58:58 PM [vite] (client) hmr update /src/ContentHub.tsx, /src/PhotoGallery.tsx, /src/PracticePlayer.tsx
+1:58:58 PM [vite] (client) hmr update /src/styles.css
+1:58:58 PM [vite] server restarted.

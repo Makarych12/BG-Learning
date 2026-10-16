@@ -1,0 +1,2462 @@
+[
+  {
+    "id": "rail-wd-Q194158",
+    "bg": "побитова скорост",
+    "ru": "скорость передачи данных",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q194158",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q870845",
+    "bg": "пропускателна способност",
+    "ru": "пропускная способность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q870845",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q20989",
+    "bg": "интензитет на електрическото поле",
+    "ru": "напряжённость электрического поля",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q20989",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q161635",
+    "bg": "ъглова скорост",
+    "ru": "вектор угловой скорости",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q161635",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q28123",
+    "bg": "интензитет на магнитното поле",
+    "ru": "напряжённость магнитного поля",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q28123",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11465",
+    "bg": "скорост",
+    "ru": "скорость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11465",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11376",
+    "bg": "ускорение",
+    "ru": "ускорение",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11376",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q30204",
+    "bg": "магнитна индукция",
+    "ru": "магнитная индукция",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q30204",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q39297",
+    "bg": "обем",
+    "ru": "объём",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q39297",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1366187",
+    "bg": "масов разход",
+    "ru": "массовый расход",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1366187",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q208476",
+    "bg": "пространствен ъгъл",
+    "ru": "телесный угол",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q208476",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11500",
+    "bg": "площ",
+    "ru": "площадь",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11500",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q39552",
+    "bg": "налягане",
+    "ru": "давление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q39552",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q41273",
+    "bg": "импулс",
+    "ru": "импульс",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q41273",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q48103",
+    "bg": "момент на сила",
+    "ru": "момент силы",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q48103",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q55451",
+    "bg": "електричен потенциал",
+    "ru": "электростатический потенциал",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q55451",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q4593291",
+    "bg": "специфична електропроводимост",
+    "ru": "удельная электрическая проводимость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q4593291",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11402",
+    "bg": "сила",
+    "ru": "сила",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11402",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q161254",
+    "bg": "момент на импулса",
+    "ru": "момент импульса",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q161254",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q578372",
+    "bg": "време за реакция",
+    "ru": "Время отклика",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q578372",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1134348",
+    "bg": "обемен разход",
+    "ru": "объёмный расход",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1134348",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q234072",
+    "bg": "плътност на тока",
+    "ru": "плотность тока",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q234072",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q76005",
+    "bg": "якост",
+    "ru": "предел прочности",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q76005",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q185981",
+    "bg": "период на въртене",
+    "ru": "период вращения",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q185981",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q186300",
+    "bg": "ъглово ускорение",
+    "ru": "угловое ускорение",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q186300",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q180241",
+    "bg": "вътрешна енергия",
+    "ru": "внутренняя энергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q180241",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q186191",
+    "bg": "якост на натиск",
+    "ru": "прочность по сжатию",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q186191",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q242657",
+    "bg": "магнитен момент",
+    "ru": "магнитный момент",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q242657",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q264647",
+    "bg": "термодинамична температура",
+    "ru": "термодинамическая температура",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q264647",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1139344",
+    "bg": "наклон",
+    "ru": "уклон",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1139344",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q914921",
+    "bg": "триене при търкаляне",
+    "ru": "трение качения",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q914921",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q837940",
+    "bg": "импулс на сила",
+    "ru": "импульс силы",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q837940",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q856711",
+    "bg": "намагнитване",
+    "ru": "намагниченность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q856711",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q179043",
+    "bg": "импеданс",
+    "ru": "электрический импеданс",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q179043",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1068172",
+    "bg": "звуково налягане",
+    "ru": "звуковое давление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1068172",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q194411",
+    "bg": "осветеност",
+    "ru": "освещённость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q194411",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q28474",
+    "bg": "периметър",
+    "ru": "периметр",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q28474",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q178828",
+    "bg": "точка на оросяване",
+    "ru": "точка росы",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q178828",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q107780",
+    "bg": "светлинен поток",
+    "ru": "световой поток",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q107780",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q25342",
+    "bg": "мощност",
+    "ru": "мощность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q25342",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11379",
+    "bg": "енергия",
+    "ru": "энергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11379",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q29539",
+    "bg": "плътност",
+    "ru": "плотность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q29539",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q165618",
+    "bg": "масов инерционен момент",
+    "ru": "момент инерции",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q165618",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11466",
+    "bg": "температура",
+    "ru": "температура",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11466",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q41364",
+    "bg": "дължина на вълната",
+    "ru": "длина волны",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q41364",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q172881",
+    "bg": "центростремителна сила",
+    "ru": "центростремительная сила",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q172881",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11423",
+    "bg": "маса",
+    "ru": "масса",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11423",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1111",
+    "bg": "електрически заряд",
+    "ru": "электрический заряд",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1111",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q180600",
+    "bg": "влажност на въздуха",
+    "ru": "влажность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q180600",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q25428",
+    "bg": "електрическо напрежение",
+    "ru": "электрическое напряжение",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q25428",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q36253",
+    "bg": "дължина",
+    "ru": "длина",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q36253",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q11652",
+    "bg": "честота",
+    "ru": "частота",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q11652",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q46276",
+    "bg": "кинетична енергия",
+    "ru": "кинетическая энергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q46276",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q177831",
+    "bg": "магнитен поток",
+    "ru": "магнитный поток",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q177831",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q177897",
+    "bg": "индуктивност",
+    "ru": "индуктивность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q177897",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q126017",
+    "bg": "разстояние",
+    "ru": "расстояние",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q126017",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q25358",
+    "bg": "електрическо съпротивление",
+    "ru": "электрическое сопротивление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q25358",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q185329",
+    "bg": "електродвижеща сила",
+    "ru": "электродвижущая сила",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q185329",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q164399",
+    "bg": "електрически капацитет",
+    "ru": "электрическая ёмкость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q164399",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q309017",
+    "bg": "електрическа проводимост",
+    "ru": "электрическая проводимость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q309017",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q487005",
+    "bg": "топлопроводимост",
+    "ru": "теплопроводность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q487005",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q160857",
+    "bg": "конска сила",
+    "ru": "лошадиная сила",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q160857",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q834020",
+    "bg": "ъглова честота",
+    "ru": "угловая частота",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q834020",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q155640",
+    "bg": "потенциална енергия",
+    "ru": "потенциальная энергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q155640",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q461466",
+    "bg": "модул на срязване",
+    "ru": "модуль сдвига",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q461466",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q27137",
+    "bg": "електрическа мощност",
+    "ru": "электрическая мощность",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q27137",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q2091584",
+    "bg": "модул на еластичност",
+    "ru": "модуль Юнга",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q2091584",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q2945123",
+    "bg": "център на масите",
+    "ru": "центр масс/инерции/тяжести",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q2945123",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q1261069",
+    "bg": "пад на налягане",
+    "ru": "падение давления",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q1261069",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q332329",
+    "bg": "контактно съпротивление",
+    "ru": "контактное сопротивление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q332329",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q908492",
+    "bg": "спирачен път",
+    "ru": "Тормозной путь",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q908492",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q214519",
+    "bg": "междурелсие",
+    "ru": "ширина колеи",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q214519",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q902126",
+    "bg": "топлина на изгаряне",
+    "ru": "удельная теплота сгорания",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q902126",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q42213",
+    "bg": "механична работа",
+    "ru": "работа",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q42213",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q81809",
+    "bg": "атмосферно налягане",
+    "ru": "атмосферное давление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q81809",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q44432",
+    "bg": "топлина",
+    "ru": "теплота",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q44432",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q37221",
+    "bg": "диаметър",
+    "ru": "диаметр",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q37221",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q45760",
+    "bg": "коефициент на температурно разширение",
+    "ru": "коэффициент теплового расширения",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q45760",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q28352",
+    "bg": "магнитна проницаемост",
+    "ru": "магнитная проницаемость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q28352",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q124003",
+    "bg": "скорост на звука",
+    "ru": "скорость звука",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q124003",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q159190",
+    "bg": "амплитуда",
+    "ru": "амплитуда",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q159190",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q184550",
+    "bg": "механична енергия",
+    "ru": "механическая энергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q184550",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q193972",
+    "bg": "реактивно съпротивление",
+    "ru": "Реактивное сопротивление",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q193972",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q206799",
+    "bg": "електрическа енергия",
+    "ru": "электроэнергия",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q206799",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q190453",
+    "bg": "коефициент на поасон",
+    "ru": "коэффициент Пуассона",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q190453",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q211569",
+    "bg": "диелектрична проницаемост",
+    "ru": "диэлектрическая проницаемость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q211569",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q691463",
+    "bg": "магнитна възприемчивост",
+    "ru": "Магнитная восприимчивость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q691463",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q569057",
+    "bg": "коравина",
+    "ru": "жёсткость",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q569057",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q634340",
+    "bg": "коефициент на топлопредаване",
+    "ru": "коэффициент теплопередачи",
+    "topic": "Инженерная лексика · Физические величины",
+    "source": "https://www.wikidata.org/wiki/Q634340",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q107715"
+  },
+  {
+    "id": "rail-wd-Q25504",
+    "bg": "светодиод",
+    "ru": "светодиод",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q25504",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q337716",
+    "bg": "дефектнотокова защита",
+    "ru": "устройство защитного отключения",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q337716",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q131214",
+    "bg": "антена",
+    "ru": "антенна",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q131214",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q5339",
+    "bg": "транзистор",
+    "ru": "транзистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q5339",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q11656",
+    "bg": "диод",
+    "ru": "диод",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q11656",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q165678",
+    "bg": "микроконтролер",
+    "ru": "микроконтроллер",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q165678",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q765821",
+    "bg": "индуктивен датчик",
+    "ru": "Индуктивный датчик",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q765821",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q423488",
+    "bg": "изпълнително устройство",
+    "ru": "исполнительное устройство",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q423488",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q864746",
+    "bg": "дросел",
+    "ru": "дроссель",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q864746",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q5322",
+    "bg": "кондензатор",
+    "ru": "электрический конденсатор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q5322",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q80831",
+    "bg": "интегрална схема",
+    "ru": "интегральная схема",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q80831",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q1041891",
+    "bg": "фототранзистор",
+    "ru": "фототранзистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q1041891",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q175943",
+    "bg": "фотодиод",
+    "ru": "фотодиод",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q175943",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q1431247",
+    "bg": "датчик на хол",
+    "ru": "датчик эффекта Холла",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q1431247",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q1466064",
+    "bg": "процесор",
+    "ru": "процессор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q1466064",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q465115",
+    "bg": "варистор",
+    "ru": "Варистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q465115",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q180805",
+    "bg": "тиристор",
+    "ru": "тиристор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q180805",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q187868",
+    "bg": "потенциометър",
+    "ru": "потенциометр",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q187868",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q194120",
+    "bg": "фоторезистор",
+    "ru": "фоторезистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q194120",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q5321",
+    "bg": "резистор",
+    "ru": "резистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q5321",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q221499",
+    "bg": "симистор",
+    "ru": "симистор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q221499",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q321098",
+    "bg": "лазерен диод",
+    "ru": "лазерный диод",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q321098",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q2119531",
+    "bg": "електрически съединител",
+    "ru": "электрический соединитель",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q2119531",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q3574371",
+    "bg": "електронна лампа",
+    "ru": "электронная лампа",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q3574371",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q176140",
+    "bg": "електрод",
+    "ru": "электрод",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q176140",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q4173903",
+    "bg": "кварцов резонатор",
+    "ru": "кварцевый резонатор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q4173903",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q66041190",
+    "bg": "магнитна глава",
+    "ru": "магнитная головка",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q66041190",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q210765",
+    "bg": "фотодетектор",
+    "ru": "фотодетектор",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q210765",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q849084",
+    "bg": "оптрон",
+    "ru": "оптрон",
+    "topic": "Инженерная лексика · Электронные компоненты",
+    "source": "https://www.wikidata.org/wiki/Q849084",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q11653"
+  },
+  {
+    "id": "rail-wd-Q910597",
+    "bg": "осигурителни железопътни инсталации",
+    "ru": "устройства сигнализации, централизации и блокировки",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q910597",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q1210334",
+    "bg": "железопътен мост",
+    "ru": "железнодорожный мост",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q1210334",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q1112477",
+    "bg": "теснолинейка",
+    "ru": "узкоколейная железная дорога",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q1112477",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q27028153",
+    "bg": "трамвайно депо",
+    "ru": "трамвайное депо",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q27028153",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q6636777",
+    "bg": "пътно-железопътен мост",
+    "ru": "автомобильно-железнодорожный мост",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q6636777",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q55678",
+    "bg": "железопътна спирка",
+    "ru": "остановочный пункт на железной дороге",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q55678",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q82818",
+    "bg": "железопътна стрелка",
+    "ru": "стрелочный перевод",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q82818",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q160342",
+    "bg": "релсов път",
+    "ru": "железнодорожный путь",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q160342",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q325358",
+    "bg": "перон",
+    "ru": "перрон",
+    "topic": "Инженерная лексика · Железнодорожная инфраструктура",
+    "source": "https://www.wikidata.org/wiki/Q325358",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q1311670"
+  },
+  {
+    "id": "rail-wd-Q134566",
+    "bg": "везни",
+    "ru": "весы",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q134566",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q856535",
+    "bg": "токов трансформатор",
+    "ru": "Трансформатор тока",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q856535",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q192772",
+    "bg": "нониус",
+    "ru": "нониус",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q192772",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q944562",
+    "bg": "ватметър",
+    "ru": "ваттметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q944562",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q184846",
+    "bg": "ареометър",
+    "ru": "ареометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q184846",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q166046",
+    "bg": "амперметър",
+    "ru": "амперметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q166046",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q179741",
+    "bg": "волтметър",
+    "ru": "вольтметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q179741",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q214649",
+    "bg": "рулетка",
+    "ru": "рулетка",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q214649",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q189996",
+    "bg": "мултицет",
+    "ru": "Мультиметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q189996",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q646",
+    "bg": "термометър",
+    "ru": "термометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q646",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q581851",
+    "bg": "термографска камера",
+    "ru": "тепловизор",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q581851",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q181517",
+    "bg": "теодолит",
+    "ru": "теодолит",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q181517",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q79757",
+    "bg": "барометър",
+    "ru": "барометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q79757",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q965297",
+    "bg": "пиезометър",
+    "ru": "пьезометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q965297",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q178873",
+    "bg": "стробоскоп",
+    "ru": "стробоскоп",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q178873",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q183173",
+    "bg": "хигрометър",
+    "ru": "гигрометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q183173",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q3541771",
+    "bg": "манометър на бурдон",
+    "ru": "манометр Бурдона",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q3541771",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q179472",
+    "bg": "галванометър",
+    "ru": "Гальванометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q179472",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q192940",
+    "bg": "акселерометър",
+    "ru": "акселерометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q192940",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q189783",
+    "bg": "калориметър",
+    "ru": "Калориметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q189783",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q103896",
+    "bg": "пергел",
+    "ru": "циркуль",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q103896",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q483400",
+    "bg": "жироскоп",
+    "ru": "гироскоп",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q483400",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q194391",
+    "bg": "омметър",
+    "ru": "омметр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q194391",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q216782",
+    "bg": "манометър",
+    "ru": "манометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q216782",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q1426632",
+    "bg": "лазерен далекомер",
+    "ru": "Лазерный дальномер",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q1426632",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q912018",
+    "bg": "интерферометър",
+    "ru": "интерферометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q912018",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q268503",
+    "bg": "водомер",
+    "ru": "счётчик воды",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q268503",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q104555",
+    "bg": "линийка",
+    "ru": "линейка",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q104555",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q1046665",
+    "bg": "фазомер",
+    "ru": "Фазометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q1046665",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q584082",
+    "bg": "нивелир",
+    "ru": "Нивелир",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q584082",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q333921",
+    "bg": "магнитометър",
+    "ru": "магнитометр",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q333921",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q1643652",
+    "bg": "далекомер",
+    "ru": "Дальномер",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q1643652",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q622756",
+    "bg": "електромер",
+    "ru": "счётчик электроэнергии",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q622756",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q1331405",
+    "bg": "честотомер",
+    "ru": "частотомер",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q1331405",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q167676",
+    "bg": "сензор",
+    "ru": "датчик",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q167676",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q174320",
+    "bg": "осцилоскоп",
+    "ru": "осциллограф",
+    "topic": "Инженерная лексика · Измерительные приборы",
+    "source": "https://www.wikidata.org/wiki/Q174320",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q2041172"
+  },
+  {
+    "id": "rail-wd-Q175334",
+    "bg": "ръчна количка",
+    "ru": "тачка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q175334",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1304613",
+    "bg": "пистолет за горещо лепене",
+    "ru": "термоклеевой пистолет",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1304613",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q192504",
+    "bg": "пинцета",
+    "ru": "пинцет",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q192504",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q232254",
+    "bg": "кирка",
+    "ru": "кайло",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q232254",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1129424",
+    "bg": "плашка",
+    "ru": "Плашка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1129424",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q178692",
+    "bg": "кран",
+    "ru": "грузоподъёмный кран",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q178692",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q147690",
+    "bg": "тебешир",
+    "ru": "мелок",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q147690",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q752323",
+    "bg": "кофраж",
+    "ru": "Опалубка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q752323",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q37077",
+    "bg": "пирон",
+    "ru": "гвоздь",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q37077",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q475638",
+    "bg": "менгеме",
+    "ru": "тиски",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q475638",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q13681",
+    "bg": "кози крак",
+    "ru": "гвоздодёр",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q13681",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q12673",
+    "bg": "върток",
+    "ru": "Вороток",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q12673",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q40847",
+    "bg": "ножици",
+    "ru": "ножницы",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q40847",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q335283",
+    "bg": "свредло",
+    "ru": "сверло",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q335283",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q207988",
+    "bg": "либела",
+    "ru": "жидкостный уровень",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q207988",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q272882",
+    "bg": "крик",
+    "ru": "домкрат",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q272882",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q212500",
+    "bg": "нит",
+    "ru": "Заклёпка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q212500",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q193142",
+    "bg": "пила",
+    "ru": "напильник",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q193142",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q408151",
+    "bg": "аерограф",
+    "ru": "Аэрограф",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q408151",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1098256",
+    "bg": "дюбел",
+    "ru": "дюбель",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1098256",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q474188",
+    "bg": "секач (инструмент)",
+    "ru": "зубило",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q474188",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1412569",
+    "bg": "шплинт",
+    "ru": "Шплинт",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1412569",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q321495",
+    "bg": "стрипващи клещи",
+    "ru": "Стриппер",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q321495",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1500589",
+    "bg": "свинска опашка",
+    "ru": "Кабельная стяжка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1500589",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q846600",
+    "bg": "стяга",
+    "ru": "струбцина",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q846600",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q154411",
+    "bg": "гаечен ключ",
+    "ru": "гаечный ключ",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q154411",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q161071",
+    "bg": "отвертка",
+    "ru": "отвёртка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q161071",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q204260",
+    "bg": "ренде",
+    "ru": "рубанок",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q204260",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q815738",
+    "bg": "лампа",
+    "ru": "светильник",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q815738",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1413277",
+    "bg": "метчик",
+    "ru": "метчик",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1413277",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1133232",
+    "bg": "маткап",
+    "ru": "ручная дрель",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1133232",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q827274",
+    "bg": "ъглошлайф",
+    "ru": "угловая шлифовальная машина",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q827274",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q3918600",
+    "bg": "мистрия",
+    "ru": "мастерок для кладки",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q3918600",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q12826066",
+    "bg": "отвес",
+    "ru": "отвес",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q12826066",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q18411763",
+    "bg": "френски ключ",
+    "ru": "французский ключ",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q18411763",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q13049940",
+    "bg": "клещи",
+    "ru": "Щипцы",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q13049940",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q173350",
+    "bg": "печатна платка",
+    "ru": "печатная плата",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q173350",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q142274",
+    "bg": "шкурка",
+    "ru": "наждачная бумага",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q142274",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q8955276",
+    "bg": "коуш",
+    "ru": "Коуш",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q8955276",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q623402",
+    "bg": "поялник",
+    "ru": "паяльник",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q623402",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q208138",
+    "bg": "фарадеев кафез",
+    "ru": "клетка Фарадея",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q208138",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q904170",
+    "bg": "каменотрошачка",
+    "ru": "Дробилка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q904170",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q213643",
+    "bg": "силоз",
+    "ru": "Силос (ёмкость)",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q213643",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q19766",
+    "bg": "пневматичен чук",
+    "ru": "отбойный молоток",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q19766",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q390417",
+    "bg": "тигел",
+    "ru": "тигель",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q390417",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q2397030",
+    "bg": "полиспаст",
+    "ru": "полиспаст",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q2397030",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q4454333",
+    "bg": "телфер",
+    "ru": "Тельфер",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q4454333",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q269359",
+    "bg": "комбинирани клещи",
+    "ru": "плоскогубцы комбинированные",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q269359",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q104363",
+    "bg": "наковалня",
+    "ru": "наковальня",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q104363",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q58964",
+    "bg": "бормашина",
+    "ru": "дрель",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q58964",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q134574",
+    "bg": "помпа",
+    "ru": "насос",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q134574",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1047832",
+    "bg": "резервоар",
+    "ru": "резервуар",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1047832",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q168639",
+    "bg": "стълба",
+    "ru": "лестница-стремянка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q168639",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q176440",
+    "bg": "маркуч",
+    "ru": "Шланг",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q176440",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q863835",
+    "bg": "райбер (инструмент)",
+    "ru": "развёртка",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q863835",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1445068",
+    "bg": "поялна лампа",
+    "ru": "паяльная лампа",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1445068",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q1411613",
+    "bg": "електротелфер",
+    "ru": "таль",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q1411613",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q627111",
+    "bg": "центробежна помпа",
+    "ru": "центробежный насос",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q627111",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q636009",
+    "bg": "въздушна помпа",
+    "ru": "воздушный насос",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q636009",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q2041172",
+    "bg": "измерителен уред",
+    "ru": "измерительный прибор",
+    "topic": "Инженерная лексика · Инструменты",
+    "source": "https://www.wikidata.org/wiki/Q2041172",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q39546"
+  },
+  {
+    "id": "rail-wd-Q18830",
+    "bg": "плъзгащ лагер",
+    "ru": "подшипник скольжения",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q18830",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q309383",
+    "bg": "вал",
+    "ru": "вал",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q309383",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q2427645",
+    "bg": "възвратна пружина",
+    "ru": "Возвратная пружина",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q2427645",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q6497460",
+    "bg": "скоростна кутия",
+    "ru": "коробка передач",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q6497460",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1415737",
+    "bg": "швелер",
+    "ru": "швеллер",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1415737",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q749400",
+    "bg": "резба",
+    "ru": "резьба",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q749400",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q600568",
+    "bg": "топлинна тръба",
+    "ru": "Тепловая трубка",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q600568",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q2266823",
+    "bg": "стопор",
+    "ru": "стопор",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q2266823",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1424692",
+    "bg": "шпонка",
+    "ru": "шпонка",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1424692",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q245739",
+    "bg": "соленоид",
+    "ru": "соленоид",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q245739",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1534839",
+    "bg": "спирачка",
+    "ru": "тормоз",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1534839",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1764334",
+    "bg": "едисонов цокъл",
+    "ru": "Цоколь Эдисона",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1764334",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1587136",
+    "bg": "магнитен лагер",
+    "ru": "магнитный подшипник",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1587136",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q1779067",
+    "bg": "бутален болт",
+    "ru": "Поршневой палец",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q1779067",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q188209",
+    "bg": "ос",
+    "ru": "ось",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q188209",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q190100",
+    "bg": "лагер",
+    "ru": "подшипник",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q190100",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q49718",
+    "bg": "колянов вал",
+    "ru": "коленчатый вал",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q49718",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q4567087",
+    "bg": "пневматичен цилиндър",
+    "ru": "пневматический цилиндр",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q4567087",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q190312",
+    "bg": "статор",
+    "ru": "статор",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q190312",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q12522",
+    "bg": "малтийски механизъм",
+    "ru": "мальтийский механизм",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q12522",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q12529",
+    "bg": "червячна предавка",
+    "ru": "червячная передача",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q12529",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q102836",
+    "bg": "пружина",
+    "ru": "пружина",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q102836",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  },
+  {
+    "id": "rail-wd-Q10499968",
+    "bg": "байонетно съединение",
+    "ru": "Байонетное соединение",
+    "topic": "Инженерная лексика · Детали машин",
+    "source": "https://www.wikidata.org/wiki/Q10499968",
+    "license": "CC0",
+    "review": "explicit-allowlist",
+    "root": "Q839546"
+  }
+]

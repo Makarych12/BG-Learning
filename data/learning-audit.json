@@ -1,0 +1,232 @@
+{
+  "date": "2026-10-16",
+  "scope": "Full structural inventory; targeted linguistic checks only. Not a certification of the corpus.",
+  "counts": {
+    "dictionary": 16658,
+    "forms": 58587,
+    "sentences": 17819,
+    "sentencesEligibleForPractice": 4857,
+    "sentencesPendingReview": 12962,
+    "verbs": 2700,
+    "accessibleVerbs": 2701,
+    "generatedForms": 1312200,
+    "railTerms": 2082,
+    "grammarUnits": 44,
+    "grammarTasks": 1029,
+    "dialogues": 409,
+    "listening": 525,
+    "voice": 305
+  },
+  "railway": [
+    {
+      "id": "equipment",
+      "title": "Локомотив и оборудование",
+      "tasks": 3949,
+      "materials": 1313,
+      "modes": {
+        "technical": 1259,
+        "meaning": 1209,
+        "dictation": 1307,
+        "translate-ru": 48,
+        "translate-bg": 48,
+        "order": 48,
+        "dialogue": 24,
+        "correction": 6
+      }
+    },
+    {
+      "id": "condition",
+      "title": "Техническое состояние",
+      "tasks": 2748,
+      "materials": 829,
+      "modes": {
+        "technical": 631,
+        "meaning": 616,
+        "dictation": 823,
+        "translate-ru": 192,
+        "translate-bg": 192,
+        "order": 192,
+        "dialogue": 96,
+        "correction": 6
+      }
+    },
+    {
+      "id": "communication",
+      "title": "Рабочее общение",
+      "tasks": 2072,
+      "materials": 597,
+      "modes": {
+        "technical": 391,
+        "meaning": 384,
+        "dictation": 591,
+        "translate-ru": 200,
+        "translate-bg": 200,
+        "order": 200,
+        "dialogue": 100,
+        "correction": 6
+      }
+    }
+  ],
+  "sourceReviewStatuses": {
+    "community": 13640,
+    "community-direct-translation": 5677,
+    "editorial-language-practice": 200,
+    "source-human-parallel": 2009,
+    "tatoeba-linked-via-intermediate": 12951
+  },
+  "railReviewQueue": {
+    "бунтуване": "Перевод «подпрыгивание» не соответствует общеязыковому значению; требуется подтверждение технического термина.",
+    "челюст на оста": "Не подтверждено соответствие «букса».",
+    "подбандажна част": "Не подтверждено соответствие «подступичная часть»: разные элементы колеса.",
+    "шенкел": "Нужно подтвердить соответствие «шкворень» именно для железнодорожной тележки.",
+    "шенкелен лагер": "Не подтверждено соответствие «подпятник».",
+    "стъпка на траверсите": "Нужно различить расстояние между шпалами и эпюру их размещения.",
+    "охранителен тупик": "Нужно различить предохранительный и улавливающий тупики."
+  },
+  "flags": [
+    {
+      "id": "tatoeba-433116",
+      "reason": "mixed-script-review",
+      "text": "Виe говорите ли италиански език?"
+    },
+    {
+      "id": "tatoeba-3159670",
+      "reason": "mixed-script-review",
+      "text": "Аз съм достатъчно възрастнa."
+    },
+    {
+      "id": "tatoeba-3253043",
+      "reason": "mixed-script-review",
+      "text": "Aко живота ти поднася лимони, направи си от тях лимонада."
+    },
+    {
+      "id": "tatoeba-3266097",
+      "reason": "mixed-script-review",
+      "text": "По заскрежения прозорец се чу плахо почукване. Том наметна якето си и излезе в предверието. \"Неволята явно е довела някой за през нощта\", - с досада си помисли той, отключвайки вратата. На прага, по нощница и валенки на бос крак, стоеше Мери, зиморничаво завила се в пухкавия шал на баба си. \"Щe ме пуснеш ли?\" - тихо попита тя, без да гледа Том в очите. \"Ами, влизай, така и така си дошла - да не мръзнеш\", отвърна Том, канейки с жест неканената гостенка в избата."
+    },
+    {
+      "id": "wiki-reverse-5a4774af9317c97e",
+      "reason": "duplicate-of:wiki-904af05901b1c35e",
+      "text": "Токачка"
+    },
+    {
+      "id": "flores200-dev-221",
+      "reason": "mixed-script-review",
+      "text": "Tой съобщи, че ще подкрепи британските състезатели на провеждащите се в Лондон Олимпийски игри през 2012 г., въпреки коментарите си."
+    },
+    {
+      "id": "flores200-dev-672",
+      "reason": "mixed-script-review",
+      "text": "Tака разрешително за затънтен район се предоставя на 1-ви януари за всяка начална дата през май."
+    },
+    {
+      "id": "flores200-dev-755",
+      "reason": "mixed-script-review",
+      "text": "Златната ера на парните железници и океанските лайнери е наследена от някои хотели; преди СВII, през 19 - ти или началото на 20 - ти век."
+    },
+    {
+      "id": "flores200-devtest-146",
+      "reason": "mixed-script-review",
+      "text": "Крайните резултати от президентските и парламентарните избори в Намибия сочат, че настоящият президент, Хификепунe Похамба, е преизбран с голяма разлика."
+    },
+    {
+      "id": "flores200-devtest-402",
+      "reason": "mixed-script-review",
+      "text": "Mоже да си помислите, че картата на съкровището е написана на гърба на Декларацията за независимост, ако сте гледали филма „Национално съкровище“."
+    },
+    {
+      "id": "flores200-devtest-570",
+      "reason": "mixed-script-review",
+      "text": "Mежду 150 и 200 копия са направени през нощта, сега известни като „Dunlap broadsides“.\""
+    },
+    {
+      "id": "flores200-devtest-729",
+      "reason": "mixed-script-review",
+      "text": "Редицата сгради, които оформят силуета на Хонконг, се оприличават на бляскавa стълбовидна диаграма, която изпъква заради водите на пристанище Виктория."
+    },
+    {
+      "id": "tatoeba-1458581",
+      "reason": "mixed-script-review",
+      "text": "Kъде е входа ?"
+    },
+    {
+      "id": "tatoeba-1519838",
+      "reason": "mixed-script-review",
+      "text": "Bсеки човек има право на закрила на моралните и материалните си интереси, които са резултат от каквото и да е научно, литературно или художествено произведение, на което той е автор."
+    },
+    {
+      "id": "tatoeba-3931353",
+      "reason": "mixed-script-review",
+      "text": "Сигурен съм, че си много заетa."
+    },
+    {
+      "id": "tatoeba-3931356",
+      "reason": "mixed-script-review",
+      "text": "Сигурнa съм, че си много зает."
+    },
+    {
+      "id": "tatoeba-3931359",
+      "reason": "mixed-script-review",
+      "text": "Сигурнa съм, че си много заетa."
+    },
+    {
+      "id": "tatoeba-3931360",
+      "reason": "mixed-script-review",
+      "text": "Сигурнa съм, че сте много зает."
+    },
+    {
+      "id": "tatoeba-3931361",
+      "reason": "mixed-script-review",
+      "text": "Сигурнa съм, че сте много заета."
+    },
+    {
+      "id": "tatoeba-3931362",
+      "reason": "mixed-script-review",
+      "text": "Сигурнa съм, че сте много заети."
+    },
+    {
+      "id": "tatoeba-13819908",
+      "reason": "mixed-script-review",
+      "text": "Аз cъм фъри."
+    }
+  ],
+  "linguisticChecks": [
+    {
+      "issue": "цепнатина translated as скол",
+      "fix": "трещина, щель",
+      "source": "https://ibl.bas.bg/rbe/lang/bg/пукам/"
+    },
+    {
+      "issue": "температурно изкривяване translated as выправление",
+      "fix": "температурное искривление",
+      "source": "https://ibl.bas.bg/rbe/lang/bg/изкривяване/"
+    },
+    {
+      "issue": "срабатване на защитата spelling",
+      "fix": "сработване на защитата",
+      "source": "https://mgu.bg/wp-content/uploads/2025/03/Vol.-59-III-2016-49-54.pdf"
+    },
+    {
+      "issue": "неутрална вставка suspected calque",
+      "fix": "Retained: attested technical term",
+      "source": "https://www.rail-infra.bg/upload/608/TS-RI-007-2006%20IZM-01-2017.pdf"
+    },
+    {
+      "issue": "Perfect used at the start of an independent phrase",
+      "fix": "participle precedes auxiliary; negative retains auxiliary before participle",
+      "source": "https://ibl.bas.bg/izvestiya/wp-content/uploads/2024/09/01_Stancheva_2024_IIBE-XXXVII_7-56.pdf"
+    },
+    {
+      "issue": "Rail head mistranslated as главина (hub)",
+      "fix": "глава на релса",
+      "source": "https://www.rail-infra.bg/upload/3865/ПТПЖП_08_2021_new.pdf"
+    }
+  ],
+  "limitations": [
+    "Russian translations and CEFR levels have not all been reviewed by a linguist.",
+    "Source paradigms are community data, not individually certified by BAS.",
+    "Flags are review candidates, not automatic linguistic corrections.",
+    "Not every verb has a Russian translation or linked bilingual examples.",
+    "Browser connection unavailable during this audit."
+  ]
+}

@@ -1,0 +1,5 @@
+npm notice run chameleon-bg@0.3.0 preview
+npm notice run vite preview --host 0.0.0.0 --port 4173
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: http://192.168.1.6:4173/
+  ➜  Network: http://100.89.160.83:4173/

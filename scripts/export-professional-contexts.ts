@@ -1,0 +1,12 @@
+import { professionalDialogues } from '../src/rail-conversations';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+const rows = professionalDialogues.flatMap(d=>d.lines.map((l,i)=>({id:`academy-${d.id}-${i}`,bg:l.bg,ru:l.ru,translations:[],author:'CHAMELEON BG · авторский учебный разговор «'+d.title+'»',source:'/sources/professional-contexts.html',license:'Авторские учебные материалы',review:'editorial-language-practice',audio:null,words:l.bg.split(/\s+/).length})));
+const unique = [...new Map(rows.map(r=>[r.bg,r])).values()];
+const payload=JSON.stringify({schema:1,version:'0.3.0',kind:'sentences',items:unique});
+writeFileSync('public/content/sentences-professional-001.json',payload);
+const m=JSON.parse(readFileSync('public/content/manifest.json','utf8'));
+const id='sentences-professional-001'; m.packages=m.packages.filter((p:any)=>p.id!==id);
+m.packages.push({id,kind:'sentences',title:'Профессиональные учебные разговоры',count:unique.length,bytes:Buffer.byteLength(payload),sha256:createHash('sha256').update(payload).digest('hex'),url:'/content/'+id+'.json'});
+m.counts.sentences=m.packages.filter((p:any)=>p.kind==='sentences').reduce((n:number,p:any)=>n+p.count,0);
+writeFileSync('public/content/manifest.json',JSON.stringify(m,null,2)); console.log(unique.length+' unique authored professional contexts');

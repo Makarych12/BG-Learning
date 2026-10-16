@@ -1,0 +1,50 @@
+{
+  "environment": "Node + fake-indexeddb; measures parsing and query work, not browser rendering or FPS",
+  "dictionaryEntries": 16658,
+  "packages": 87,
+  "installMs": 1309.3004660000001,
+  "parseMedianMs": 1.296196000000009,
+  "parseP95Ms": 3.341516000000013,
+  "queries": [
+    {
+      "query": "работ",
+      "ms": 10.409445000000005,
+      "returned": 36
+    },
+    {
+      "query": "локомотив",
+      "ms": 0.3577299999999468,
+      "returned": 1
+    },
+    {
+      "query": "стол",
+      "ms": 4.48433799999998,
+      "returned": 35
+    },
+    {
+      "query": "вода",
+      "ms": 0.9735259999999926,
+      "returned": 9
+    },
+    {
+      "query": "електр",
+      "ms": 2.9077980000001844,
+      "returned": 36
+    },
+    {
+      "query": "учител",
+      "ms": 1.025000000000091,
+      "returned": 6
+    },
+    {
+      "query": "желез",
+      "ms": 4.627025000000003,
+      "returned": 32
+    },
+    {
+      "query": "съм",
+      "ms": 1.982810999999856,
+      "returned": 4
+    }
+  ]
+}

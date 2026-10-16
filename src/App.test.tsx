@@ -1,0 +1,112 @@
+import { beforeEach, afterEach, it, expect } from "vitest";
+import { render, screen, waitFor, cleanup } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "./App";
+import { db, defaultSettings } from "./storage";
+import { exercises } from "./content";
+beforeEach(async () => {
+  await Promise.all([
+    db.settings.clear(),
+    db.memory.clear(),
+    db.attempts.clear(),
+    db.sessions.clear(),
+  ]);
+  await db.settings.put(defaultSettings);
+});
+afterEach(() => cleanup());
+it("Открывает академию, оценивает ответ, сохраняет и восстанавливает урок после перезапуска", async () => {
+  const user = userEvent.setup();
+  const first = render(<App />);
+  await screen.findByRole("heading", { name: /Здравей/ });
+  await user.click(screen.getByRole("button", { name: "Академия A1–C2" }));
+  await user.click(
+    (await screen.findAllByRole("button", { name: "Начать урок" }))[0],
+  );
+  await screen.findByRole("dialog");
+  const prompt = document.querySelector(".exercise-prompt")!.textContent;
+  const exercise = exercises.find((e) => e.prompt === prompt)!;
+  if (exercise.type === "choice")
+    await user.click(screen.getByText(exercise.answers[0], { exact: true }));
+  else if (exercise.type === "order") {
+    for (const token of exercise.answers[0].split(" "))
+      await user.click(screen.getByRole("button", { name: token }));
+  } else
+    await user.type(
+      screen.getByRole("textbox", { name: "Ваш ответ" }),
+      exercise.answers[0],
+    );
+  await user.click(screen.getByRole("button", { name: "Проверить" }));
+  await screen.findByText("Точно! Так держать.");
+  expect(await db.attempts.count()).toBe(1);
+  expect((await db.sessions.get("active"))?.index).toBe(1);
+  await user.click(screen.getByRole("button", { name: "Закрыть" }));
+  first.unmount();
+  render(<App />);
+  await user.click(
+    await screen.findByRole("button", { name: "Продолжить обучение" }),
+  );
+  await screen.findByRole("dialog");
+  expect(screen.getByText("2 / 5")).toBeTruthy();
+  expect(await db.attempts.count()).toBe(1);
+});
+it("Показывает карточку, сохраняет FSRS-рейтинг и обновляет очередь", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  await screen.findByRole("heading", { name: /Здравей/ });
+  await user.click(screen.getByRole("button", { name: "Умные карточки" }));
+  await user.click(
+    await screen.findByRole("button", { name: "Начать повторение" }),
+  );
+  await user.click(screen.getByRole("button", { name: "Показать перевод" }));
+  await user.click(screen.getByRole("button", { name: /^Помню/ }));
+  await waitFor(async () => expect(await db.memory.count()).toBe(1));
+  expect((await db.memory.toArray())[0].card.reps).toBe(1);
+  expect((await db.attempts.toArray())[0].skill).toBe("Узнавание слов");
+});
+it("Сохраняет ежедневную цель и распределяет все выбранные минуты", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+  await screen.findByRole("heading", { name: /Здравей/ });
+  await user.click(screen.getByRole("button", { name: "Интенсив 30 дней" }));
+  await user.click(
+    await screen.findByRole("button", { name: "20 минут в день" }),
+  );
+  await waitFor(async () =>
+    expect((await db.settings.get("profile"))?.minutes).toBe(20),
+  );
+  const total = Array.from(
+    document.querySelectorAll(".boost-plan button>span:nth-last-child(2)"),
+  ).reduce((s, e) => s + parseInt(e.textContent!), 0);
+  expect(total).toBe(20);
+});
+it("При первом старте сохраняет выбранный уровень и темп до запуска урока", async () => {
+  const user = userEvent.setup();
+  await db.settings.clear();
+  render(<App />);
+  await screen.findByRole("heading", { name: /Здравей/ });
+  expect((await db.settings.get("profile"))?.id).toBe("profile");
+  await user.click(screen.getByRole("button", { name: "Начать обучение" }));
+  await screen.findByRole("dialog", { name: "Твоя академия, твой ритм" });
+  await user.selectOptions(
+    screen.getByLabelText("Сколько времени в день?"),
+    "60",
+  );
+  await waitFor(async () =>
+    expect((await db.settings.get("profile"))?.minutes).toBe(60),
+  );
+  await user.selectOptions(
+    screen.getByLabelText("С какого уровня начнём?"),
+    "B1",
+  );
+  await waitFor(async () =>
+    expect((await db.settings.get("profile"))?.level).toBe("B1"),
+  );
+  await user.click(screen.getByRole("button", { name: "Открыть первый урок" }));
+  await screen.findByText("1 / 5");
+  expect((await db.settings.get("profile"))?.onboarded).toBe(true);
+  expect(
+    (await db.sessions.get("active"))?.exerciseIds.every((id) =>
+      id.startsWith("b1"),
+    ),
+  ).toBe(true);
+});
