@@ -29,7 +29,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   const [selectedLevel, setSelectedLevel] = useState<Level | "all">("all");
   const [currentIndex, setCurrentIndex] = useState(0);
   const playback = useSyncExternalStore(subscribeAudio, audioState);
-  const [speed, setSpeed] = useState<number>(0.85);
+  const speed=playback.rate;
 
   // Interaction mode & speech recognition
   const [isRecording, setIsRecording] = useState(false);
@@ -50,6 +50,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   });
 
   const recognitionRef = useRef<any>(null);
+  const recognitionTimer = useRef<ReturnType<typeof setTimeout>|null>(null);
   const sessionRef = useRef<HTMLDivElement>(null);
 
   const speechSupported = typeof window !== "undefined" && !!(
@@ -67,6 +68,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   const currentScenario: VoiceScenario | undefined = filteredScenarios[currentIndex] || filteredScenarios[0];
 
   const releaseRecognition = (updateState=true) => {
+    if(recognitionTimer.current)clearTimeout(recognitionTimer.current);recognitionTimer.current=null;
     const r=recognitionRef.current;recognitionRef.current=null;
     if(r){r.onresult=r.onend=r.onerror=r.onstart=null;try{r.abort();}catch{}}
     if(updateState)setIsRecording(false);
@@ -85,6 +87,10 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   useEffect(resetScenario, [currentIndex, selectedTheme, selectedLevel]);
 
   useEffect(()=>()=>{stopSpeech();releaseRecognition(false);},[]);
+  useEffect(()=>{
+    const visibility=()=>{if(document.hidden&&recognitionRef.current){releaseRecognition();setStatusMessage('Запись остановлена при сворачивании. Можно начать заново.');}};
+    document.addEventListener('visibilitychange',visibility);return()=>document.removeEventListener('visibilitychange',visibility);
+  },[]);
 
   const partnerPrompt = activeTurn === "initial"
     ? currentScenario?.partnerPromptBg
@@ -112,7 +118,9 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   // Start speech recognition
   const startRecording = () => {
     if (isRecording) {
-      recognitionRef.current?.stop();
+      try{recognitionRef.current?.stop();}catch{releaseRecognition();}
+      if(recognitionTimer.current)clearTimeout(recognitionTimer.current);
+      recognitionTimer.current=setTimeout(()=>{releaseRecognition();setStatusMessage('Запись остановлена. Можно повторить попытку.');},2000);
       setIsRecording(false);
       return;
     }
@@ -125,13 +133,20 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
 
     releaseRecognition();
     const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const r = new SpeechRec();
+    let r:any;
+    try{r=new SpeechRec();}catch{setUseTextInput(true);setStatusMessage('Микрофон недоступен. Введите ответ или повторите попытку.');return;}
     r.lang = "bg-BG";
     r.interimResults = false;
     r.maxAlternatives = 3;
     recognitionRef.current = r;
+    const watchdog=(ms:number)=>{
+      if(recognitionTimer.current)clearTimeout(recognitionTimer.current);
+      recognitionTimer.current=setTimeout(()=>{if(recognitionRef.current===r){releaseRecognition();setStatusMessage('Распознавание не отвечает. Повторите запись или введите ответ текстом.');}},ms);
+    };
 
     r.onstart = () => {
+      if(recognitionRef.current!==r)return;
+      watchdog(45000);
       setIsRecording(true);
       setStatusMessage("Слушаю вас на болгарском... Говорите в микрофон.");
       setSpeechTranscript("");
@@ -139,15 +154,20 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
     };
 
     r.onresult = (event: any) => {
-      const heard = event.results[0][0].transcript;
+      if(recognitionRef.current!==r)return;
+      const heard = event.results?.[event.resultIndex??0]?.[0]?.transcript;
+      releaseRecognition();
+      if(!heard){setStatusMessage('Речь не распознана. Повторите запись.');return;}
       setSpeechTranscript(heard);
       setIsRecording(false);
       evaluateResponse(heard);
     };
 
     r.onerror = (e: any) => {
-      setIsRecording(false);
+      if(recognitionRef.current!==r)return;
+      releaseRecognition();
       if (e.error === "not-allowed") {
+        setUseTextInput(true);
         setStatusMessage("Доступ к микрофону заблокирован. Разрешите микрофон в настройках браузера или используйте текстовый режим.");
       } else {
         setStatusMessage(`Ошибка распознавания (${e.error}). Попробуйте сказать фразу ещё раз чётче или введите ответ текстом.`);
@@ -155,15 +175,18 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
     };
 
     r.onend = () => {
-      setIsRecording(false);
+      if(recognitionRef.current!==r)return;
+      releaseRecognition();
+      setStatusMessage('Запись завершена без результата. Можно повторить попытку или ввести ответ.');
     };
 
     try {
       stopSpeech();
       setIsRecording(true);
+      watchdog(8000);
       r.start();
     } catch {
-      setIsRecording(false);
+      releaseRecognition();
       setStatusMessage("Не удалось включить микрофон. Попробуйте текстовый режим ввода.");
     }
   };
@@ -422,12 +445,12 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
 
                 <div style={{ display: "flex", alignItems: "center", gap: "4px", marginLeft: "auto" }}>
                   <span style={{ fontSize: "0.75rem", opacity: 0.7 }}>Скорость:</span>
-                  {[0.75, 0.85, 1.0].map((s) => (
+                  {[0.75, 1, 1.25, 1.5].map((s) => (
                     <button
                       key={s}
                       className={`btn ${speed === s ? "primary" : "secondary"}`}
                       style={{ fontSize: "0.72rem", padding: "2px 6px" }}
-                      onClick={() => {setSpeed(s);configureAudio({rate:s});}}
+                      onClick={() => configureAudio({rate:s})}
                     >
                       {s}x
                     </button>

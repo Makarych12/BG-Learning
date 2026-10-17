@@ -5803,10 +5803,6 @@ html:has(.modal-backdrop) .audio-dock:not(:hover):not(:focus-within){opacity:.94
  .hero-tag{font-size:10px;line-height:1.6;letter-spacing:.5px}
 }
 .modal.panel{background:linear-gradient(145deg,#26333b,#1b2230 55%,#1a2530)!important;transform-style:flat}
-@media(max-width:760px){
- html:has(.audio-dock.playing,.audio-dock.loading,.audio-dock.error) .modal-backdrop{align-items:flex-start}
- html:has(.audio-dock.playing,.audio-dock.loading,.audio-dock.error) .modal{max-height:calc(100dvh - 230px)}
-}
 /* Decorative feedback must never enlarge the scrollable page. */
 button:has(>.neon-ripple){overflow:clip}
 .answer-feedback:has(>.success-ring),.feedback-correct:has(>.success-ring),.success-orb:has(>.success-ring){overflow:clip}
@@ -5864,3 +5860,26 @@ button:has(>.neon-ripple){overflow:clip}
  .hero-art .chameleon{width:100%;height:100%}
  .hero-resume{flex-basis:100%;text-align:left}
 }
+/* Audio controls occupy the same compact box throughout loading/play/pause/error. */
+.audio-dock{width:300px;height:204px;max-height:calc(100dvh - 24px);padding:12px;display:grid;grid-template-rows:32px 20px 24px 48px 24px;gap:4px;transform:none!important;animation:none!important;transition:none;contain:layout paint;box-sizing:border-box}
+.audio-dock-title{min-width:0;gap:6px}.audio-dock-title>span{flex:1;max-height:32px;overflow:auto;line-height:16px}.audio-dock-title>svg,.audio-dock-title>button{flex-shrink:0}
+.audio-dock p{margin:0;line-height:20px}.audio-dock canvas,.audio-dock.idle canvas{width:100%;height:24px}
+.audio-dock-controls{display:grid;grid-template-columns:32px 32px 32px minmax(66px,1fr) minmax(42px,1fr);gap:4px;align-items:center}
+.audio-dock-controls button{min-width:0;min-height:36px;padding:6px}.audio-dock label{font-size:11px;gap:2px}.audio-dock select{font-size:16px;width:100%;padding:2px}.audio-dock input{width:100%;min-width:0;height:24px}.audio-dock small{margin:0;line-height:12px;overflow:auto}
+.economy .audio-dock canvas,.reduce-motion .audio-dock canvas{display:block;visibility:hidden}
+@media(prefers-reduced-motion:reduce){.audio-dock canvas{display:block;visibility:hidden}}
+@media(max-width:760px){
+ .audio-dock{width:300px;max-width:calc(100vw - 24px);backdrop-filter:none}
+ .audio-dock-title button{min-width:28px;min-height:28px;padding:4px}
+ .audio-dock-controls button{min-width:0}
+ /* A fixed portal keeps audio outside a moving page; opening it never resizes a lesson. */
+ .modal-backdrop{align-items:center}
+}
+.inline-audio-controls{height:174px;display:grid;grid-template-rows:42px 1fr;gap:8px;margin:14px 0;padding:12px;border-radius:12px;background:#111b29;box-sizing:border-box;min-width:0}
+.inline-audio-controls>span{overflow:auto;font-size:13px;line-height:1.5}
+.inline-audio-controls>div{display:flex;gap:6px;flex-wrap:wrap;align-content:start;align-items:center}
+.inline-audio-controls .listen-play{margin:0;padding:8px;min-height:40px;font-size:13px;width:auto}
+.inline-audio-controls button{min-height:40px;padding:8px;font-size:13px}
+.inline-audio-controls label{display:flex;gap:8px;align-items:center;font-size:12px}
+.inline-audio-controls select{font-size:16px;max-width:85px}
+.app:has(.inline-audio-controls)>.audio-dock{display:none}

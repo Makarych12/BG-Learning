@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo,useSyncExternalStore } from "react";
 import { listeningTasks, type ListeningTask, type ListeningCategory } from "./listening-tasks";
-import { speak, stopSpeech,audioState,subscribeAudio } from "./speech";
+import { speak, stopSpeech,configureAudio,audioState,subscribeAudio } from "./speech";
 import type { Level } from "./content";
 
 interface ListeningLabProps {
@@ -24,8 +24,8 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
   const [selectedCategory, setSelectedCategory] = useState<ListeningCategory | "all">("all");
   const [selectedLevel, setSelectedLevel] = useState<Level | "all">("all");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [speed, setSpeed] = useState<number>(0.85);
   const playback=useSyncExternalStore(subscribeAudio,audioState);
+  const speed=playback.rate;
   const isPlaying=playback.status==='playing'||playback.status==='loading';
   const [userInput, setUserInput] = useState("");
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -238,7 +238,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
 
           <button
             className="btn secondary"
-            onClick={() => handlePlayAudio(speed * 0.85)}
+            onClick={() => handlePlayAudio(0.75)}
             title="Воспроизвести медленнее"
             style={{ fontSize: "0.85rem" }}
           >
@@ -248,12 +248,12 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
           {/* Speed Controls */}
           <div style={{ display: "flex", alignItems: "center", gap: "4px", flexWrap: "wrap", marginLeft: "auto" }}>
             <span style={{ fontSize: "0.8rem", opacity: 0.7, marginRight: "4px" }}>Скорость:</span>
-            {[0.75, 0.85, 1.0, 1.1].map((s) => (
+            {[0.75, 1, 1.25, 1.5].map((s) => (
               <button
                 key={s}
                 className={`btn ${speed === s ? "primary" : "secondary"}`}
                 style={{ fontSize: "0.75rem", padding: "3px 8px", minWidth: "42px" }}
-                onClick={() => { setSpeed(s); if (isPlaying) handlePlayAudio(s); }}
+                onClick={() => configureAudio({rate:s})}
               >
                 {s}x
               </button>

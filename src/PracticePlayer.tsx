@@ -1,4 +1,5 @@
 import {PhotoImage} from "./PhotoImage";
+import InlineAudioControls from "./InlineAudioControls";
 import { ReactiveKeyboard } from "./ReactiveKeyboard";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -46,6 +47,13 @@ export default function PracticePlayer({
     [reveal, setReveal] = useState(false);
   const t = record.items[record.index];
   const recognition = useRef<any>(null);
+  const recognitionTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
+  function releaseRecognition(){
+    if(recognitionTimer.current)clearTimeout(recognitionTimer.current);recognitionTimer.current=null;
+    const r=recognition.current;recognition.current=null;
+    if(r){r.onstart=r.onend=r.onerror=r.onresult=null;try{r.abort();}catch{}}
+  }
+  function preparePlayback(){releaseRecognition();setRecording(false);}
   const ref = useRef<HTMLDivElement>(null);
   const [rightOrder, setRightOrder] = useState<number[]>([]);
   const finished = record.index >= record.items.length;
@@ -81,11 +89,12 @@ export default function PracticePlayer({
       document.body.style.overflow = overflow;
       previous?.focus({ preventScroll: true });
       document.removeEventListener("keydown", key);
-      recognition.current?.abort();
+      releaseRecognition();
       stopSpeech();
     };
   }, []);
   useEffect(() => {
+    releaseRecognition();setRecording(false);stopSpeech();
     setAnswer(record.answer ?? "");
     setChecked(!!record.checked);
     setCorrect(!!record.lastCorrect);
@@ -193,7 +202,9 @@ export default function PracticePlayer({
   }
   function startRecognition() {
     if (recording) {
-      recognition.current?.stop();
+      try{recognition.current?.stop();}catch{releaseRecognition();setRecording(false);}
+      if(recognitionTimer.current)clearTimeout(recognitionTimer.current);
+      recognitionTimer.current=setTimeout(()=>{releaseRecognition();setRecording(false);},2000);
       return;
     }
     const R =
@@ -206,13 +217,16 @@ export default function PracticePlayer({
       return;
     }
     stopSpeech();
-    const r = new R();
+    releaseRecognition();
+    let r:any;try{r=new R();}catch{notify('Не удалось включить микрофон. Можно ввести ответ вручную.');return;}
     recognition.current = r;
     r.lang = "bg-BG";
-    r.onstart = () => setRecording(true);
-    r.onend = () => setRecording(false);
+    const watchdog=(ms:number)=>{if(recognitionTimer.current)clearTimeout(recognitionTimer.current);recognitionTimer.current=setTimeout(()=>{if(recognition.current===r){releaseRecognition();setRecording(false);notify('Распознавание не отвечает. Повторите запись или введите ответ.');}},ms);};
+    r.onstart = () => {if(recognition.current===r){setRecording(true);watchdog(45000);}};
+    r.onend = () => {if(recognition.current===r){releaseRecognition();setRecording(false);}};
     r.onerror = (e: any) => {
-      setRecording(false);
+      if(recognition.current!==r)return;
+      releaseRecognition();setRecording(false);
       notify(
         e.error === "not-allowed"
           ? "Разрешите доступ к микрофону в браузере."
@@ -220,14 +234,19 @@ export default function PracticePlayer({
       );
     };
     r.onresult = (e: any) => {
-      const text = e.results[0][0].transcript;
+      if(recognition.current!==r)return;
+      const text = e.results?.[e.resultIndex??0]?.[0]?.transcript;
+      releaseRecognition();setRecording(false);
+      if(!text)return;
       setAnswer(text);
       setTranscript(text);
     };
     try {
       stopSpeech();
+      setRecording(true);watchdog(8000);
       r.start();
     } catch {
+      releaseRecognition();setRecording(false);
       notify("Не удалось начать распознавание.");
     }
   }
@@ -332,7 +351,7 @@ export default function PracticePlayer({
                 {t.bg}
                 <button
                   className="icon-btn"
-                  onClick={() => speak(t.bg!, notify)}
+                  onClick={() => {preparePlayback();void speak(t.bg!, notify);}}
                   aria-label="Прослушать контекст"
                 >
                   <Volume2 size={18} />
@@ -345,12 +364,7 @@ export default function PracticePlayer({
             {["dictation", "listen-choice", "multi", "speaking"].includes(
               t.type,
             ) && (
-              <button
-                className="listen-play"
-                onClick={() => speak(t.bg!, notify)}
-              >
-                <Volume2 size={24} /> Прослушать фразу
-              </button>
+              <InlineAudioControls text={t.bg!} notify={notify} onPlay={preparePlayback}/>
             )}
             {choice ? (
               <div className="answer-options">

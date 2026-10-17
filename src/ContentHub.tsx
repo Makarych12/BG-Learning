@@ -1,5 +1,5 @@
 import type {LessonUnit} from "./grammar-units";
-import { useState, useEffect, useLayoutEffect, useRef, useMemo, lazy, Suspense, Fragment } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useMemo, useSyncExternalStore, lazy, Suspense, Fragment } from "react";
 import { sentenceReviewReason, railReviewReason } from "./content-quality";
 const WritingWorkshop=lazy(()=>import("./WritingWorkshop"));
 const RailAcademy=lazy(()=>import("./RailAcademy"));
@@ -54,7 +54,7 @@ import type { Dialogue } from "./curriculum";
 
 import { db, reviewWord, shuffle, type Settings as Profile } from "./storage";
 import { Rating } from "ts-fsrs";
-import { speak, stopSpeech, speakSequence, cacheAudio } from "./speech";
+import { speak, stopSpeech, speakSequence, cacheAudio,configureAudio,audioState,subscribeAudio } from "./speech";
 import PracticePlayer from "./PracticePlayer";
 import type { Level } from "./content";
 export type HubMode =
@@ -110,6 +110,8 @@ export default function ContentHub({
     [queueCount, setQueueCount] = useState(0),
     [practiceIds, setPracticeIds] = useState<string[]>([]);
   const [lessonContent,setLessonContent]=useState<LessonUnit|null>(null);
+  const [dialogueLimit,setDialogueLimit]=useState(18);
+  useEffect(()=>setDialogueLimit(18),[level]);
   const [lessonError,setLessonError]=useState(false),[lessonRetry,setLessonRetry]=useState(0);
   useEffect(()=>{
     let alive=true;setLessonError(false);
@@ -171,6 +173,7 @@ export default function ContentHub({
     onRefresh();
   }
   const installationAbort = useRef<AbortController | null>(null);
+  const audioDownloadAbort = useRef<AbortController | null>(null);
   async function install(c: Catalog) {
     const controller = installationAbort.current ??= new AbortController();
     if (controller.signal.aborted) return;
@@ -202,7 +205,7 @@ export default function ContentHub({
           c.packages.map((p) => p.id),
         );
         if (
-          ["library","practice","listening"].includes(mode) && c.packages.some(
+          ["library","practice"].includes(mode) && c.packages.some(
             (p, i) =>
               local[i]?.sha256 !== p.sha256 || local[i]?.version !== c.version,
           )
@@ -215,6 +218,7 @@ export default function ContentHub({
     return () => {
       alive = false;
       installationAbort.current?.abort();
+      audioDownloadAbort.current?.abort();
       playing.current = false;
       stopSpeech();
     };
@@ -286,12 +290,19 @@ export default function ContentHub({
     if (busy) return;
     setBusy(true);
     try {
+      if(mode==='listening')await ensureListeningMaterials();
       await launch(await generateTasks(type, level, 10));
     } catch {
       notify("Не удалось подготовить практику. Попробуйте ещё раз.");
     } finally {
       setBusy(false);
     }
+  }
+  async function ensureListeningMaterials(){
+    if(!catalog)return;
+    const [sentences,words]=await Promise.all([contentDB.sentences.count(),contentDB.lexemes.count()]);
+    const packages=[!sentences&&catalog.packages.find(p=>p.kind==='sentences'),!words&&catalog.packages.find(p=>p.kind==='dictionary')].filter((p):p is Catalog['packages'][number]=>!!p);
+    if(packages.length)await install({...catalog,packages});
   }
   async function rate(r: Rating) {
     if (!selected || busy) return;
@@ -1156,7 +1167,7 @@ export default function ContentHub({
             ))}
           </div>
           <div className="unit-grid expandable-grid">
-            {dialogues.filter(d => d.level === level).map(d => <Fragment key={d.id}>
+            {dialogues.filter(d => d.level === level).slice(0,dialogueLimit).map(d => <Fragment key={d.id}>
               <button className="panel unit-card" aria-expanded={dialogue === d.id}
                 onClick={event => {stopSpeech(); toggleExpansion(event, d.id, dialogue, setDialogue);}}>
                 <span className="tag">{d.topic} · {d.level}</span><h3>{d.title}</h3>
@@ -1166,6 +1177,7 @@ export default function ContentHub({
                 showTranslations={showTranslations} setShowTranslations={setShowTranslations}/></div>}
             </Fragment>)}
           </div>
+          {dialogues.filter(d=>d.level===level).length>dialogueLimit&&<button className="btn secondary" onClick={()=>setDialogueLimit(limit=>limit+18)}>Показать ещё диалоги</button>}
         </>
       )}
       {mode === "listening" && (
@@ -1225,7 +1237,9 @@ export default function ContentHub({
               className="btn secondary"
               disabled={!!audioProgress}
               onClick={async () => {
+                const controller=new AbortController();audioDownloadAbort.current=controller;
                 try {
+                  await ensureListeningMaterials();
                   const rows = await contentDB.sentences
                     .orderBy("words")
                     .limit(100)
@@ -1233,9 +1247,11 @@ export default function ContentHub({
                   await cacheAudio(
                     rows.map((s) => s.bg),
                     (d, t) => setAudioProgress(`${d}/${t}`),
+                    controller.signal,
                   );
                   notify("100 аудиофраз сохранены для офлайн-практики.");
                 } catch (e) {
+                  if(controller.signal.aborted)return;
                   notify(
                     e instanceof Error ? e.message : "Аудиозагрузка прервана.",
                   );
@@ -1343,8 +1359,8 @@ function DialogueView({
   showTranslations: boolean;
   setShowTranslations: (b: boolean) => void;
 }) {
-  const [speed, setSpeed] = useState(0.85),
-    [currentLine, setCurrentLine] = useState(-1);
+  const speed=useSyncExternalStore(subscribeAudio,audioState).rate;
+  const [currentLine, setCurrentLine] = useState(-1);
   useEffect(
     () => () => {
       stopSpeech();
@@ -1389,10 +1405,8 @@ function DialogueView({
         </button>
         <label>
           Скорость{" "}
-          <select value={speed} onChange={(e) => setSpeed(+e.target.value)}>
-            <option value={0.65}>Медленно</option>
-            <option value={0.85}>Обычно</option>
-            <option value={1}>Быстрее</option>
+          <select value={speed} onChange={(e) => configureAudio({rate:+e.target.value})}>
+            {[.75,1,1.25,1.5].map(rate=><option key={rate} value={rate}>{rate}x</option>)}
           </select>
         </label>
       </div>

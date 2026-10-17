@@ -7,3 +7,7 @@ it('автоматически облегчает слабые устройст�
  expect(modestHardware({})).toBe(false);
  expect(modestHardware({hardwareConcurrency:0})).toBe(false);
 });
+it('Android с восемью ядрами сразу использует статичную графику без ожидания профиля',()=>{
+ expect(modestHardware({userAgent:'Mozilla/5.0 (Linux; Android 14)',deviceMemory:8,hardwareConcurrency:8})).toBe(true);
+ expect(modestHardware({userAgent:'Mozilla/5.0 (X11; Linux x86_64)',deviceMemory:8,hardwareConcurrency:8})).toBe(false);
+});

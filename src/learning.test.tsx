@@ -287,3 +287,14 @@ it('Активный словарь фильтруется до пагинаци
  const rows=await searchLexemes('',0,'all',true);
  expect(rows).toHaveLength(4);expect(rows.every(w=>w.active)).toBe(true);
 });
+it('воспроизведение устного задания освобождает микрофон и отключает его старые результаты',async()=>{
+ const speech=await import('./speech');vi.spyOn(speech,'speak').mockResolvedValue(false);let recorder:any;
+ class Recognition{onstart:any;onend:any;onerror:any;onresult:any;abort=vi.fn();stop=vi.fn();constructor(){recorder=this;}start(){this.onstart();}}
+ vi.stubGlobal('SpeechRecognition',Recognition);
+ try{
+  const user=userEvent.setup();render(<PracticePlayer initial={{id:'current',items:[{...task,type:'speaking',bg:'вода'}],index:0,correct:0,startedAt:Date.now()}} onClose={vi.fn()} notify={vi.fn()} onSaved={vi.fn()}/>);
+  await user.click(screen.getByRole('button',{name:'Ответить голосом'}));await user.click(screen.getByRole('button',{name:'Прослушать фразу'}));
+  expect(recorder.abort).toHaveBeenCalled();expect(recorder.onresult).toBeNull();expect(screen.getByRole('button',{name:'Ответить голосом'})).toBeTruthy();
+  expect(await db.attempts.count()).toBe(0);
+ }finally{vi.unstubAllGlobals();}
+});

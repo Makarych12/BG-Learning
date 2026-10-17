@@ -1,8 +1,10 @@
 import { useSyncExternalStore } from 'react';
 import { currentRuntimeProfile } from './performance';
 
-export function modestHardware(device: {deviceMemory?: number; hardwareConcurrency?: number}) {
- return (device.deviceMemory !== undefined && device.deviceMemory <= 4)
+export function modestHardware(device: {deviceMemory?: number; hardwareConcurrency?: number;userAgent?:string}) {
+ // Android's reported RAM/core count does not describe GPU/thermal limits. Start
+ // with the static artwork there instead of spending eight seconds over budget.
+ return /Android/i.test(device.userAgent??'') || (device.deviceMemory !== undefined && device.deviceMemory <= 4)
   || (device.hardwareConcurrency !== undefined && device.hardwareConcurrency > 0 && device.hardwareConcurrency <= 4);
 }
 function economySnapshot() {

@@ -2,8 +2,8 @@ import {modestHardware, useEconomyEffects} from "./effects";
 import { profileRuntime, currentRuntimeProfile } from "./performance";
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
-import { Volume2, Square, RotateCcw, X } from 'lucide-react';
-import { audioState, subscribeAudio, audioAnalyser, configureAudio, speak, stopSpeech } from './speech';
+import { Volume2, Square, RotateCcw, X,Pause,Play } from 'lucide-react';
+import { audioState, subscribeAudio, audioAnalyser, configureAudio, speak, stopSpeech,pauseSpeech,resumeSpeech } from './speech';
 
 /** Global interactions share one set of delegated listeners and stop offscreen. */
 export function Atmosphere({ reduced }: { reduced: boolean }) {
@@ -21,7 +21,7 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
     let economy = modestHardware(hardware);
     root.parentElement?.classList.toggle('economy',economy);
     const media = gsap.matchMedia();
-    const adapt = () => { const sample=currentRuntimeProfile(); if(sample && sample.frames>=30 && (sample.observedFps < 40 || sample.p95FrameMs > 45)){economy=true;root.parentElement?.classList.add('economy');media.revert();} };
+    const adapt = () => { const sample=currentRuntimeProfile(); if(sample && sample.frames>=30 && (sample.observedFps < 40 || sample.p95FrameMs > 45)){economy=true;root.parentElement?.classList.add('economy');media.revert();effects.disconnect();for(const tween of tweens)tween.kill();tweens.clear();} };
     window.addEventListener('chameleon-profile',adapt);
     media.add('(prefers-reduced-motion: no-preference) and (min-width: 761px) and (hover: hover)', () => {
       if (reduced || economy) return;
@@ -132,7 +132,7 @@ export function AudioDock({ reduced = false }: { reduced?: boolean }) {
   return <aside className={`audio-dock ${state.status}`} aria-label="Управление звуком">
     <div className="audio-dock-title"><Volume2 size={16}/><span role="status">{state.status === 'loading' ? 'Загружаем звук…' : state.status === 'error' ? 'Не удалось загрузить звук' : state.status === 'playing' ? state.source : 'Аудио готово'}</span><button aria-label="Закрыть проигрыватель" onClick={() => { stopSpeech(); setDismissed(true); }}><X size={14}/></button></div>
     <p lang="bg">{state.text}</p><canvas ref={canvas} width={240} height={40} aria-label="Спектр реального аудиосигнала"/>
-    <div className="audio-dock-controls"><button onClick={() => speak(state.text, () => {})} aria-label="Повторить звук"><RotateCcw size={16}/></button><button onClick={stopSpeech} aria-label="Остановить звук"><Square size={14}/></button><label>Темп<select aria-label="Скорость аудио" value={state.rate} onChange={e=>configureAudio({rate:+e.target.value})}>{[.55,.65,.7,.85,1,1.15,1.3].map(v=><option key={v} value={v}>{(v/.85).toFixed(1)}×</option>)}</select></label><label>Звук<input aria-label="Громкость аудио" type="range" min="0" max="1" step=".05" value={state.volume} onChange={e=>configureAudio({volume:+e.target.value})}/></label></div>
-    {state.error && <small>{state.error}</small>}
+    <div className="audio-dock-controls"><button onClick={() => speak(state.text, () => {})} aria-label="Повторить звук"><RotateCcw size={16}/></button><button disabled={!['playing','paused'].includes(state.status)} onClick={()=>state.status==='paused'?void resumeSpeech():pauseSpeech()} aria-label={state.status==='paused'?'Продолжить звук':'Пауза'}>{state.status==='paused'?<Play size={14}/>:<Pause size={14}/>}</button><button onClick={stopSpeech} aria-label="Остановить звук"><Square size={14}/></button><label>Темп<select aria-label="Скорость аудио" value={state.rate} onChange={e=>configureAudio({rate:+e.target.value})}>{[.75,1,1.25,1.5].map(v=><option key={v} value={v}>{v}x</option>)}</select></label><label>Звук<input aria-label="Громкость аудио" type="range" min="0" max="1" step=".05" value={state.volume} onChange={e=>configureAudio({volume:+e.target.value})}/></label></div>
+    <small>{state.error}</small>
   </aside>;
 }
