@@ -23,11 +23,13 @@ export default function PracticePlayer({
   onClose,
   notify,
   onSaved,
+  onNextLesson,
 }: {
   initial: PracticeRecord;
   onClose: () => void;
   notify: (s: string) => void;
   onSaved: () => void;
+  onNextLesson?: () => void;
 }) {
   const [record, setRecord] = useState(initial),
     [answer, setAnswer] = useState(initial.answer ?? ""),
@@ -289,7 +291,8 @@ export default function PracticePlayer({
             <p>
               {record.correct} из {record.items.length} верных ответов
             </p>
-            <button className="btn primary full" onClick={onClose}>
+            {onNextLesson && <button className="btn primary full" onClick={onNextLesson}>Следующий урок <ArrowRight size={17}/></button>}
+            <button className={`btn ${onNextLesson?'secondary':'primary'} full`} onClick={onClose}>
               Вернуться к материалам <ArrowRight size={17} />
             </button>
           </div>

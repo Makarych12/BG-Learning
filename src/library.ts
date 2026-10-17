@@ -99,6 +99,7 @@ export type PracticeRecord = {
   checked?: boolean;
   answer?: string;
   lastCorrect?: boolean;
+  courseUnitId?: string;
 };
 export type Mechanic =
   | "meaning"

@@ -254,6 +254,7 @@ function Chameleon() {
   );
 }
 function App() {
+  const [courseStart,setCourseStart]=useState<{level:Level;request:number}>();
   const economy = useEconomyEffects();
   const [page, setPage] = useState<Page>("home"),
     [profile, setProfile] = useState<Profile>(defaultSettings),
@@ -341,6 +342,7 @@ function App() {
     }
   };
   const go = (p: Page) => {
+    if(p!=="academy")setCourseStart(undefined);
     stopSpeech();
     beginNavigation(p);
     setPage(p);
@@ -376,6 +378,12 @@ function App() {
     mode = "lesson",
     ids?: string[],
   ) {
+    if (mode === "lesson" && !ids) {
+      if(level!==profile.level)await saveProfile({...profile,level});
+      if (page !== "academy") go("academy");
+      setCourseStart(previous=>({level,request:(previous?.request??0)+1}));
+      return;
+    }
     const pool =
       ids ??
       shuffle(exercises.filter((e) => e.level === level)).map((e) => e.id);
@@ -433,6 +441,7 @@ function App() {
         profile={profile}
         notify={notify}
         onRefresh={refresh}
+        courseStart={mode === "courses" ? courseStart : undefined}
       />
     </Suspense>
   );
@@ -694,19 +703,16 @@ function App() {
                             <button
                               className="btn primary"
                               onClick={() =>
-                                savedSession
-                                  ? setSession(savedSession)
-                                  : !profile.onboarded
+                                !profile.onboarded
                                     ? setModal("onboarding")
                                     : startLesson()
                               }
                             >
                               <Play size={15} fill="currentColor" />
-                              {savedSession
-                                ? "Продолжить обучение"
-                                : "Начать обучение"}
+                              Начать обучение
                               <ArrowRight size={17} />
                             </button>
+                            {savedSession && <button className="hero-link hero-resume" onClick={()=>setSession(savedSession)}>Продолжить сохранённое вводное занятие</button>}
                             <button
                               className="hero-link"
                               onClick={() => setModal("diagnostic")}
@@ -883,7 +889,7 @@ function App() {
                                 <h3>{l.name}</h3>
                                 <p>{l.description}</p>
                                 <div className="level-footer">
-                                  <span>Стартовый урок · 5 заданий</span>
+                                  <span>Все уроки уровня</span>
                                   <ChevronRight size={15} />
                                 </div>
                               </button>
@@ -1068,7 +1074,7 @@ function App() {
                             <h2>{l.name}</h2>
                             <p>{l.description}</p>
                             <div className="lesson-detail">
-                              <BookOpen size={16} /> {l.id === "C1" || l.id === "C2" ? "Развёрнутые уроки · чтение, диалоги и практика" : "Вводная практика · 5 заданий"}
+                              <BookOpen size={16} /> Полная программа · темы, примеры и практика
                             </div>
                             <div className="tags">
                               <span>Лексика</span>
@@ -1077,12 +1083,7 @@ function App() {
                             </div>
                             <button
                               className="btn secondary"
-                              onClick={() => {
-                                saveProfile({ ...profile, level: l.id });
-                                if (l.id === "C1" || l.id === "C2") {
-                                  document.querySelector(".content-hub")?.scrollIntoView({block:"start",behavior:"instant"});
-                                } else startLesson(l.id);
-                              }}
+                              onClick={() => void startLesson(l.id)}
                             >
                               Начать урок <ArrowRight size={16} />
                             </button>
@@ -1090,10 +1091,7 @@ function App() {
                         ))}
                       </div>
                       <p className="content-note">
-                        <Info size={15} /> Быстрый вводный блок:{" "}
-                        {exercises.length} заданий и {words.length} слов. Это
-                        вводные подборки, а не полные курсы CEFR. Материалы
-                        требуют финальной проверки редактором.
+                        <Info size={15} /> Выберите уровень и тему. Каждый урок открывается с объяснениями и примерами; все его задания доступны в практике без ограничения до пяти вопросов.
                       </p>
                     </>
                   )}

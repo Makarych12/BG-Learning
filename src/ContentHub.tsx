@@ -72,8 +72,10 @@ export default function ContentHub({
   notify,
   onRefresh,
   initialQuery,
+  courseStart,
 }: {
   initialQuery?: string;
+  courseStart?: {level:Level;request:number};
   mode: HubMode;
   profile: Profile;
   notify: (s: string) => void;
@@ -114,6 +116,24 @@ export default function ContentHub({
     void import('./advanced-lessons').then(m=>m.loadAdvancedLesson(activeUnit)).then(unit=>{if(alive)setLessonContent(unit);}).catch(()=>{if(alive)setLessonError(true);});
     return()=>{alive=false;};
   },[activeUnit,lessonRetry]);
+  const courseScroll = useRef<string|null>(null);
+  function openCourseUnit(unit:LessonUnit) {
+    stopSpeech();setLevel(unit.level);setPractice(null);
+    const target=document.getElementById(`lesson-${unit.id}`);
+    if(target)target.scrollIntoView?.({block:'start',behavior:'instant'});
+    else courseScroll.current=unit.id;
+    setActiveUnit(unit.id);
+  }
+  useEffect(()=>{
+    if(mode!=='courses'||!courseStart||!dataReady)return;
+    const first=grammarUnits.find(unit=>unit.level===courseStart.level);
+    if(first)openCourseUnit(first);
+  },[courseStart?.request,dataReady,mode]);
+  useLayoutEffect(()=>{
+    if(courseScroll.current!==activeUnit)return;
+    const target=document.getElementById(`lesson-${activeUnit}`);
+    if(target){target.scrollIntoView?.({block:'start',behavior:'instant'});courseScroll.current=null;}
+  },[activeUnit]);
   const playing = useRef(false);
   const expansionAnchor = useRef<{element: HTMLElement; top: number} | null>(null);
   function toggleExpansion(event: React.MouseEvent<HTMLElement>, id: string, current: string | null, set: (id: string | null) => void) {
@@ -171,11 +191,11 @@ export default function ContentHub({
   }
   useEffect(() => {
     let alive = true;
+    void refresh().catch(()=>{if(alive)notify("Не удалось прочитать сохранённую практику.");});
     getCatalog()
       .then(async (c) => {
         if (!alive) return;
         setCatalog(c);
-        await refresh();
         if (!alive) return;
         const local = await contentDB.packages.bulkGet(
           c.packages.map((p) => p.id),
@@ -235,7 +255,7 @@ export default function ContentHub({
       alive = false;
     };
   }, [selected]);
-  async function launch(tasks: Task[]) {
+  async function launch(tasks: Task[], courseUnitId?:string) {
     if (!tasks.length) {
       notify(
         "Подходящие материалы не найдены. Выберите другую тему или завершите загрузку пакетов.",
@@ -252,6 +272,7 @@ export default function ContentHub({
     const record: PracticeRecord = {
       id: "current",
       items: await adaptTasks(tasks),
+      courseUnitId,
       index: 0,
       correct: 0,
       startedAt: Date.now(),
@@ -842,7 +863,7 @@ export default function ContentHub({
             ))}
           </div>
           {mode === "grammar" && <VerbReference notify={notify} launch={launch} revision={installed} />}
-          {mode==='courses' && (level==='C1'||level==='C2') && <p className="course-count">{grammarUnits.filter(u=>u.level===level).length} полных уроков · {grammarUnits.filter(u=>u.level===level).reduce((total,u)=>total+(u.taskCount??u.tasks.length),0)} заданий · чтение, диалоги и аудирование</p>}
+          {mode==='courses' && <p className="course-count">{grammarUnits.filter(u=>u.level===level).length} полных уроков · {grammarUnits.filter(u=>u.level===level).reduce((total,u)=>total+(u.taskCount??u.tasks.length),0)} заданий</p>}
           <div className="unit-grid expandable-grid">
             {grammarUnits.filter(u => u.level === level).map(summary => { const u=lessonContent?.id===summary.id?lessonContent:summary; return <Fragment key={u.id}>
               <button className="panel unit-card" aria-expanded={activeUnit === u.id} aria-controls={`lesson-${u.id}`}
@@ -907,7 +928,7 @@ export default function ContentHub({
                 {grammarUnits.slice(0,9).some(candidate=>candidate.id===u.id) && <button className="btn secondary" onClick={async()=>launch(await verbTasks(u.level,18,grammarUnits.findIndex(candidate=>candidate.id===u.id)))}>Новые упражнения по этому времени · разные глаголы</button>}
                 <button
                   className="btn primary"
-                  onClick={() => launch(u.tasks)}
+                  onClick={() => launch(u.tasks,mode==='courses'?u.id:undefined)}
                 >
                   Закрепить тему · {u.tasks.length} задания{" "}
                   <ArrowRight size={16} />
@@ -932,6 +953,7 @@ export default function ContentHub({
                   Аудиодиктант по теме <Headphones size={16} />
                 </button>
               </div>
+              {mode==='courses' && (()=>{const units=grammarUnits.filter(unit=>unit.level===u.level),next=units[units.findIndex(unit=>unit.id===u.id)+1];return next&&<button className="btn secondary next-course-lesson" onClick={()=>openCourseUnit(next)}>Следующий урок: {next.title} <ArrowRight size={16}/></button>;})()}
               <SourceLink
                 url={u.source}
                 label="Грамматический справочник · примеры составлены для обучения"
@@ -1246,6 +1268,12 @@ export default function ContentHub({
         <PracticePlayer
           key={practice.startedAt}
           initial={practice}
+          onNextLesson={mode==='courses' && practice.courseUnitId ? (()=>{
+            const current=grammarUnits.find(unit=>unit.id===practice.courseUnitId);
+            const units=grammarUnits.filter(unit=>unit.level===current?.level);
+            const next=units[units.findIndex(unit=>unit.id===practice.courseUnitId)+1];
+            return next?()=>openCourseUnit(next):undefined;
+          })():undefined}
           notify={notify}
           onSaved={refresh}
           onClose={() => {

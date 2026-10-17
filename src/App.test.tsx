@@ -3,52 +3,46 @@ import { render, screen, waitFor, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { db, defaultSettings } from "./storage";
-import { exercises } from "./content";
+import { grammarUnits } from "./grammar-units";
 beforeEach(async () => {
   await Promise.all([
     db.settings.clear(),
     db.memory.clear(),
     db.attempts.clear(),
     db.sessions.clear(),
+    db.practice.clear(),
   ]);
   await db.settings.put(defaultSettings);
 });
 afterEach(() => cleanup());
-it("Открывает академию, оценивает ответ, сохраняет и восстанавливает урок после перезапуска", async () => {
+it("Основной вход открывает полный урок Академии и восстанавливает его после перезапуска", async () => {
+  await db.settings.update('profile',{onboarded:true});
   const user = userEvent.setup();
   const first = render(<App />);
   await screen.findByRole("heading", { name: /Здравей/ });
-  await user.click(screen.getByRole("button", { name: "Академия A1–C2" }));
-  await user.click(
-    (await screen.findAllByRole("button", { name: "Начать урок" }))[0],
-  );
-  await screen.findByRole("dialog");
+  await user.click(screen.getByRole("button", { name: "Начать обучение" }));
+  await screen.findByRole("heading", {name:"Настоящее время",level:2},{timeout:5000});
+  await user.click(screen.getByRole("button", {name:/Закрепить тему/}));
+  await screen.findByRole("dialog",{name:"Практика академии"});
+  const unit=grammarUnits.find(u=>u.id==='present')!;
+  expect(unit.tasks.length).toBeGreaterThan(5);
   const prompt = document.querySelector(".exercise-prompt")!.textContent;
-  const exercise = exercises.find((e) => e.prompt === prompt)!;
-  if (exercise.type === "choice")
-    await user.click(screen.getByText(exercise.answers[0], { exact: true }));
-  else if (exercise.type === "order") {
-    for (const token of exercise.answers[0].split(" "))
-      await user.click(screen.getByRole("button", { name: token }));
-  } else
-    await user.type(
-      screen.getByRole("textbox", { name: "Ваш ответ" }),
-      exercise.answers[0],
-    );
-  await user.click(screen.getByRole("button", { name: "Проверить" }));
-  await screen.findByText("Точно! Так держать.");
+  const task = unit.tasks.find(t=>t.prompt===prompt)!;
+  await user.type(screen.getByRole("textbox",{name:"Ответ на задание"}),task.answers[0]);
+  await user.click(screen.getByRole("button",{name:"Проверить"}));
+  await screen.findByText("Верно!");
+  await user.click(screen.getByRole("button",{name:"Дальше"}));
+  expect((await db.practice.get("current"))?.items).toHaveLength(unit.tasks.length);
+  expect((await db.practice.get("current"))?.index).toBe(1);
+  expect(await db.sessions.get("active")).toBeUndefined();
+  await user.click(screen.getByRole("button",{name:"Закрыть практику"}));
+  first.unmount();render(<App />);
+  await user.click(await screen.findByRole("button",{name:"Начать обучение"}));
+  await user.click(await screen.findByRole("button",{name:"Продолжить"}));
+  await screen.findByRole("dialog",{name:"Практика академии"});
+  expect(screen.getByText(`2 / ${unit.tasks.length}`)).toBeTruthy();
   expect(await db.attempts.count()).toBe(1);
-  expect((await db.sessions.get("active"))?.index).toBe(1);
-  await user.click(screen.getByRole("button", { name: "Закрыть" }));
-  first.unmount();
-  render(<App />);
-  await user.click(
-    await screen.findByRole("button", { name: "Продолжить обучение" }),
-  );
-  await screen.findByRole("dialog");
-  expect(screen.getByText("2 / 5")).toBeTruthy();
-  expect(await db.attempts.count()).toBe(1);
-});
+},15000);
 it("Показывает карточку, сохраняет FSRS-рейтинг и обновляет очередь", async () => {
   const user = userEvent.setup();
   render(<App />);
@@ -102,11 +96,10 @@ it("При первом старте сохраняет выбранный ур�
     expect((await db.settings.get("profile"))?.level).toBe("B1"),
   );
   await user.click(screen.getByRole("button", { name: "Открыть первый урок" }));
-  await screen.findByText("1 / 5");
+  await screen.findByRole("heading",{name:"Аорист: событие в прошлом",level:2});
+  await user.click(screen.getByRole("button",{name:/Закрепить тему/}));
+  await screen.findByText("1 / 24");
   expect((await db.settings.get("profile"))?.onboarded).toBe(true);
-  expect(
-    (await db.sessions.get("active"))?.exerciseIds.every((id) =>
-      id.startsWith("b1"),
-    ),
-  ).toBe(true);
+  expect((await db.practice.get("current"))?.items.every(task=>task.level==='B1')).toBe(true);
+  expect(await db.sessions.get("active")).toBeUndefined();
 });
