@@ -6,6 +6,8 @@ import { db, defaultSettings } from "./storage";
 import { grammarUnits } from "./grammar-units";
 import {academyCatalog} from './academy-catalog';
 beforeEach(async () => {
+  window.location.hash = "";
+  window.history.replaceState(null, "", "/");
   await Promise.all([
     db.settings.clear(),
     db.memory.clear(),
@@ -55,7 +57,10 @@ it("Основной вход открывает полный урок Акад�
   expect((await db.practice.get("current"))?.index).toBe(1);
   expect(await db.sessions.get("active")).toBeUndefined();
   await user.click(screen.getByRole("button",{name:"Закрыть практику"}));
-  first.unmount();render(<App />);
+  first.unmount();
+  window.location.hash = "";
+  window.history.replaceState(null, "", "/");
+  render(<App />);
   await user.click(await screen.findByRole("button",{name:"Начать обучение"}));
   await user.click(await screen.findByRole("button",{name:"Продолжить"}));
   await screen.findByRole("dialog",{name:"Практика академии"});

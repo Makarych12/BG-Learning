@@ -256,11 +256,17 @@ function Chameleon() {
     </svg>
   );
 }
+function getInitialPage(): Page {
+  if (typeof window === "undefined") return "home";
+  const raw = window.location.hash.slice(1).split("/")[0];
+  const found = nav.find((n) => n.id === raw);
+  return found ? (found.id as Page) : "home";
+}
 function App() {
   const [academyCounts,setAcademyCounts]=useState<CourseCounts>();
   const [courseStart,setCourseStart]=useState<{level:Level;request:number}>();
   const economy = useEconomyEffects();
-  const [page, setPage] = useState<Page>("home"),
+  const [page, setPage] = useState<Page>(getInitialPage),
     [profile, setProfile] = useState<Profile>(defaultSettings),
     [ready, setReady] = useState(false),
     [error, setError] = useState(""),
@@ -301,6 +307,31 @@ function App() {
           );
       }
     })();
+    const initial = getInitialPage();
+    if (!window.history.state || !window.history.state.page) {
+      window.history.replaceState({ page: initial }, "", window.location.hash || `#${initial}`);
+    }
+    const onPopState = (e: PopStateEvent) => {
+      const state = e.state;
+      const targetPage = state?.page || (window.location.hash.slice(1).split("/")[0] as Page);
+      const validPage = nav.some((n) => n.id === targetPage) ? targetPage : "home";
+
+      if (!state?.sub || state.sub !== "menu") setMenu(false);
+      if (!state?.sub || state.sub !== "search") setSearchOpen(false);
+      if (!state?.sub || state.sub !== "modal") setModal(null);
+      if (!state?.sub || state.sub !== "session") setSession(null);
+
+      setPage((currentPage) => {
+        if (currentPage !== validPage) {
+          if (validPage !== "academy") setCourseStart(undefined);
+          stopSpeech();
+          window.scrollTo({ top: 0, behavior: "instant" });
+          return validPage;
+        }
+        return currentPage;
+      });
+    };
+    window.addEventListener("popstate", onPopState);
     const off = () => setOnline(navigator.onLine);
     const prompt = (e: Event) => {
       e.preventDefault();
@@ -316,6 +347,7 @@ function App() {
     });
     return () => {
       alive = false;
+      window.removeEventListener("popstate", onPopState);
       window.removeEventListener("online", off);
       window.removeEventListener("offline", off);
       window.removeEventListener("beforeinstallprompt", prompt);
@@ -360,7 +392,11 @@ function App() {
     setQuery("");
     setSearchOpen(false);
     window.scrollTo({ top: 0, behavior: "instant" });
+    if (!window.history.state || window.history.state.page !== p || window.history.state.sub) {
+      window.history.pushState({ page: p }, "", `#${p}`);
+    }
   };
+
   useEffect(()=>{let second=0;const first=requestAnimationFrame(()=>{second=requestAnimationFrame(()=>finishNavigation(page));});return()=>{cancelAnimationFrame(first);cancelAnimationFrame(second);};},[page]);
   const dayKey=localDay(Date.now());
   const today=useMemo(()=>attempts.filter(a=>localDay(a.at)===dayKey),[attempts,dayKey]);
@@ -411,6 +447,9 @@ function App() {
       await db.sessions.put(s);
       setSavedSession(s);
       setSession(s);
+      if (!window.history.state || window.history.state.sub !== "session") {
+        window.history.pushState({ page, sub: "session" }, "", `#${page}/lesson`);
+      }
     } catch {
       notify(
         "Не удалось сохранить начало урока. Проверьте доступ к хранилищу.",
@@ -470,7 +509,13 @@ function App() {
           <button
             className="sidebar-overlay"
             aria-label="Закрыть меню"
-            onClick={() => setMenu(false)}
+            onClick={() => {
+              if (window.history.state?.sub === "menu") {
+                window.history.back();
+              } else {
+                setMenu(false);
+              }
+            }}
           />
         )}
         <aside className={`sidebar ${menu ? "open" : ""}`}>
@@ -540,7 +585,12 @@ function App() {
             <div className="breadcrumb">
               <button
                 className="icon-btn mobile-menu"
-                onClick={() => setMenu(true)}
+                onClick={() => {
+                  setMenu(true);
+                  if (!window.history.state || window.history.state.sub !== "menu") {
+                    window.history.pushState({ page, sub: "menu" }, "", `#${page}/menu`);
+                  }
+                }}
                 aria-label="Открыть меню"
               >
                 <Menu size={22} />
@@ -1425,8 +1475,12 @@ function App() {
           <Lesson
             session={session}
             onClose={async () => {
-              setSession(null);
-              await refresh();
+              if (window.history.state?.sub === "session") {
+                window.history.back();
+              } else {
+                setSession(null);
+                await refresh();
+              }
             }}
             onChange={async (s) => {
               setSession(s);

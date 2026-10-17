@@ -139,9 +139,39 @@ export default function ContentHub({
   },[activeUnit]);
   const playing = useRef(false);
   const expansionAnchor = useRef<{element: HTMLElement; top: number} | null>(null);
+  useEffect(() => {
+    const onPop = (e: PopStateEvent) => {
+      const state = e.state;
+      if (!state || state.sub !== 'unit') {
+        setActiveUnit(null);
+      }
+      if (!state || state.sub !== 'dialogue') {
+        setDialogue(null);
+      }
+      if (!state || state.sub !== 'practice') {
+        setPractice(null);
+      }
+      if (!state || state.sub !== 'word') {
+        setSelected(null);
+      }
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   function toggleExpansion(event: React.MouseEvent<HTMLElement>, id: string, current: string | null, set: (id: string | null) => void) {
     expansionAnchor.current = {element: event.currentTarget, top: event.currentTarget.getBoundingClientRect().top};
-    set(current === id ? null : id);
+    if (current === id) {
+      if (window.history.state?.sub === 'unit') {
+        window.history.back();
+      } else {
+        set(null);
+      }
+    } else {
+      set(id);
+      if (!window.history.state || window.history.state.sub !== 'unit' || window.history.state.unitId !== id) {
+        window.history.pushState({ page: mode, sub: 'unit', unitId: id }, '', `#${mode}/lesson-${id}`);
+      }
+    }
   }
   useLayoutEffect(() => {
     const anchor = expansionAnchor.current;
@@ -886,7 +916,7 @@ export default function ContentHub({
               </button>
               {activeUnit === u.id && <div className="inline-expansion" id={`lesson-${u.id}`}>
             {u.summaryOnly ? <div className="panel lesson-loading" role={lessonError?'alert':'status'}>{lessonError?<><p>Не удалось загрузить урок. Сохранённый прогресс не затронут.</p><button className="btn secondary" onClick={()=>setLessonRetry(n=>n+1)}>Повторить загрузку урока</button></>:<p>Загружаем выбранный урок…</p>}</div> : <article className="panel grammar-unit">
-              <button className="text-btn" onClick={event => { const card = event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement; if(card) expansionAnchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)}; setActiveUnit(null); }}>
+              <button className="text-btn" onClick={event => { const card = event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement; if(card) expansionAnchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)}; if (window.history.state?.sub === 'unit') { window.history.back(); } else { setActiveUnit(null); } }}>
                 <ArrowLeft size={15} /> К темам
               </button>
               <span className="tag">{u.level}</span>

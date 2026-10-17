@@ -36,7 +36,41 @@ export default function RailLessons({notify,launch}:{notify:(s:string)=>void;lau
  const anchor=useRef<{element:HTMLElement;top:number}|null>(null);
  const [chosen,setChosen]=useState<string|null>(null);const unit=units.find(u=>u.id===chosen);
  useLayoutEffect(()=>{const saved=anchor.current;anchor.current=null;if(saved?.element.isConnected)window.scrollBy({top:saved.element.getBoundingClientRect().top-saved.top,behavior:"instant"});},[chosen]);
+ useEffect(()=>{
+  const onPop=(e:PopStateEvent)=>{
+   if(!e.state||e.state.sub!=='rail-lesson'){
+    setChosen(null);
+   }
+  };
+  window.addEventListener('popstate',onPop);
+  return()=>window.removeEventListener('popstate',onPop);
+ },[]);
+ function toggleChosen(event:React.MouseEvent<HTMLElement>,id:string){
+  anchor.current={element:event.currentTarget,top:event.currentTarget.getBoundingClientRect().top};
+  if(chosen===id){
+   if(window.history.state?.sub==='rail-lesson'){
+    window.history.back();
+   }else{
+    setChosen(null);
+   }
+  }else{
+   setChosen(id);
+   if(!window.history.state||window.history.state.sub!=='rail-lesson'||window.history.state.unitId!==id){
+    window.history.pushState({page:'railway',sub:'rail-lesson',unitId:id},'','#railway/lesson-'+id);
+   }
+  }
+ }
+ function returnToRailLessons(event:React.MouseEvent<HTMLElement>){
+  const card=event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement;
+  if(card)anchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)};
+  if(window.history.state?.sub==='rail-lesson'){
+   window.history.back();
+  }else{
+   setChosen(null);
+  }
+ }
  const terms=unit?unit.words.flatMap(bg=>railTerms.filter(t=>t.bg===bg)).filter((t,i,a)=>a.findIndex(x=>x.bg===t.bg)===i):[];
  function tasks(u:Unit,oral=false):Task[]{const selected=u.words.flatMap(bg=>railTerms.filter(t=>t.bg===bg&&!railReviewReason(t))),d=dialogues.find(d=>d.id===u.dialogue);return [...shuffle(selected).map((t,i):Task=>({id:`rail-lesson-${u.id}-${oral?'oral':'written'}-${t.id}`,type:oral?'speaking':i%2?'technical':'meaning',prompt:oral?`Произнесите по-болгарски: ${t.ru}`:i%2?`Назовите термин: ${t.ru}`:`Объясните значение: ${t.bg}`,bg:oral?t.bg:undefined,answers:[oral||i%2?t.bg:t.ru],options:!oral&&!(i%2)?shuffle([t.ru,...shuffle(railTerms.filter(x=>x.ru!==t.ru)).slice(0,3).map(x=>x.ru)]):undefined,explanation:`${t.bg} — ${t.ru}`,source:t.source,wordId:t.id,skill:'Технический урок · '+u.title,level:'B2'})),...(d?d.lines.filter((_,i)=>i%2).map((l,i):Task=>({id:`rail-situation-${u.id}-${i}`,type:oral?'speaking':'dialogue',prompt:`Ответьте в учебной ситуации: ${l.ru}`,bg:oral?l.bg:undefined,answers:[l.bg],explanation:l.ru,source:'/sources/professional-contexts.html',skill:'Профессиональное общение',level:'B2'})):[])];}
- return <section className="rail-lessons"><h3>Профессиональные уроки · {units.length}</h3><div className="unit-grid expandable-grid">{units.map((u,i)=><Fragment key={u.id}><button className="panel unit-card" aria-expanded={chosen===u.id} onClick={event=>{anchor.current={element:event.currentTarget,top:event.currentTarget.getBoundingClientRect().top};setChosen(chosen===u.id?null:u.id);}}><span className="tag">Урок {i+1}</span><h3>{u.title}</h3><p>Термины, объяснения, перевод, разговорная ситуация и проверка</p></button>{chosen===u.id&&<div className="inline-expansion"><article className="panel rail-lesson"><button className="text-btn" onClick={event=>{const card=event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement;if(card)anchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)};setChosen(null);}}>← Все профессиональные уроки</button><h2>{u.title}</h2><p>{u.explanation}</p><div className="info-banner">{u.language}</div><div className="rail-lesson-photos">{photos.filter(p=>u.photo.includes(p.subject)).map(p=><figure key={p.id}><PhotoImage sizes="(max-width:480px) 90vw, 480px" src={p.path} alt={p.bg} loading="lazy" decoding="async"/><figcaption>{p.bg} · <a href={p.source} target="_blank" rel="noreferrer">{p.author} · {p.license}</a></figcaption></figure>)}</div><div className="forms-table">{terms.map(t=><div key={t.id}><strong lang="bg">{t.bg}</strong><span>{t.ru}</span><button className="icon-btn" aria-label={`Озвучить термин урока ${t.bg}`} onClick={()=>speak(t.bg,notify)}>▶</button></div>)}</div>{(()=>{const d=dialogues.find(d=>d.id===u.dialogue);return d&&<><h3>Учебная ситуация: {d.title}</h3>{d.lines.map((l,i)=><div className="example-box" key={i}><p lang="bg">{l.bg}<button className="icon-btn" onClick={()=>speak(l.bg,notify)} aria-label="Прослушать реплику урока">▶</button></p><p>{l.ru}</p></div>)}</>;})()}<div className="settings-actions"><button className="btn primary" onClick={()=>launch(tasks(u))}>Письменный экзамен · {tasks(u).length} заданий</button><button className="btn secondary" onClick={()=>launch(tasks(u,true))}>Устные ответы по теме</button></div><p className="editorial-note">Авторский языковой урок. Официальные процедуры и допустимые технические значения определяются действующей документацией.</p></article></div>}</Fragment>)}</div></section>;
+ return <section className="rail-lessons"><h3>Профессиональные уроки · {units.length}</h3><div className="unit-grid expandable-grid">{units.map((u,i)=><Fragment key={u.id}><button className="panel unit-card" aria-expanded={chosen===u.id} onClick={event=>toggleChosen(event,u.id)}><span className="tag">Урок {i+1}</span><h3>{u.title}</h3><p>Термины, объяснения, перевод, разговорная ситуация и проверка</p></button>{chosen===u.id&&<div className="inline-expansion"><article className="panel rail-lesson"><button className="text-btn" onClick={returnToRailLessons}>← Все профессиональные уроки</button><h2>{u.title}</h2><p>{u.explanation}</p><div className="info-banner">{u.language}</div><div className="rail-lesson-photos">{photos.filter(p=>u.photo.includes(p.subject)).map(p=><figure key={p.id}><PhotoImage sizes="(max-width:480px) 90vw, 480px" src={p.path} alt={p.bg} loading="lazy" decoding="async"/><figcaption>{p.bg} · <a href={p.source} target="_blank" rel="noreferrer">{p.author} · {p.license}</a></figcaption></figure>)}</div><div className="forms-table">{terms.map(t=><div key={t.id}><strong lang="bg">{t.bg}</strong><span>{t.ru}</span><button className="icon-btn" aria-label={`Озвучить термин урока ${t.bg}`} onClick={()=>speak(t.bg,notify)}>▶</button></div>)}</div>{(()=>{const d=dialogues.find(d=>d.id===u.dialogue);return d&&<><h3>Учебная ситуация: {d.title}</h3>{d.lines.map((l,i)=><div className="example-box" key={i}><p lang="bg">{l.bg}<button className="icon-btn" onClick={()=>speak(l.bg,notify)} aria-label="Прослушать реплику урока">▶</button></p><p>{l.ru}</p></div>)}</>;})()}<div className="settings-actions"><button className="btn primary" onClick={()=>launch(tasks(u))}>Письменный экзамен · {tasks(u).length} заданий</button><button className="btn secondary" onClick={()=>launch(tasks(u,true))}>Устные ответы по теме</button></div><p className="editorial-note">Авторский языковой урок. Официальные процедуры и допустимые технические значения определяются действующей документацией.</p></article></div>}</Fragment>)}</div></section>;
 }
+
