@@ -85,10 +85,19 @@ export default function PracticePlayer({
       }
     };
     document.addEventListener("keydown", key);
+    const vv = window.visualViewport;
+    const onViewportResize = () => {
+      const active = document.activeElement as HTMLElement | null;
+      if (active && (active.classList.contains("exercise-input") || active.tagName === "INPUT")) {
+        active.scrollIntoView?.({ behavior: "smooth", block: "center" });
+      }
+    };
+    vv?.addEventListener("resize", onViewportResize);
     return () => {
       document.body.style.overflow = overflow;
       previous?.focus({ preventScroll: true });
       document.removeEventListener("keydown", key);
+      vv?.removeEventListener("resize", onViewportResize);
       releaseRecognition();
       stopSpeech();
     };
@@ -483,6 +492,11 @@ export default function PracticePlayer({
                     className="exercise-input"
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
+                    onFocus={(e) => {
+                      setTimeout(() => {
+                        (e.target as HTMLElement)?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+                      }, 150);
+                    }}
                     disabled={checked}
                     aria-label="Ответ на задание"
                     placeholder="Введите ответ…"

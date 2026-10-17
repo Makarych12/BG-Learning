@@ -2790,6 +2790,18 @@ function Lesson({
     setChecked(false);
     setCorrect(false);
   }, [session.index]);
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const onViewportResize = () => {
+      const active = document.activeElement as HTMLElement | null;
+      if (active && (active.classList.contains("exercise-input") || active.tagName === "INPUT")) {
+        active.scrollIntoView?.({ behavior: "smooth", block: "center" });
+      }
+    };
+    vv.addEventListener("resize", onViewportResize);
+    return () => vv.removeEventListener("resize", onViewportResize);
+  }, []);
   const response =
     exercise?.type === "order"
       ? tokens.map((i) => options.current[i]).join(" ")
@@ -3020,6 +3032,11 @@ function Lesson({
                 autoFocus
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
+                onFocus={(e) => {
+                  setTimeout(() => {
+                    (e.target as HTMLElement)?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+                  }, 150);
+                }}
                 disabled={checked}
                 aria-label="Ваш ответ"
                 placeholder="Напишите ответ по-болгарски…"
