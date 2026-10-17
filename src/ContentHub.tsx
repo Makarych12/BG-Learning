@@ -1,5 +1,7 @@
+import type {LessonUnit} from "./grammar-units";
 import { useState, useEffect, useLayoutEffect, useRef, useMemo, lazy, Suspense, Fragment } from "react";
 import { sentenceReviewReason, railReviewReason } from "./content-quality";
+const WritingWorkshop=lazy(()=>import("./WritingWorkshop"));
 const RailAcademy=lazy(()=>import("./RailAcademy"));
 const RailLessons=lazy(()=>import("./RailLessons"));
 async function verbTasks(...args:Parameters<typeof import('./grammar-practice')['verbTasks']>){return (await import('./grammar-practice')).verbTasks(...args);}
@@ -104,6 +106,14 @@ export default function ContentHub({
     [checked, setChecked] = useState(false),
     [queueCount, setQueueCount] = useState(0),
     [practiceIds, setPracticeIds] = useState<string[]>([]);
+  const [lessonContent,setLessonContent]=useState<LessonUnit|null>(null);
+  const [lessonError,setLessonError]=useState(false),[lessonRetry,setLessonRetry]=useState(0);
+  useEffect(()=>{
+    let alive=true;setLessonError(false);
+    if(!activeUnit?.startsWith('advanced-'))return;
+    void import('./advanced-lessons').then(m=>m.loadAdvancedLesson(activeUnit)).then(unit=>{if(alive)setLessonContent(unit);}).catch(()=>{if(alive)setLessonError(true);});
+    return()=>{alive=false;};
+  },[activeUnit,lessonRetry]);
   const playing = useRef(false);
   const expansionAnchor = useRef<{element: HTMLElement; top: number} | null>(null);
   function toggleExpansion(event: React.MouseEvent<HTMLElement>, id: string, current: string | null, set: (id: string | null) => void) {
@@ -832,16 +842,17 @@ export default function ContentHub({
             ))}
           </div>
           {mode === "grammar" && <VerbReference notify={notify} launch={launch} revision={installed} />}
+          {mode==='courses' && (level==='C1'||level==='C2') && <p className="course-count">{grammarUnits.filter(u=>u.level===level).length} полных уроков · {grammarUnits.filter(u=>u.level===level).reduce((total,u)=>total+(u.taskCount??u.tasks.length),0)} заданий · чтение, диалоги и аудирование</p>}
           <div className="unit-grid expandable-grid">
-            {grammarUnits.filter(u => u.level === level).map(u => <Fragment key={u.id}>
+            {grammarUnits.filter(u => u.level === level).map(summary => { const u=lessonContent?.id===summary.id?lessonContent:summary; return <Fragment key={u.id}>
               <button className="panel unit-card" aria-expanded={activeUnit === u.id} aria-controls={`lesson-${u.id}`}
                 onClick={event => toggleExpansion(event, u.id, activeUnit, setActiveUnit)}>
-                <span className="tag">{u.level} · {u.tasks.length} заданий</span>
-                <h3>{u.title}</h3><p>{u.rule}</p>
+                <span className="tag">{u.level} · {summary.taskCount ?? summary.tasks.length} заданий</span>
+                <h3>{summary.title}</h3><p>{summary.rule}</p>
                 <span>{activeUnit === u.id ? 'Свернуть тему' : 'Изучить тему'} <ArrowRight size={16}/></span>
               </button>
               {activeUnit === u.id && <div className="inline-expansion" id={`lesson-${u.id}`}>
-            <article className="panel grammar-unit">
+            {u.summaryOnly ? <div className="panel lesson-loading" role={lessonError?'alert':'status'}>{lessonError?<><p>Не удалось загрузить урок. Сохранённый прогресс не затронут.</p><button className="btn secondary" onClick={()=>setLessonRetry(n=>n+1)}>Повторить загрузку урока</button></>:<p>Загружаем выбранный урок…</p>}</div> : <article className="panel grammar-unit">
               <button className="text-btn" onClick={event => { const card = event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement; if(card) expansionAnchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)}; setActiveUnit(null); }}>
                 <ArrowLeft size={15} /> К темам
               </button>
@@ -869,6 +880,7 @@ export default function ContentHub({
                   <small>{e.ru}</small>
                 </div>
               ))}
+              {u.workshop && <Suspense fallback={<p>Открываем письменную практику…</p>}><WritingWorkshop key={u.id} lessonId={u.id} workshop={u.workshop}/></Suspense>}
               <div className="settings-actions">
                 <button
                   className="btn secondary"
@@ -924,9 +936,9 @@ export default function ContentHub({
                 url={u.source}
                 label="Грамматический справочник · примеры составлены для обучения"
               />
-            </article>
+            </article>}
               </div>}
-            </Fragment>)}
+            </Fragment>})}
           </div>
           {mode === "courses" && (
             <div className="course-practice-panel panel">

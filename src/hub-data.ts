@@ -8,7 +8,8 @@ export function loadHubData(mode:HubMode):Promise<Data>{
  let pending=loaded.get(mode);if(pending)return pending;
  pending=(async()=>{
   const data={...empty};const jobs:Promise<void>[]=[];
-  if(['courses','grammar','plan'].includes(mode))jobs.push(import('./grammar-units').then(m=>{data.grammarUnits=m.grammarUnits;}));
+  if(mode==='courses')jobs.push(Promise.all([import('./grammar-units'),import('./academy-catalog')]).then(([m,a])=>{data.grammarUnits=[...m.grammarUnits.filter(u=>u.level!=='C1'&&u.level!=='C2'),...a.academyCatalog];}));
+  if(['grammar','plan'].includes(mode))jobs.push(import('./grammar-units').then(m=>{data.grammarUnits=m.grammarUnits;}));
   if(mode==='dialogues')jobs.push(import('./dialogues').then(m=>{data.dialogues=m.dialogues;}));
   if(mode==='railway')jobs.push(import('./rail-dialogues.json').then(m=>{data.dialogues=m.default as Data['dialogues'];}));
   if(mode==='railway')jobs.push(import('./railway').then(m=>{data.railTerms=m.railTerms;data.railExamples=m.railExamples;data.railSources=m.railSources;}));

@@ -5,7 +5,7 @@ export function audioKey(text: string) {
   for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619) >>> 0;
   return hash.toString(16).padStart(8, '0');
 }
-type State = { status: 'idle' | 'loading' | 'playing' | 'error'; text: string; source: string; error: string; rate: number; volume: number };
+type State = { status: 'idle' | 'loading' | 'playing' | 'paused' | 'error'; text: string; source: string; error: string; rate: number; volume: number };
 let state: State = { status: 'idle', text: '', source: '', error: '', rate: .85, volume: .85 };
 const listeners = new Set<() => void>();
 export const audioState = () => state;
@@ -14,6 +14,7 @@ const update = (change: Partial<State>) => { state = { ...state, ...change }; li
 let element: HTMLAudioElement | null = null, context: AudioContext | null = null, analyser: AnalyserNode | null = null, gain: GainNode | null = null;
 let normalizationTimer: ReturnType<typeof setInterval> | null = null;
 let clearSequence: (()=>void) | null = null;
+let pauseWatchdog: (() => void) | null = null, resumeWatchdog: (() => void) | null = null;
 let generation = 0, cancelPending: (() => void) | null = null;
 const aliases=new Map<string,Promise<Record<string,string>>>();
 export function prepareAudio(text?:string):Promise<Record<string,string>> {
@@ -74,8 +75,25 @@ function normalizeVolume() {
     if (rms > .025) gain.gain.setTargetAtTime(state.volume * Math.max(.55,Math.min(1.8,.14/rms)), context.currentTime, .16);
   },120);
 }
+export function pauseSpeech() {
+  if (state.status !== 'playing') return;
+  pauseWatchdog?.(); stopNormalization();
+  if (state.source.startsWith('Системный')) speechSynthesis.pause();
+  else element?.pause();
+  update({status:'paused'});
+}
+export async function resumeSpeech() {
+  if (state.status !== 'paused') return;
+  const token = generation;
+  try {
+    if (state.source.startsWith('Системный')) speechSynthesis.resume();
+    else { await context?.resume(); if (token !== generation) return; await element?.play(); }
+    if (token === generation) {resumeWatchdog?.(); update({status:'playing'}); normalizeVolume();}
+  } catch { if(token === generation) {stopSpeech(); update({status:'error',error:'Не удалось продолжить звук. Повторите воспроизведение.'});} }
+}
 export function stopSpeech() {
   stopNormalization();
+  pauseWatchdog = resumeWatchdog = null;
   clearSequence?.(); clearSequence = null;
   generation++;
   cancelPending?.(); cancelPending = null;
@@ -91,10 +109,13 @@ async function playFile(url: string, token: number, source: string): Promise<boo
     const finish = (ok: boolean) => {
       if (done) return; done = true; clearTimeout(timeout); stopNormalization();
       audio.onended = audio.onerror = audio.onplaying = null;
+      pauseWatchdog = resumeWatchdog = null;
       cancelPending = null; if (!ok) audio.pause(); resolve(ok);
     };
     // A stalled request must not leave the lesson locked indefinitely.
-    const timeout = setTimeout(() => finish(false), 90000);
+    let timeout = setTimeout(() => finish(false), 90000);
+    pauseWatchdog = () => clearTimeout(timeout);
+    resumeWatchdog = () => {clearTimeout(timeout);timeout=setTimeout(()=>finish(false),90000);};
     cancelPending = () => finish(false);
     audio.onended = () => finish(true);
     audio.onerror = () => finish(false);
@@ -115,8 +136,10 @@ async function systemVoice(text: string, token: number) {
   return new Promise<boolean>(resolve => {
     const utterance = new SpeechSynthesisUtterance(text); utterance.voice = voice; utterance.lang = 'bg-BG'; utterance.rate = state.rate; utterance.volume = state.volume;
     let finished = false;
-    const done = (ok: boolean) => { if (finished) return; finished = true; clearTimeout(timeout); cancelPending = null; resolve(ok); };
-    const timeout = setTimeout(() => { speechSynthesis.cancel(); done(false); }, 90000);
+    const done = (ok: boolean) => { if (finished) return; finished = true; clearTimeout(timeout); pauseWatchdog = resumeWatchdog = null; cancelPending = null; resolve(ok); };
+    let timeout = setTimeout(() => { speechSynthesis.cancel(); done(false); }, 90000);
+    pauseWatchdog = () => clearTimeout(timeout);
+    resumeWatchdog = () => {clearTimeout(timeout);timeout=setTimeout(()=>{speechSynthesis.cancel();done(false);},90000);};
     cancelPending = () => done(false);
     utterance.onend = () => done(true); utterance.onerror = () => done(false);
     utterance.onstart = () => { if (token === generation) update({ status: 'playing', source: 'Системный голос bg-BG · сигнал недоступен' }); };

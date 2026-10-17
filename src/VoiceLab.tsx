@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useSyncExternalStore } from "react";
 import { voiceScenarios, type VoiceScenario, type VoiceTheme } from "./voice-scenarios";
-import { speak, stopSpeech } from "./speech";
+import { speak, stopSpeech, pauseSpeech, resumeSpeech, configureAudio, audioState, subscribeAudio } from "./speech";
 import type { Level } from "./content";
 
 interface VoiceLabProps {
@@ -9,7 +9,7 @@ interface VoiceLabProps {
 }
 
 const THEME_NAMES: Record<VoiceTheme | "all", string> = {
-  all: "Все темы (305)",
+  all: "Все темы",
   store: "Магазин и покупки",
   transit: "Транспорт и вокзал",
   work: "Работа и коллеги",
@@ -28,6 +28,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   const [selectedTheme, setSelectedTheme] = useState<VoiceTheme | "all">("all");
   const [selectedLevel, setSelectedLevel] = useState<Level | "all">("all");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const playback = useSyncExternalStore(subscribeAudio, audioState);
   const [speed, setSpeed] = useState<number>(0.85);
 
   // Interaction mode & speech recognition
@@ -49,6 +50,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   });
 
   const recognitionRef = useRef<any>(null);
+  const sessionRef = useRef<HTMLDivElement>(null);
 
   const speechSupported = typeof window !== "undefined" && !!(
     (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
@@ -64,21 +66,25 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
 
   const currentScenario: VoiceScenario | undefined = filteredScenarios[currentIndex] || filteredScenarios[0];
 
-  useEffect(() => {
+  const releaseRecognition = (updateState=true) => {
+    const r=recognitionRef.current;recognitionRef.current=null;
+    if(r){r.onresult=r.onend=r.onerror=r.onstart=null;try{r.abort();}catch{}}
+    if(updateState)setIsRecording(false);
+  };
+  const resetScenario = () => {
     // Reset inputs on scenario change
     setSpeechTranscript("");
     setTypedInput("");
     setIsEvaluated(false);
     setStatusMessage("");
     setActiveTurn("initial");
+    if (sessionRef.current) sessionRef.current.scrollTop=0;
     stopSpeech();
-    if (recognitionRef.current) {
-      try { recognitionRef.current.abort(); } catch {}
-    }
-    setIsRecording(false);
-  }, [currentIndex, selectedTheme, selectedLevel]);
+    releaseRecognition();
+  };
+  useEffect(resetScenario, [currentIndex, selectedTheme, selectedLevel]);
 
-  useEffect(()=>()=>{stopSpeech();const current=recognitionRef.current;if(current){current.onresult=current.onend=current.onerror=null;try{current.abort();}catch{}}},[]);
+  useEffect(()=>()=>{stopSpeech();releaseRecognition(false);},[]);
 
   const partnerPrompt = activeTurn === "initial"
     ? currentScenario?.partnerPromptBg
@@ -99,6 +105,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   // Play audio helper
   const playAudio = (text?: string, rate = speed) => {
     if (!text) return;
+    releaseRecognition();
     speak(text, notify, rate);
   };
 
@@ -116,6 +123,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
       return;
     }
 
+    releaseRecognition();
     const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     const r = new SpeechRec();
     r.lang = "bg-BG";
@@ -152,6 +160,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
 
     try {
       stopSpeech();
+      setIsRecording(true);
       r.start();
     } catch {
       setIsRecording(false);
@@ -169,7 +178,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
 
     const normUser = norm(userText);
     const normTarget = norm(targetResponse);
-    const validAlts = (currentScenario.alternatives || []).map(norm);
+    const validAlts = (activeTurn === "initial" ? currentScenario.alternatives || [] : []).map(norm);
 
     const matchedExact = normUser === normTarget || validAlts.includes(normUser);
     const wordsUser = normUser.split(" ");
@@ -177,10 +186,10 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
     const commonWords = wordsUser.filter((w) => wordsTarget.includes(w));
     const overlapRatio = commonWords.length / Math.max(1, wordsTarget.length);
 
-    if (matchedExact || overlapRatio >= 0.75) {
+    if (matchedExact && !!normUser) {
       setStatusMessage("Отлично! Ответ распознан верно и грамматически точен.");
       notify("Великолепно! Фраза принята.");
-      const updated = { ...completedIds, [currentScenario.id]: true };
+      const updated = { ...completedIds, ...(!currentScenario.followUp || activeTurn === "followUp" ? {[currentScenario.id]: true} : {}) };
       setCompletedIds(updated);
       try {
         localStorage.setItem("chameleon_voice_completed", JSON.stringify(updated));
@@ -212,6 +221,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   }, [isEvaluated, useTextInput, typedInput, speechTranscript, targetResponse]);
 
   const handleNext = () => {
+    resetScenario();
     if (currentIndex < filteredScenarios.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
@@ -220,6 +230,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
   };
 
   const handlePrev = () => {
+    resetScenario();
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
     } else {
@@ -247,7 +258,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
         <div>
           <span className="hero-tag" style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", padding: "4px 10px", borderRadius: "12px", fontSize: "0.8rem", fontWeight: 600 }}>
-            ГОЛОСОВОЙ РЕЖИМ · 305 РАЗГОВОРНЫХ СИТУАЦИЙ
+            ГОЛОСОВОЙ РЕЖИМ · {voiceScenarios.length} РАЗГОВОРНЫХ СИТУАЦИЙ
           </span>
           <h2 style={{ margin: "0.5rem 0 0.25rem 0", fontSize: "1.6rem" }}>
             Речевая практика и диалоги
@@ -302,8 +313,12 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
         </div>
       </div>
 
+      <div className="voice-playback" aria-label="Воспроизведение реплики">
+        <span role="status">{playback.status === 'loading' ? 'Загружаем звук…' : playback.status === 'playing' ? 'Воспроизводится реплика' : playback.status === 'paused' ? 'Пауза' : playback.status === 'error' ? playback.error : 'Готово к прослушиванию'}</span>
+        <div><button className="btn secondary" disabled={!['playing','paused'].includes(playback.status)} onClick={()=>playback.status === 'paused' ? void resumeSpeech() : pauseSpeech()}>{playback.status === 'paused' ? 'Продолжить звук' : 'Пауза'}</button><button className="btn secondary" disabled={playback.status === 'idle'} onClick={stopSpeech}>Остановить звук</button></div>
+      </div>
       {/* Scenario Context Card */}
-      <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "1.5rem", marginBottom: "1.5rem" }}>
+      <div ref={sessionRef} className="voice-session" role="region" aria-label="Текущая разговорная ситуация" tabIndex={0} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "1.5rem", marginBottom: "1.5rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ background: "#059669", color: "#fff", padding: "2px 8px", borderRadius: "6px", fontSize: "0.75rem", fontWeight: 700 }}>
@@ -369,7 +384,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
             </span>
             <button
               className="btn secondary"
-              onClick={() => setUseTextInput(!useTextInput)}
+              onClick={() => {releaseRecognition();setUseTextInput(!useTextInput);}}
               style={{ fontSize: "0.75rem", padding: "2px 8px" }}
             >
               {useTextInput ? "🎤 Включить микрофон" : "⌨ Ввод текста"}
@@ -412,7 +427,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
                       key={s}
                       className={`btn ${speed === s ? "primary" : "secondary"}`}
                       style={{ fontSize: "0.72rem", padding: "2px 6px" }}
-                      onClick={() => setSpeed(s)}
+                      onClick={() => {setSpeed(s);configureAudio({rate:s});}}
                     >
                       {s}x
                     </button>
@@ -435,6 +450,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
               <div style={{ display: "flex", gap: "8px", marginBottom: "0.5rem" }}>
                 <input
                   type="text"
+                  aria-label="Ответ на болгарском"
                   value={typedInput}
                   onChange={(e) => setTypedInput(e.target.value)}
                   onKeyDown={(e) => { if (e.key === "Enter" && typedInput.trim()) evaluateResponse(typedInput); }}
@@ -524,6 +540,9 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
             <button
               className="btn primary"
               onClick={() => {
+                stopSpeech();
+                releaseRecognition();
+                if (sessionRef.current) sessionRef.current.scrollTop=0;
                 setActiveTurn("followUp");
                 setSpeechTranscript("");
                 setTypedInput("");
@@ -539,7 +558,7 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
       </div>
 
       {/* Navigation Footer */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
+      <div className="voice-navigation" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
         <div style={{ display: "flex", gap: "8px" }}>
           <button className="btn secondary" onClick={handlePrev}>
             ← Предыдущая ситуация
@@ -551,7 +570,8 @@ export const VoiceLab: React.FC<VoiceLabProps> = ({ notify }) => {
         <button
           className="btn secondary"
           onClick={() => {
-            const nextIdx = Math.floor(Math.random() * filteredScenarios.length);
+            resetScenario();
+            const nextIdx = filteredScenarios.length > 1 ? (currentIndex + 1 + Math.floor(Math.random() * (filteredScenarios.length - 1))) % filteredScenarios.length : 0;
             setCurrentIndex(nextIdx);
           }}
           style={{ fontSize: "0.85rem" }}

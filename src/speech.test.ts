@@ -55,3 +55,15 @@ it('выбранный урок воспроизводится офлайн бе
 it('подготовка аудио на главной не скачивает полный каталог',async()=>{
  const s=await import('./speech');await s.prepareAudio();expect(fetch).not.toHaveBeenCalled();
 });
+it('пауза сохраняет позицию и очередь, продолжение не загружает звук заново',async()=>{
+ const s=await import('./speech');s.speak('вода',vi.fn());await flush();
+ const audio=MockAudio.instances[0],before=audio.src,requests=vi.mocked(fetch).mock.calls.length;
+ s.pauseSpeech();expect(s.audioState().status).toBe('paused');expect(audio.pause).toHaveBeenCalled();
+ await s.resumeSpeech();expect(s.audioState().status).toBe('playing');expect(audio.src).toBe(before);expect(vi.mocked(fetch).mock.calls).toHaveLength(requests);
+ s.stopSpeech();expect(s.audioState().status).toBe('idle');
+});
+it('долгая пауза не запускает запасной источник и не теряет запись',async()=>{
+ vi.useFakeTimers();const s=await import('./speech');s.speak('вода',vi.fn());await flush();
+ s.pauseSpeech();await vi.advanceTimersByTimeAsync(120000);expect(s.audioState().status).toBe('paused');expect(vi.mocked(fetch).mock.calls.some(([url])=>String(url).includes('/api/tts'))).toBe(false);
+ await s.resumeSpeech();expect(s.audioState().status).toBe('playing');s.stopSpeech();
+});

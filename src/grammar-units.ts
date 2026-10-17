@@ -1,4 +1,3 @@
-import { advancedLessons } from "./advanced-lessons";
 import type { Level } from "./content";
 import type { Task } from "./library";
 import { extraGrammarTasks } from "./grammar-expansion-tasks";
@@ -12,6 +11,9 @@ export type LessonUnit = {
   examples: { bg: string; ru: string }[];
   tasks: Task[];
   source: string;
+  summaryOnly?: boolean;
+  taskCount?: number;
+  workshop?: {prompt:string;model:string;criteria:string[]};
   reading?: {title: string; bg: string; ru: string};
   conversation?: {speaker: string; bg: string; ru: string}[];
 };
@@ -659,7 +661,7 @@ const rawGrammarUnits: LessonUnit[] = [
 Передайте чужую информацию: Те пристигат. → Те ___.|пристигали|Множественное число: пристигали.`,
   ),
 ];
-export const grammarUnits: LessonUnit[] = [...rawGrammarUnits, ...advancedLessons].map((u) => ({
+export const grammarUnits: LessonUnit[] = rawGrammarUnits.map((u) => ({
   ...u,
   tasks: [...u.tasks, ...(extraGrammarTasks[u.id] || [])].filter((task, index, all) => all.findIndex(other => other.prompt.trim() === task.prompt.trim()) === index),
 }));

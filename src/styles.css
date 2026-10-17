@@ -5812,3 +5812,37 @@ button:has(>.neon-ripple){overflow:clip}
 .answer-feedback:has(>.success-ring),.feedback-correct:has(>.success-ring),.success-orb:has(>.success-ring){overflow:clip}
 .lexeme-detail,.lexeme-heading,.lexeme-heading>div{min-width:0;overflow-wrap:anywhere}
 @media(max-width:760px){.lexeme-heading{gap:12px}.lexeme-heading .sound-button{flex-shrink:0}.forms-table>div{min-width:0;flex-wrap:wrap}}
+/* Voice practice owns a stable scroll region and an inline audio controller. */
+.voice-lab{min-width:0;max-width:100%;overflow-wrap:anywhere;transform:none!important}
+.voice-session{height:clamp(360px,72svh,720px);overflow:auto;overscroll-behavior-y:contain;scrollbar-gutter:stable;scroll-behavior:auto;min-width:0;transform:none!important;contain:layout}
+.voice-lab :where(div,span,input,button){min-width:0;max-width:100%}
+.voice-lab button{white-space:normal;overflow-wrap:anywhere;min-height:44px;line-height:1.5}
+.voice-lab input{font-size:16px!important;width:100%;min-width:0}
+.voice-playback{display:grid;grid-template-rows:minmax(48px,auto) auto;gap:8px;margin:16px 0;padding:12px;background:#111b29;border-radius:12px;min-height:116px}
+.voice-playback>span{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.voice-playback>div{display:flex;flex-wrap:wrap;gap:8px}
+.app:has(.voice-lab)>.audio-dock{display:none}
+.voice-navigation>div{flex-wrap:wrap}
+@media(max-width:760px){
+ .voice-lab{padding:16px!important}
+ .voice-lab .hero-tag{display:inline-block;line-height:1.6}
+ .voice-session{padding:14px!important;height:clamp(320px,68svh,650px)}
+ .voice-session div[style*="justify-content: space-between"]{flex-wrap:wrap;gap:8px}
+ .voice-session div[style*="margin-left: auto"]{flex-wrap:wrap}
+ .voice-session input+button{flex-shrink:0}
+ .voice-session div:has(>input){flex-wrap:wrap}
+ .voice-session div:has(>input)>input{flex-basis:100%}
+ .voice-navigation>div,.voice-navigation>button{width:100%}
+ .voice-navigation>div>button{flex:1}
+}
+.voice-playback{height:132px;grid-template-rows:48px 1fr}
+.voice-playback>span{overflow:auto}
+.lesson-loading{padding:20px;min-height:160px}
+.course-count{font-size:14px;line-height:1.65;color:#bddbcc}
+.writing-workshop{margin:24px 0;padding:18px;border:1px solid #c4e7ff25;border-radius:12px;min-width:0}
+.writing-workshop p,.writing-workshop li{line-height:1.75;font-size:14px;overflow-wrap:anywhere}
+.writing-workshop label{display:block;margin:12px 0;font-size:14px}
+.writing-workshop textarea{display:block;resize:vertical;width:100%;min-height:160px;max-height:420px;font-size:16px;line-height:1.65;box-sizing:border-box;padding:12px}
+.writing-workshop summary{cursor:pointer;padding:12px 0;font-size:14px}
+.voice-playback>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.voice-playback .btn{font-size:12px;padding:8px 6px}
