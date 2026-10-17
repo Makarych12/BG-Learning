@@ -6097,10 +6097,10 @@ button:has(>.neon-ripple){overflow:clip}
     font-size: 16px !important;
     font-weight: 700 !important;
     padding: 12px 20px !important;
-    border-radius: 10px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    white-space: normal !important;
+    text-align: center !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
   }
   .hero-buttons .btn,
   .hero .btn,
@@ -6136,15 +6136,17 @@ button:has(>.neon-ripple){overflow:clip}
   }
   .rating-buttons {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 8px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
   }
   .rating-buttons button {
-    min-height: 48px !important;
+    min-height: 52px !important;
     font-size: 16px !important;
     font-weight: 700 !important;
-    padding: 12px 4px !important;
-    border-radius: 8px !important;
+    padding: 12px 8px !important;
+    border-radius: 10px !important;
+    white-space: normal !important;
+    text-align: center !important;
   }
   .rating-buttons strong {
     font-size: 15px !important;
@@ -6283,16 +6285,23 @@ button:has(>.neon-ripple){overflow:clip}
   }
   .topbar {
     height: 64px !important;
-    padding: 0 16px !important;
+    padding: 0 12px !important;
+    min-width: 0 !important;
   }
   .topbar-actions {
-    gap: 8px !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
   }
   .search-wrap {
-    width: 180px !important;
+    width: min(170px, 40vw) !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
   }
   .search-wrap input {
     font-size: 15px !important;
+    min-width: 0 !important;
+    width: 100% !important;
   }
 }
 
