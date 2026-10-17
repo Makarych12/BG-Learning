@@ -184,12 +184,17 @@ async function fetchCatalog(): Promise<Catalog> {
   }
 }
 let installation: Promise<void> | null = null;
+let installationSignal: AbortSignal | undefined;
 export function installContent(
   catalog: Catalog,
   onProgress: (done: number, total: number) => void,
   signal?: AbortSignal,
-) {
-  if (installation) return installation;
+): Promise<void> {
+  if (installation) {
+    if (installationSignal?.aborted && !signal?.aborted) return installation.catch(() => {}).then(() => installContent(catalog, onProgress, signal));
+    return installation;
+  }
+  installationSignal = signal;
   installation = (async () => {
     let processor:ReturnType<typeof packageProcessor>|null=null;
     try {
@@ -232,6 +237,7 @@ export function installContent(
     } finally { processor?.close(); }
   })().finally(() => {
     installation = null;
+    installationSignal = undefined;
   });
   return installation;
 }

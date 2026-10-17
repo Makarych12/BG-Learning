@@ -18,6 +18,8 @@ const CATEGORY_NAMES: Record<ListeningCategory | "all", string> = {
   monologues: "Рассказы и монологи",
 };
 
+const normalizeAnswer = (value: string) => value.trim().toLowerCase().replace(/[.,!?:;«»"-]/g, "");
+
 export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
   const [selectedCategory, setSelectedCategory] = useState<ListeningCategory | "all">("all");
   const [selectedLevel, setSelectedLevel] = useState<Level | "all">("all");
@@ -81,9 +83,9 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
     if (currentTask.type === "choice" || currentTask.type === "comprehension") {
       isCorrect = selectedOption?.trim().toLowerCase() === currentTask.answer.trim().toLowerCase();
     } else {
-      const cleanUser = userInput.trim().toLowerCase().replace(/[.,!?:;«»"-]/g, "");
-      const cleanAns = currentTask.answer.trim().toLowerCase().replace(/[.,!?:;«»"-]/g, "");
-      isCorrect = cleanUser === cleanAns || cleanUser.includes(cleanAns) || cleanAns.includes(cleanUser);
+      const cleanUser = normalizeAnswer(userInput);
+      const cleanAns = normalizeAnswer(currentTask.answer);
+      isCorrect = !!cleanUser && cleanUser === cleanAns;
     }
 
     if (isCorrect) {
@@ -98,7 +100,9 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
     }
   };
 
+  const resetExercise = () => {setUserInput("");setSelectedOption(null);setIsSubmitted(false);setShowFullTranscript(false);stopSpeech();};
   const handleNext = () => {
+    resetExercise();
     if (currentIndex < filteredTasks.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
@@ -107,6 +111,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
   };
 
   const handlePrev = () => {
+    resetExercise();
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
     } else {
@@ -115,7 +120,8 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
   };
 
   const handleRandom = () => {
-    const nextIdx = Math.floor(Math.random() * filteredTasks.length);
+    resetExercise();
+    const nextIdx = filteredTasks.length > 1 ? (currentIndex + 1 + Math.floor(Math.random() * (filteredTasks.length - 1))) % filteredTasks.length : 0;
     setCurrentIndex(nextIdx);
   };
 
@@ -139,7 +145,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
         <div>
           <span className="hero-tag" style={{ background: "rgba(59, 130, 246, 0.15)", color: "#60a5fa", padding: "4px 10px", borderRadius: "12px", fontSize: "0.8rem", fontWeight: 600 }}>
-            ТРЕНАЖЁР АУДИРОВАНИЯ · 525 УПРАЖНЕНИЙ
+            ТРЕНАЖЁР АУДИРОВАНИЯ · {listeningTasks.length} УПРАЖНЕНИЙ
           </span>
           <h2 style={{ margin: "0.5rem 0 0.25rem 0", fontSize: "1.6rem" }}>
             Лаборатория понимания речи
@@ -240,7 +246,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
           </button>
 
           {/* Speed Controls */}
-          <div style={{ display: "flex", alignItems: "center", gap: "4px", marginLeft: "auto" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "4px", flexWrap: "wrap", marginLeft: "auto" }}>
             <span style={{ fontSize: "0.8rem", opacity: 0.7, marginRight: "4px" }}>Скорость:</span>
             {[0.75, 0.85, 1.0, 1.1].map((s) => (
               <button
@@ -258,7 +264,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
         {/* Interactive Answer Input or Options */}
         <div style={{ marginBottom: "1.5rem" }}>
           {currentTask.type === "choice" || currentTask.type === "comprehension" ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "10px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: "10px" }}>
               {currentTask.options?.map((opt, i) => {
                 const isSelected = selectedOption === opt;
                 const isCorrect = isSubmitted && opt.trim().toLowerCase() === currentTask.answer.trim().toLowerCase();
@@ -320,7 +326,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
                   borderRadius: "8px",
                   background: "rgba(0,0,0,0.3)",
                   border: isSubmitted
-                    ? (userInput.trim().toLowerCase().includes(currentTask.answer.toLowerCase())
+                    ? (!!normalizeAnswer(userInput) && normalizeAnswer(userInput) === normalizeAnswer(currentTask.answer)
                       ? "2px solid #10b981"
                       : "2px solid #ef4444")
                     : "1px solid rgba(255,255,255,0.15)",
@@ -370,7 +376,7 @@ export const ListeningLab: React.FC<ListeningLabProps> = ({ notify }) => {
               <div style={{ fontSize: "0.8rem", textTransform: "uppercase", opacity: 0.6, letterSpacing: "0.05em", marginBottom: "4px" }}>
                 Болгарский текст (оригинал):
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
                 <strong style={{ fontSize: "1.05rem", color: "#60a5fa" }} lang="bg">
                   {currentTask.audioText}
                 </strong>

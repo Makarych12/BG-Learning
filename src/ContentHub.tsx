@@ -1,3 +1,4 @@
+import { useState, useEffect, useLayoutEffect, useRef, useMemo, lazy, Suspense, Fragment } from "react";
 import { sentenceReviewReason, railReviewReason } from "./content-quality";
 const RailAcademy=lazy(()=>import("./RailAcademy"));
 const RailLessons=lazy(()=>import("./RailLessons"));
@@ -6,7 +7,6 @@ async function morphologyTasks(...args:Parameters<typeof import('./grammar-pract
 const VerbReference=lazy(()=>import("./VerbReference"));
 import { practiceLevel } from "./adaptation";
 const PhotoGallery=lazy(()=>import("./PhotoGallery").then(m=>({default:m.PhotoGallery})));
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "react";
 import {
   Search,
   BookOpen,
@@ -105,6 +105,18 @@ export default function ContentHub({
     [queueCount, setQueueCount] = useState(0),
     [practiceIds, setPracticeIds] = useState<string[]>([]);
   const playing = useRef(false);
+  const expansionAnchor = useRef<{element: HTMLElement; top: number} | null>(null);
+  function toggleExpansion(event: React.MouseEvent<HTMLElement>, id: string, current: string | null, set: (id: string | null) => void) {
+    expansionAnchor.current = {element: event.currentTarget, top: event.currentTarget.getBoundingClientRect().top};
+    set(current === id ? null : id);
+  }
+  useLayoutEffect(() => {
+    const anchor = expansionAnchor.current;
+    if (!anchor) return;
+    expansionAnchor.current = null;
+    if (anchor.element.isConnected) window.scrollBy({top: anchor.element.getBoundingClientRect().top - anchor.top, behavior: 'instant'});
+  }, [activeUnit, dialogue, selected?.id]);
+
   useEffect(() => {
     if (initialQuery !== undefined) {
       setQuery(initialQuery);
@@ -127,12 +139,16 @@ export default function ContentHub({
     setResume(await db.practice.get("current"));
     onRefresh();
   }
+  const installationAbort = useRef<AbortController | null>(null);
   async function install(c: Catalog) {
+    const controller = installationAbort.current ??= new AbortController();
+    if (controller.signal.aborted) return;
     setLoading(true);
     try {
-      await installContent(c, (done, total) => setProgress({ done, total }));
-      await refresh();
+      await installContent(c, (done, total) => { if (!controller.signal.aborted) setProgress({ done, total }); }, controller.signal);
+      if (!controller.signal.aborted) await refresh();
     } catch (e) {
+      if (controller.signal.aborted) return;
       notify(
         e instanceof Error
           ? e.message
@@ -150,11 +166,12 @@ export default function ContentHub({
         if (!alive) return;
         setCatalog(c);
         await refresh();
+        if (!alive) return;
         const local = await contentDB.packages.bulkGet(
           c.packages.map((p) => p.id),
         );
         if (
-          !["railway","dialogues"].includes(mode) && c.packages.some(
+          ["library","practice","listening"].includes(mode) && c.packages.some(
             (p, i) =>
               local[i]?.sha256 !== p.sha256 || local[i]?.version !== c.version,
           )
@@ -166,6 +183,7 @@ export default function ContentHub({
       );
     return () => {
       alive = false;
+      installationAbort.current?.abort();
       playing.current = false;
       stopSpeech();
     };
@@ -299,139 +317,10 @@ export default function ContentHub({
     listening: "Библиотека аудирования",
     plan: "Адаптивный маршрут",
   };
-  const unit = grammarUnits.find((u) => u.id === activeUnit);
-  const currentDialogue = dialogues.find((d) => d.id === dialogue);
   const filteredRail = useMemo(()=>railTerms.filter(t => (topic === "all" || topic === t.topic) && (t.bg+" "+t.ru).toLowerCase().includes(query.toLowerCase())),[railTerms,topic,query]);
   useEffect(()=>{ if(mode === "railway")setOffset(0); },[topic,query,mode]);
   const themeTopics = useMemo(()=>Array.from(new Set(railTerms.map((t) => t.topic))),[railTerms]);
-  if(dataError)return <p role="alert">Не удалось загрузить материалы. Повторите открытие раздела.</p>;
-  if(!dataReady)return <p role="status">Загружаем материалы раздела…</p>;
-  return (
-    <Suspense fallback={<p role="status">Открываем раздел…</p>}><section className="content-hub">{!dataReady&&<p role="status">Загружаем материалы раздела…</p>}{dataError&&<p role="alert">Не удалось загрузить материалы. Повторите открытие раздела.</p>}
-      <div className="section-title">
-        <div>
-          <h2>{titles[mode]}</h2>
-          <p>
-            {mode === "library"
-              ? `${catalog?.counts.words.toLocaleString("ru") ?? "…"} словарных статей · ${catalog?.counts.sentences.toLocaleString("ru") ?? "…"} переводных контекста`
-              : "Уроки, практика и ваши реальные результаты"}
-          </p>
-        </div>
-        {!["library", "railway"].includes(mode) && (
-          <select
-            aria-label="Уровень расширенной практики"
-            value={level}
-            onChange={(e) => {
-              setLevel(e.target.value as Level);
-              setActiveUnit(null);
-              setDialogue(null);
-            }}
-          >
-            {levelList.map((l) => (
-              <option key={l}>{l}</option>
-            ))}
-          </select>
-        )}
-      </div>
-      {loading && (
-        <div className="download-progress" role="status">
-          <Download size={17} />
-          <div>
-            <strong>Сохраняем библиотеку для обучения</strong>
-            <small>
-              Пакет {progress.done} из {progress.total} · можно пользоваться уже
-              загруженными материалами
-            </small>
-            <div className="progress-track">
-              <i
-                style={{
-                  width: `${progress.total ? (progress.done / progress.total) * 100 : 0}%`,
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-      {resume && !practice && (
-        <div className="info-banner">
-          <Layers size={20} />
-          <span>
-            Незавершённая практика: {resume.index + 1} из {resume.items.length}{" "}
-            заданий.
-          </span>
-          <button className="btn secondary" onClick={() => setPractice(resume)}>
-            Продолжить <ArrowRight size={16} />
-          </button>
-        </div>
-      )}
-      {mode === "library" && (
-        <>
-          <div className="library-toolbar">
-            <div className="filter-tabs">
-              {[
-                { id: "words", name: "Словарь" },
-                { id: "sentences", name: "Контексты" },
-                { id: "photos", name: "Фотогалерея" },
-                { id: "packages", name: "Загрузки и источники" },
-              ].map((t) => (
-                <button
-                  key={t.id}
-                  className={tab === t.id ? "active" : ""}
-                  onClick={() => {
-                    setTab(t.id as typeof tab);
-                    setOffset(0);
-                  }}
-                >
-                  {t.name}
-                </button>
-              ))}
-            </div>
-            <span className="library-count">
-              <Check size={13} /> {installed.toLocaleString("ru")} статей на
-              устройстве
-            </span>
-          </div>
-          {(tab === "words" || tab === "sentences") && (
-            <div className="library-search">
-              <Search size={19} />
-              <input
-                aria-label="Поиск в большой библиотеке"
-                placeholder="Болгарское слово или русское значение…"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setOffset(0);
-                  setSelected(null);
-                }}
-              />
-              {tab === "words" && (
-                <select
-                  aria-label="Часть речи"
-                  value={pos}
-                  onChange={(e) => {
-                    setPos(e.target.value);
-                    setOffset(0);
-                  }}
-                >
-                  <option value="all">Все части речи</option>
-                  {[
-                    ["noun", "Существительные"],
-                    ["verb", "Глаголы"],
-                    ["adj", "Прилагательные"],
-                    ["adv", "Наречия"],
-                    ["phrase", "Выражения"],
-                    ["pron", "Местоимения"],
-                  ].map(([id, label]) => (
-                    <option value={id} key={id}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
-          )}
-          {tab === "words" && <label className="active-vocabulary-toggle"><input type="checkbox" checked={activeOnly} onChange={e=>{setActiveOnly(e.target.checked);setOffset(0);setSelected(null);}}/> Только активный словарь · {catalog?.counts.activeWords ?? "…"} слов с пятью и более контекстами</label>}
-          {selected && tab === "words" && (
+  const lexemeDetails = selected ? (
             <article className="panel lexeme-detail">
               <div className="lexeme-heading">
                 <div>
@@ -625,15 +514,144 @@ export default function ContentHub({
                 label="Авторы Викисловаря · CC BY-SA 4.0 · статья из открытого словаря"
               />
             </article>
-          )}
-          {tab === "words" && (
-            <div className="word-grid large-dictionary">
-              {lexemes.map((w) => (
+  ) : null;
+  if(dataError)return <p role="alert">Не удалось загрузить материалы. Повторите открытие раздела.</p>;
+  if(dataError)return <p role="alert">Не удалось загрузить материалы. Повторите открытие раздела.</p>;
+  if(!dataReady)return <p role="status">Загружаем материалы раздела…</p>;
+  return (
+    <Suspense fallback={<p role="status">Открываем раздел…</p>}><section className="content-hub">{!dataReady&&<p role="status">Загружаем материалы раздела…</p>}{dataError&&<p role="alert">Не удалось загрузить материалы. Повторите открытие раздела.</p>}
+      <div className="section-title">
+        <div>
+          <h2>{titles[mode]}</h2>
+          <p>
+            {mode === "library"
+              ? `${catalog?.counts.words.toLocaleString("ru") ?? "…"} словарных статей · ${catalog?.counts.sentences.toLocaleString("ru") ?? "…"} переводных контекста`
+              : "Уроки, практика и ваши реальные результаты"}
+          </p>
+        </div>
+        {!["library", "railway"].includes(mode) && (
+          <select
+            aria-label="Уровень расширенной практики"
+            value={level}
+            onChange={(e) => {
+              setLevel(e.target.value as Level);
+              setActiveUnit(null);
+              setDialogue(null);
+            }}
+          >
+            {levelList.map((l) => (
+              <option key={l}>{l}</option>
+            ))}
+          </select>
+        )}
+      </div>
+      {loading && (
+        <div className="download-progress" role="status">
+          <Download size={17} />
+          <div>
+            <strong>Сохраняем библиотеку для обучения</strong>
+            <small>
+              Пакет {progress.done} из {progress.total} · можно пользоваться уже
+              загруженными материалами
+            </small>
+            <div className="progress-track">
+              <i
+                style={{
+                  width: `${progress.total ? (progress.done / progress.total) * 100 : 0}%`,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      {resume && !practice && (
+        <div className="info-banner">
+          <Layers size={20} />
+          <span>
+            Незавершённая практика: {resume.index + 1} из {resume.items.length}{" "}
+            заданий.
+          </span>
+          <button className="btn secondary" onClick={() => setPractice(resume)}>
+            Продолжить <ArrowRight size={16} />
+          </button>
+        </div>
+      )}
+      {mode === "library" && (
+        <>
+          <div className="library-toolbar">
+            <div className="filter-tabs">
+              {[
+                { id: "words", name: "Словарь" },
+                { id: "sentences", name: "Контексты" },
+                { id: "photos", name: "Фотогалерея" },
+                { id: "packages", name: "Загрузки и источники" },
+              ].map((t) => (
                 <button
-                  className="panel word-card dictionary-button"
-                  key={w.id}
+                  key={t.id}
+                  className={tab === t.id ? "active" : ""}
                   onClick={() => {
-                    setSelected(w);
+                    setTab(t.id as typeof tab);
+                    setOffset(0);
+                  }}
+                >
+                  {t.name}
+                </button>
+              ))}
+            </div>
+            <span className="library-count">
+              <Check size={13} /> {installed.toLocaleString("ru")} статей на
+              устройстве
+            </span>
+          </div>
+          {(tab === "words" || tab === "sentences") && (
+            <div className="library-search">
+              <Search size={19} />
+              <input
+                aria-label="Поиск в большой библиотеке"
+                placeholder="Болгарское слово или русское значение…"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setOffset(0);
+                  setSelected(null);
+                }}
+              />
+              {tab === "words" && (
+                <select
+                  aria-label="Часть речи"
+                  value={pos}
+                  onChange={(e) => {
+                    setPos(e.target.value);
+                    setOffset(0);
+                  }}
+                >
+                  <option value="all">Все части речи</option>
+                  {[
+                    ["noun", "Существительные"],
+                    ["verb", "Глаголы"],
+                    ["adj", "Прилагательные"],
+                    ["adv", "Наречия"],
+                    ["phrase", "Выражения"],
+                    ["pron", "Местоимения"],
+                  ].map(([id, label]) => (
+                    <option value={id} key={id}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
+          )}
+          {tab === "words" && <label className="active-vocabulary-toggle"><input type="checkbox" checked={activeOnly} onChange={e=>{setActiveOnly(e.target.checked);setOffset(0);setSelected(null);}}/> Только активный словарь · {catalog?.counts.activeWords ?? "…"} слов с пятью и более контекстами</label>}
+          {tab === "words" && (
+            <div className="word-grid large-dictionary expandable-grid">
+              {lexemes.map((w) => (
+                <Fragment key={w.id}><button
+                  className="panel word-card dictionary-button"
+                  aria-expanded={selected?.id === w.id}
+                  onClick={event => {
+                    expansionAnchor.current={element:event.currentTarget,top:event.currentTarget.getBoundingClientRect().top};
+                    setSelected(selected?.id === w.id ? null : w);
                     setChecked(false);
                   }}
                 >
@@ -644,7 +662,7 @@ export default function ContentHub({
                   <h3 lang="bg">{w.stress ?? w.bg}</h3>
                   <p>{w.ru}</p>
                   <small>{w.grammar}</small>
-                </button>
+                </button>{selected?.id === w.id && <div className="inline-expansion">{lexemeDetails}</div>}</Fragment>
               ))}
             </div>
           )}
@@ -814,19 +832,29 @@ export default function ContentHub({
             ))}
           </div>
           {mode === "grammar" && <VerbReference notify={notify} launch={launch} revision={installed} />}
-          {unit ? (
+          <div className="unit-grid expandable-grid">
+            {grammarUnits.filter(u => u.level === level).map(u => <Fragment key={u.id}>
+              <button className="panel unit-card" aria-expanded={activeUnit === u.id} aria-controls={`lesson-${u.id}`}
+                onClick={event => toggleExpansion(event, u.id, activeUnit, setActiveUnit)}>
+                <span className="tag">{u.level} · {u.tasks.length} заданий</span>
+                <h3>{u.title}</h3><p>{u.rule}</p>
+                <span>{activeUnit === u.id ? 'Свернуть тему' : 'Изучить тему'} <ArrowRight size={16}/></span>
+              </button>
+              {activeUnit === u.id && <div className="inline-expansion" id={`lesson-${u.id}`}>
             <article className="panel grammar-unit">
-              <button className="text-btn" onClick={() => setActiveUnit(null)}>
+              <button className="text-btn" onClick={event => { const card = event.currentTarget.closest(".inline-expansion")?.previousElementSibling as HTMLElement; if(card) expansionAnchor.current={element:card,top:Math.max(80,card.getBoundingClientRect().top)}; setActiveUnit(null); }}>
                 <ArrowLeft size={15} /> К темам
               </button>
-              <span className="tag">{unit.level}</span>
-              <h2>{unit.title}</h2>
-              <p>{unit.rule}</p>
+              <span className="tag">{u.level}</span>
+              <h2>{u.title}</h2>
+              <p>{u.rule}</p>
               <h3>Как образуется</h3>
-              <p>{unit.formation}</p>
+              <p>{u.formation}</p>
               <h3>Отличие от русского и частые ошибки</h3>
-              <p>{unit.contrast}</p>
-              {unit.examples.map((e) => (
+              <p>{u.contrast}</p>
+              {u.reading && <section className="lesson-reading"><h3>{u.reading.title}</h3><p lang="bg">{u.reading.bg}</p><details><summary>Смысл текста по-русски</summary><p>{u.reading.ru}</p></details><button className="btn secondary" onClick={()=>speak(u.reading!.bg,notify)}>Прослушать текст</button></section>}
+              {u.conversation && <section><h3>Диалог по теме</h3>{u.conversation.map((line,i)=><div className="example-box" key={i}><strong>{line.speaker}</strong><p lang="bg">{line.bg}<button className="icon-btn" aria-label="Прослушать реплику" onClick={()=>speak(line.bg,notify)}><Volume2 size={18}/></button></p><small>{line.ru}</small></div>)}</section>}
+              {u.examples.map((e) => (
                 <div className="example-box" key={e.bg}>
                   <p lang="bg">
                     {e.bg}
@@ -848,7 +876,7 @@ export default function ContentHub({
                   onClick={async () => {
                     try {
                       await cacheAudio(
-                        unit.examples.map((e) => e.bg),
+                        u.examples.map((e) => e.bg),
                         (d, t) => setAudioProgress(`${d}/${t}`),
                       );
                       notify("Аудио урока сохранено для офлайн-практики.");
@@ -864,27 +892,27 @@ export default function ContentHub({
                     ? `Загрузка ${audioProgress}`
                     : "Скачать аудио урока"}
                 </button>
-                {grammarUnits.slice(0,9).some(u=>u.id===unit.id) && <button className="btn secondary" onClick={async()=>launch(await verbTasks(unit.level,18,grammarUnits.findIndex(u=>u.id===unit.id)))}>Новые упражнения по этому времени · разные глаголы</button>}
+                {grammarUnits.slice(0,9).some(candidate=>candidate.id===u.id) && <button className="btn secondary" onClick={async()=>launch(await verbTasks(u.level,18,grammarUnits.findIndex(candidate=>candidate.id===u.id)))}>Новые упражнения по этому времени · разные глаголы</button>}
                 <button
                   className="btn primary"
-                  onClick={() => launch(unit.tasks)}
+                  onClick={() => launch(u.tasks)}
                 >
-                  Закрепить тему · {unit.tasks.length} задания{" "}
+                  Закрепить тему · {u.tasks.length} задания{" "}
                   <ArrowRight size={16} />
                 </button>
                 <button
                   className="btn secondary"
                   onClick={() =>
                     launch(
-                      unit.examples.map((e, i) => ({
-                        id: `unit-dictation-${unit.id}-${i}`,
+                      u.examples.map((e, i) => ({
+                        id: `unit-dictation-${u.id}-${i}`,
                         type: "dictation",
                         prompt: "Прослушайте пример и запишите его.",
                         bg: e.bg,
                         answers: [e.bg],
                         explanation: e.ru,
                         skill: "Аудирование",
-                        level: unit.level,
+                        level: u.level,
                       })),
                     )
                   }
@@ -893,32 +921,13 @@ export default function ContentHub({
                 </button>
               </div>
               <SourceLink
-                url={unit.source}
+                url={u.source}
                 label="Грамматический справочник · примеры составлены для обучения"
               />
             </article>
-          ) : (
-            <div className="unit-grid">
-              {grammarUnits
-                .filter((u) => u.level === level)
-                .map((u) => (
-                  <button
-                    key={u.id}
-                    className="panel unit-card"
-                    onClick={() => setActiveUnit(u.id)}
-                  >
-                    <span className="tag">
-                      {u.level} · {u.tasks.length} задания
-                    </span>
-                    <h3>{u.title}</h3>
-                    <p>{u.rule}</p>
-                    <span>
-                      Изучить тему <ArrowRight size={16} />
-                    </span>
-                  </button>
-                ))}
-            </div>
-          )}
+              </div>}
+            </Fragment>)}
+          </div>
           {mode === "courses" && (
             <div className="course-practice-panel panel">
               <h3>Практика по уровню {level}</h3>
@@ -1064,35 +1073,17 @@ export default function ContentHub({
               Профессиональный диктант
             </button>
           </div>
-          <div className="unit-grid">
-            {dialogues
-              .filter((d) => d.topic === "Железная дорога")
-              .map((d) => (
-                <button
-                  key={d.id}
-                  className="panel unit-card"
-                  onClick={() => {
-                    setDialogue(d.id);
-                  }}
-                >
-                  <span className="tag">{d.level}</span>
-                  <h3>{d.title}</h3>
-                  <p>{d.lines.length} реплик с переводом и озвучиванием</p>
-                  <span>
-                    Открыть разговор <Mic size={16} />
-                  </span>
-                </button>
-              ))}
+          <div className="unit-grid expandable-grid">
+            {dialogues.filter(d => d.topic === "Железная дорога").map(d => <Fragment key={d.id}>
+              <button className="panel unit-card" aria-expanded={dialogue === d.id}
+                onClick={event => {stopSpeech(); toggleExpansion(event, d.id, dialogue, setDialogue);}}>
+                <span className="tag">{d.level}</span><h3>{d.title}</h3><p>{d.lines.length} реплик с переводом и озвучиванием</p>
+                <span>Открыть разговор <Mic size={16}/></span>
+              </button>
+              {dialogue === d.id && <div className="inline-expansion"><DialogueView d={d} notify={notify} launch={launch}
+                showTranslations={showTranslations} setShowTranslations={setShowTranslations}/></div>}
+            </Fragment>)}
           </div>
-          {currentDialogue && (
-            <DialogueView
-              d={currentDialogue}
-              notify={notify}
-              launch={launch}
-              showTranslations={showTranslations}
-              setShowTranslations={setShowTranslations}
-            />
-          )}
           <details className="panel technical-examples">
             <summary>Технические формулировки · {railExamples.length}</summary>
             {railExamples.map((e) => (
@@ -1129,48 +1120,17 @@ export default function ContentHub({
               </button>
             ))}
           </div>
-          {currentDialogue ? (
-            <>
-              <button
-                className="text-btn"
-                onClick={() => {
-                  setDialogue(null);
-                  playing.current = false;
-                  stopSpeech();
-                }}
-              >
-                <ArrowLeft size={16} /> Все разговоры
+          <div className="unit-grid expandable-grid">
+            {dialogues.filter(d => d.level === level).map(d => <Fragment key={d.id}>
+              <button className="panel unit-card" aria-expanded={dialogue === d.id}
+                onClick={event => {stopSpeech(); toggleExpansion(event, d.id, dialogue, setDialogue);}}>
+                <span className="tag">{d.topic} · {d.level}</span><h3>{d.title}</h3>
+                <p>{d.lines[0].bg}</p><span>{d.lines.length} реплик <ArrowRight size={15}/></span>
               </button>
-              <DialogueView
-                d={currentDialogue}
-                notify={notify}
-                launch={launch}
-                showTranslations={showTranslations}
-                setShowTranslations={setShowTranslations}
-              />
-            </>
-          ) : (
-            <div className="unit-grid">
-              {dialogues
-                .filter((d) => d.level === level)
-                .map((d) => (
-                  <button
-                    key={d.id}
-                    className="panel unit-card"
-                    onClick={() => setDialogue(d.id)}
-                  >
-                    <span className="tag">
-                      {d.topic} · {d.level}
-                    </span>
-                    <h3>{d.title}</h3>
-                    <p>{d.lines[0].bg}</p>
-                    <span>
-                      {d.lines.length} реплик <ArrowRight size={15} />
-                    </span>
-                  </button>
-                ))}
-            </div>
-          )}
+              {dialogue === d.id && <div className="inline-expansion"><DialogueView d={d} notify={notify} launch={launch}
+                showTranslations={showTranslations} setShowTranslations={setShowTranslations}/></div>}
+            </Fragment>)}
+          </div>
         </>
       )}
       {mode === "listening" && (

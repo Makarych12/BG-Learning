@@ -8,7 +8,7 @@ import {
   type Mechanic,
   type Lexeme,
 } from "./library";
-import { grammarUnits } from "./curriculum";
+import { grammarUnits } from "./grammar-units";
 import { dialogues } from "./dialogues";
 import { railTerms, railExamples } from "./railway";
 import { checkAnswer, normalizeAnswer, shuffle, db } from "./storage";

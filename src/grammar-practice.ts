@@ -1,6 +1,7 @@
 import { verbReviewReason } from './verb-review';
 import {jsonResource} from "./json-resource";
-import { verbParadigms, paradigm, grammarUnits } from './curriculum';
+import { verbParadigms, paradigm } from './verb-forms';
+import { grammarUnits } from './grammar-units';
 import { db, shuffle } from './storage';
 import type { Task, Mechanic } from './library';
 import type { Level } from './content';

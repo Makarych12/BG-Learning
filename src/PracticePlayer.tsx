@@ -77,7 +77,7 @@ export default function PracticePlayer({
     document.addEventListener("keydown", key);
     return () => {
       document.body.style.overflow = overflow;
-      previous?.focus();
+      previous?.focus({ preventScroll: true });
       document.removeEventListener("keydown", key);
       recognition.current?.abort();
       stopSpeech();

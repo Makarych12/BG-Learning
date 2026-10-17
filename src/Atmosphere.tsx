@@ -1,3 +1,4 @@
+import {modestHardware, useEconomyEffects} from "./effects";
 import { profileRuntime, currentRuntimeProfile } from "./performance";
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
@@ -17,10 +18,10 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
     const visibility = () => { root.classList.toggle('paused', document.hidden); root.parentElement?.classList.toggle('inactive', document.hidden); };
     document.addEventListener('visibilitychange', visibility);visibility();
     const hardware = navigator as Navigator & { deviceMemory?:number };
-    const economy = matchMedia('(max-width: 760px), (pointer: coarse)').matches || (hardware.deviceMemory !== undefined && hardware.deviceMemory <= 4) || (hardware.hardwareConcurrency > 0 && hardware.hardwareConcurrency <= 4);
+    let economy = modestHardware(hardware);
     root.parentElement?.classList.toggle('economy',economy);
     const media = gsap.matchMedia();
-    const adapt = () => { const sample=currentRuntimeProfile(); if(sample && sample.frames>=30 && (sample.observedFps < 40 || sample.p95FrameMs > 45)){root.parentElement?.classList.add('economy');media.revert();} };
+    const adapt = () => { const sample=currentRuntimeProfile(); if(sample && sample.frames>=30 && (sample.observedFps < 40 || sample.p95FrameMs > 45)){economy=true;root.parentElement?.classList.add('economy');media.revert();} };
     window.addEventListener('chameleon-profile',adapt);
     media.add('(prefers-reduced-motion: no-preference) and (min-width: 761px) and (hover: hover)', () => {
       if (reduced || economy) return;
@@ -62,7 +63,8 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
       return () => {cleaners.delete(prune); cancelAnimationFrame(frame);window.removeEventListener('resize',scroll); window.removeEventListener('scroll', scroll); window.removeEventListener('pointermove', pointer); document.removeEventListener('pointerout', leave); window.removeEventListener('blur', reset); for(const [card,t] of active){t.x.tween.kill();t.y.tween.kill();gsap.set(card,{clearProps:'transform'});}active.clear(); };
     });
     const press = (e: PointerEvent) => {
-      if (reduced || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (reduced || economy || document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (matchMedia('(pointer: coarse)').matches) return;
       const button = (e.target as Element).closest<HTMLElement>('button');
       if (!button || button.hasAttribute('disabled')) return;
       const box = button.getBoundingClientRect(), dot = document.createElement('i');
@@ -81,7 +83,7 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
       for(const clean of cleaners)clean();
       for(const item of animated)if(!item.isConnected){viewport?.unobserve(item);animated.delete(item);}
       for(const record of records)for(const node of record.addedNodes)if(node instanceof HTMLElement){observe(node);node.querySelectorAll(".chameleon,.audio-orb").forEach(observe);}
-      if (reduced || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (reduced || economy || document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       for (const record of records) for (const node of record.addedNodes) {
         if (!(node instanceof HTMLElement)) continue;
         const items = [node, ...node.querySelectorAll('.answer-feedback, .success-orb, .feedback-correct, .feedback-wrong')];
@@ -97,7 +99,7 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
         }
       }
     });
-    effects.observe(document.body, { childList: true, subtree: true });
+    if (!economy && !reduced) effects.observe(root.parentElement ?? document.body, { childList: true, subtree: true });
     return () => {for(const t of tweens)t.kill();tweens.clear();document.querySelectorAll('.neon-ripple,.success-ring').forEach(el=>el.remove());finishProfile(); window.removeEventListener("chameleon-profile",adapt); media.revert(); document.removeEventListener('visibilitychange', visibility);viewport?.disconnect();animated.clear(); effects.disconnect(); document.removeEventListener('pointerdown', press); };
   }, [reduced]);
   return <div className={`aurora-scene ${reduced ? 'still' : ''}`} aria-hidden="true" ref={layer}><div className="aurora-wave wave-one"/><div className="aurora-wave wave-two"/><div className="aurora-wave wave-three"/><div className="aurora-mesh"/><div className="aurora-grain"/></div>;
@@ -105,11 +107,12 @@ export function Atmosphere({ reduced }: { reduced: boolean }) {
 
 export function AudioDock({ reduced = false }: { reduced?: boolean }) {
   const [dismissed, setDismissed] = useState(false);
+  const economy = useEconomyEffects();
   const state = useSyncExternalStore(subscribeAudio, audioState);
   const canvas = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const el = canvas.current, ctx = el?.getContext('2d');
-    if (!el || !ctx || state.status !== 'playing' || state.source.includes('Системный') || reduced || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!el || !ctx || state.status !== 'playing' || state.source.includes('Системный') || reduced || economy || dismissed || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let frame = 0;
     const data = new Uint8Array(64),colors=Array.from({length:32},(_,i)=>`hsl(${155+i*3} 85% 73%)`);
     const draw = () => {
@@ -123,7 +126,7 @@ export function AudioDock({ reduced = false }: { reduced?: boolean }) {
     };
     const resume = () => { if (!document.hidden) { cancelAnimationFrame(frame); frame = requestAnimationFrame(draw); } };
     document.addEventListener('visibilitychange', resume); frame = requestAnimationFrame(draw); return () => { document.removeEventListener('visibilitychange', resume); cancelAnimationFrame(frame); ctx.clearRect(0,0,240,40); };
-  }, [state.status, state.source, reduced, dismissed]);
+  }, [state.status, state.source, reduced, dismissed, economy]);
   useEffect(() => { if (state.status === "loading") setDismissed(false); }, [state.status]);
   if (!state.text || dismissed) return null;
   return <aside className={`audio-dock ${state.status}`} aria-label="Управление звуком">

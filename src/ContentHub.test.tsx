@@ -1,0 +1,24 @@
+import {it,expect,vi,afterEach} from 'vitest';
+import {render,screen,cleanup} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import ContentHub from './ContentHub';
+import {defaultSettings} from './storage';
+import * as library from './library';
+vi.mock('./hub-data',()=>({useHubData:()=>({ready:true,error:false,data:{grammarUnits:['Первая тема','Вторая тема'].map((title,i)=>({id:'test-'+i,level:'C1',title,rule:'Правило',formation:'Образование',contrast:'Отличия',examples:[],tasks:[],source:'/test'})),dialogues:[],railTerms:[],railExamples:[],railSources:{},photos:[]}})}));
+afterEach(()=>{cleanup();vi.restoreAllMocks();});
+it('раскрывает выбранную тему под карточкой и компенсирует смещение при переключении без установки учебных пакетов',async()=>{
+ vi.spyOn(library,'getCatalog').mockResolvedValue({version:'test',packages:[{id:'large-pack',sha256:'new'}],counts:{words:0,sentences:0}} as any);
+ const install=vi.spyOn(library,'installContent');
+ const scroll=vi.spyOn(window,'scrollBy').mockImplementation(()=>{});
+ const user=userEvent.setup();render(<ContentHub mode="courses" profile={{...defaultSettings,level:'C1'}} notify={vi.fn()} onRefresh={vi.fn()}/>);
+ const first=await screen.findByRole('button',{name:/Первая тема/});
+ const second=screen.getByRole('button',{name:/Вторая тема/});
+ await user.click(first);
+ expect(first.nextElementSibling?.querySelector('h2')?.textContent).toBe('Первая тема');
+ vi.spyOn(second,'getBoundingClientRect').mockReturnValueOnce({top:260} as DOMRect).mockReturnValue({top:180} as DOMRect);
+ await user.click(second);
+ expect(first.getAttribute('aria-expanded')).toBe('false');
+ expect(second.nextElementSibling?.querySelector('h2')?.textContent).toBe('Вторая тема');
+ expect(scroll).toHaveBeenLastCalledWith({top:-80,behavior:'instant'});
+ expect(install).not.toHaveBeenCalled();
+});

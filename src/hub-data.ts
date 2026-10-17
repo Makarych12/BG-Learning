@@ -1,14 +1,14 @@
 import {finishNavigation} from "./performance-metrics";
 import { useEffect,useState } from 'react';
 import type { HubMode } from './ContentHub';
-type Data={grammarUnits:typeof import('./curriculum')['grammarUnits'];dialogues:typeof import('./dialogues')['dialogues'];railTerms:typeof import('./railway')['railTerms'];railExamples:typeof import('./railway')['railExamples'];railSources:Partial<typeof import('./railway')['railSources']>;photos:import('./photo-data').Photo[]};
+type Data={grammarUnits:typeof import('./grammar-units')['grammarUnits'];dialogues:typeof import('./dialogues')['dialogues'];railTerms:typeof import('./railway')['railTerms'];railExamples:typeof import('./railway')['railExamples'];railSources:Partial<typeof import('./railway')['railSources']>;photos:import('./photo-data').Photo[]};
 const empty:Data={grammarUnits:[],dialogues:[],railTerms:[],railExamples:[],railSources:{},photos:[]};
 const loaded=new Map<HubMode,Promise<Data>>();
 export function loadHubData(mode:HubMode):Promise<Data>{
  let pending=loaded.get(mode);if(pending)return pending;
  pending=(async()=>{
   const data={...empty};const jobs:Promise<void>[]=[];
-  if(['courses','grammar','plan'].includes(mode))jobs.push(import('./curriculum').then(m=>{data.grammarUnits=m.grammarUnits;}));
+  if(['courses','grammar','plan'].includes(mode))jobs.push(import('./grammar-units').then(m=>{data.grammarUnits=m.grammarUnits;}));
   if(mode==='dialogues')jobs.push(import('./dialogues').then(m=>{data.dialogues=m.dialogues;}));
   if(mode==='railway')jobs.push(import('./rail-dialogues.json').then(m=>{data.dialogues=m.default as Data['dialogues'];}));
   if(mode==='railway')jobs.push(import('./railway').then(m=>{data.railTerms=m.railTerms;data.railExamples=m.railExamples;data.railSources=m.railSources;}));

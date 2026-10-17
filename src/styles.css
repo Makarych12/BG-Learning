@@ -5738,3 +5738,77 @@ html:has(.modal-backdrop) .audio-dock:not(:hover):not(:focus-within){opacity:.94
 @media(max-width:600px){.virtual-verb-results{--verb-columns:2}}
 .card-face>picture,.rail-lesson-photos figure>picture{display:block;width:100%}
 .app .offscreen-motion{animation-play-state:paused!important}
+
+/* Modest hardware uses a static aurora; do not restart it in later theme rules. */
+.economy .aurora-wave,.economy .chameleon{animation:none!important;will-change:auto;filter:none}
+.economy .aurora-wave{background:radial-gradient(ellipse,#74d9b52b,transparent 70%);opacity:.4}
+.economy .sidebar,.economy .audio-dock,.economy .modal-backdrop{backdrop-filter:none}
+.economy .panel img{animation:none!important}
+.expandable-grid{grid-template-columns:repeat(3,minmax(0,1fr));overflow-anchor:none}
+.inline-expansion{grid-column:1/-1;min-width:0}
+.inline-expansion>.panel{margin:0}
+.unit-card[aria-expanded=true]{border-color:#b7eabe88!important}
+.rail-topic-grid .topic-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;min-width:0;height:auto}
+.rail-topic-grid .topic-card h3{margin:14px 0 8px}
+.rail-topic-grid .topic-card>span{margin-top:auto;padding-top:12px}
+.topic-card p,.unit-card p,.mechanic-card p{font-size:13px;line-height:1.65}
+.topic-card>span,.unit-card>span,.lesson-detail,.content-note{font-size:12px}
+.brand small{font-size:11px}
+.sidebar nav button{font-size:13px}
+.modal,.listening-lab,.extended-player{min-width:0;overflow-wrap:anywhere}
+.modal{overscroll-behavior:contain;max-height:calc(100dvh - 32px)}
+.modal-heading .icon-btn{flex-shrink:0}
+.audio-dock{max-height:calc(100dvh - 24px);overflow-y:auto}
+.word-tokens,.sentence-built{flex-wrap:wrap;min-width:0}
+.word-tokens button,.sentence-built button{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+@media(max-width:760px){
+  .main-shell,main,.content-hub,.panel,.unit-grid>*,.rail-topic-grid>*{min-width:0}
+  .expandable-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .modal-backdrop{padding:12px;align-items:center}
+  .modal{width:100%;max-width:100%;padding:18px;max-height:calc(100dvh - 24px);transform:none!important}
+  .modal .answer-options{grid-template-columns:minmax(0,1fr)}
+  .modal input,.modal textarea,.modal select{max-width:100%;font-size:16px}
+  .listening-lab{padding:16px!important}
+  .listening-lab div{min-width:0;max-width:100%}
+  .listening-lab button{max-width:100%;white-space:normal;overflow-wrap:anywhere;min-height:42px}
+  .listening-lab .hero-tag{display:inline-block;line-height:1.6}
+  .listening-lab input{min-width:0;max-width:100%;font-size:16px!important}
+  .audio-dock{right:12px;bottom:max(12px,env(safe-area-inset-bottom));max-width:calc(100vw - 24px)}
+  .audio-dock button{min-width:36px;min-height:36px}
+  .rail-topic-grid .topic-card h3,.rail-topic-grid .topic-card p,.rail-topic-grid .topic-card>span{grid-column:auto;max-width:100%;overflow-wrap:anywhere}
+  .nav-label,.header-subtitle,.eyebrow{line-height:1.5}
+}
+@media(max-width:480px){
+  .expandable-grid{grid-template-columns:minmax(0,1fr)}
+  .listening-lab>div>div[style*="padding: 1.5rem"]{padding:14px!important}
+  .settings-actions>.btn{max-width:100%;white-space:normal;line-height:1.5}
+  .unit-card,.grammar-unit{padding:18px}
+  .rail-lessons .unit-grid{max-height:none;overflow:visible;contain:none}
+}
+.breadcrumb{font-size:12px;min-width:0;white-space:normal}
+.search-wrap input{font-size:11px;min-width:0}
+.dictionary-button>p,.dictionary-button>small{font-size:13px;line-height:1.65}
+.mechanic-card>span,.dialogue-card small,.unit-card .tag{font-size:12px;line-height:1.6}
+.railway-hero p,.railway-hero small{font-size:13px;line-height:1.65}
+.lesson-reading p{line-height:1.85;white-space:pre-line}
+.lesson-reading summary{cursor:pointer;padding:10px 0;font-size:14px;color:#b9dbca}
+@media(max-width:480px){
+ .topbar{gap:8px;padding-inline:16px}
+ .breadcrumb{font-size:11px;flex:1;max-width:95px}
+ .search-wrap{width:clamp(100px,36vw,155px)}
+ .topbar-actions{gap:8px}
+ .topic-card p,.unit-card p,.mechanic-card p,.dictionary-button>p{font-size:13px}
+ .topic-card>span,.unit-card>span,.mechanic-card>span{font-size:12px}
+ .stat-card small,.stat-card p{font-size:10px;line-height:1.5}
+ .hero-tag{font-size:10px;line-height:1.6;letter-spacing:.5px}
+}
+.modal.panel{background:linear-gradient(145deg,#26333b,#1b2230 55%,#1a2530)!important;transform-style:flat}
+@media(max-width:760px){
+ html:has(.audio-dock.playing,.audio-dock.loading,.audio-dock.error) .modal-backdrop{align-items:flex-start}
+ html:has(.audio-dock.playing,.audio-dock.loading,.audio-dock.error) .modal{max-height:calc(100dvh - 230px)}
+}
+/* Decorative feedback must never enlarge the scrollable page. */
+button:has(>.neon-ripple){overflow:clip}
+.answer-feedback:has(>.success-ring),.feedback-correct:has(>.success-ring),.success-orb:has(>.success-ring){overflow:clip}
+.lexeme-detail,.lexeme-heading,.lexeme-heading>div{min-width:0;overflow-wrap:anywhere}
+@media(max-width:760px){.lexeme-heading{gap:12px}.lexeme-heading .sound-button{flex-shrink:0}.forms-table>div{min-width:0;flex-wrap:wrap}}

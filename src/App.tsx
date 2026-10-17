@@ -1,3 +1,4 @@
+import {useEconomyEffects} from "./effects";
 import {beginNavigation,finishNavigation} from "./performance-metrics";
 import { PerformancePanel } from "./performance";
 import {
@@ -253,6 +254,7 @@ function Chameleon() {
   );
 }
 function App() {
+  const economy = useEconomyEffects();
   const [page, setPage] = useState<Page>("home"),
     [profile, setProfile] = useState<Profile>(defaultSettings),
     [ready, setReady] = useState(false),
@@ -435,8 +437,8 @@ function App() {
     </Suspense>
   );
   return (
-    <MotionConfig reducedMotion={profile.reducedMotion ? "always" : "user"}>
-      <div className={profile.reducedMotion ? "app reduce-motion" : "app"}>
+    <MotionConfig reducedMotion={profile.reducedMotion || economy ? "always" : "user"}>
+      <div className={`app${profile.reducedMotion ? " reduce-motion" : ""}${economy ? " economy" : ""}`}>
         <Atmosphere reduced={profile.reducedMotion} />
         <AudioDock reduced={profile.reducedMotion} />
         <a href="#main" className="skip">
@@ -629,7 +631,7 @@ function App() {
               </div>
             ) : (
               <AnimatePresence mode="wait">
-                <motion.div key={page} {...fade}>
+                <motion.div key={page} {...(economy ? {initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:.12}} : fade)}>
                   {page === "home" && (
                     <>
                       <div className="page-heading">
@@ -1066,8 +1068,7 @@ function App() {
                             <h2>{l.name}</h2>
                             <p>{l.description}</p>
                             <div className="lesson-detail">
-                              <BookOpen size={16} /> Вводная практика · 5
-                              заданий
+                              <BookOpen size={16} /> {l.id === "C1" || l.id === "C2" ? "Развёрнутые уроки · чтение, диалоги и практика" : "Вводная практика · 5 заданий"}
                             </div>
                             <div className="tags">
                               <span>Лексика</span>
@@ -1078,7 +1079,9 @@ function App() {
                               className="btn secondary"
                               onClick={() => {
                                 saveProfile({ ...profile, level: l.id });
-                                startLesson(l.id);
+                                if (l.id === "C1" || l.id === "C2") {
+                                  document.querySelector(".content-hub")?.scrollIntoView({block:"start",behavior:"instant"});
+                                } else startLesson(l.id);
                               }}
                             >
                               Начать урок <ArrowRight size={16} />
@@ -1556,7 +1559,7 @@ function Modal({
     return () => {
       document.body.style.overflow = overflow;
       document.removeEventListener("keydown", key);
-      prev?.focus();
+      prev?.focus({ preventScroll: true });
     };
   }, []);
   return (
