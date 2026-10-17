@@ -1,4 +1,7 @@
 import {useEconomyEffects} from "./effects";
+import {SectionBoundary} from "./SectionBoundary";
+import {loadCourseCounts} from "./hub-data";
+import type {CourseCounts} from "./academy-counts";
 import {beginNavigation,finishNavigation} from "./performance-metrics";
 import { PerformancePanel } from "./performance";
 import {
@@ -254,6 +257,7 @@ function Chameleon() {
   );
 }
 function App() {
+  const [academyCounts,setAcademyCounts]=useState<CourseCounts>();
   const [courseStart,setCourseStart]=useState<{level:Level;request:number}>();
   const economy = useEconomyEffects();
   const [page, setPage] = useState<Page>("home"),
@@ -333,6 +337,12 @@ function App() {
     }
   }, [toast]);
   const notify = useCallback((text: string) => setToast(text),[]);
+  useEffect(()=>{
+    if(page!=="academy"||academyCounts)return;
+    let alive=true;
+    void loadCourseCounts().then(counts=>{if(alive)setAcademyCounts(counts);}).catch(()=>{if(alive)notify("Не удалось загрузить программу Академии. Откройте раздел повторно.");});
+    return()=>{alive=false;};
+  },[page,academyCounts,notify]);
   const saveProfile = async (p: Profile) => {
     try {
       await db.settings.put(p);
@@ -373,15 +383,18 @@ function App() {
       memory.some((m) => m.wordId === w.id && m.card.due <= new Date()),
   ).length,[memory]);
   const currentLevel = levels.find((l) => l.id === profile.level)!;
+  async function openAcademyLevel(level: Level) {
+    if(level!==profile.level)await saveProfile({...profile,level});
+    if(page!=="academy")go("academy");
+    setCourseStart(previous=>({level,request:(previous?.request??0)+1}));
+  }
   async function startLesson(
     level: Level = profile.level,
     mode = "lesson",
     ids?: string[],
   ) {
     if (mode === "lesson" && !ids) {
-      if(level!==profile.level)await saveProfile({...profile,level});
-      if (page !== "academy") go("academy");
-      setCourseStart(previous=>({level,request:(previous?.request??0)+1}));
+      await openAcademyLevel(level);
       return;
     }
     const pool =
@@ -641,6 +654,7 @@ function App() {
             ) : (
               <AnimatePresence mode="wait">
                 <motion.div key={page} {...(economy ? {initial:{opacity:0},animate:{opacity:1},exit:{opacity:0},transition:{duration:.12}} : fade)}>
+                  <SectionBoundary>
                   {page === "home" && (
                     <>
                       <div className="page-heading">
@@ -1074,7 +1088,9 @@ function App() {
                             <h2>{l.name}</h2>
                             <p>{l.description}</p>
                             <div className="lesson-detail">
-                              <BookOpen size={16} /> Полная программа · темы, примеры и практика
+                              <BookOpen size={16} /> {academyCounts
+                                ? `${academyCounts[l.id].lessons} уроков · ${academyCounts[l.id].tasks} заданий`
+                                : "Загружаем программу…"}
                             </div>
                             <div className="tags">
                               <span>Лексика</span>
@@ -1083,7 +1099,7 @@ function App() {
                             </div>
                             <button
                               className="btn secondary"
-                              onClick={() => void startLesson(l.id)}
+                              onClick={() => void openAcademyLevel(l.id)}
                             >
                               Начать урок <ArrowRight size={16} />
                             </button>
@@ -1239,6 +1255,7 @@ function App() {
                       showSources={() => setModal("sources")}
                     />
                   )}
+                  </SectionBoundary>
                 </motion.div>
               </AnimatePresence>
             )}

@@ -1,6 +1,12 @@
 import {finishNavigation} from "./performance-metrics";
 import { useEffect,useState } from 'react';
 import type { HubMode } from './ContentHub';
+import type {Level} from './content';
+import {courseCounts,type CourseCounts} from './academy-counts';
+export async function loadCourseCounts():Promise<CourseCounts>{
+ const {grammarUnits}=await loadHubData('courses');
+ return Object.fromEntries(['A1','A2','B1','B2','C1','C2'].map(level=>[level,courseCounts(grammarUnits,level as Level)])) as CourseCounts;
+}
 type Data={grammarUnits:typeof import('./grammar-units')['grammarUnits'];dialogues:typeof import('./dialogues')['dialogues'];railTerms:typeof import('./railway')['railTerms'];railExamples:typeof import('./railway')['railExamples'];railSources:Partial<typeof import('./railway')['railSources']>;photos:import('./photo-data').Photo[]};
 const empty:Data={grammarUnits:[],dialogues:[],railTerms:[],railExamples:[],railSources:{},photos:[]};
 const loaded=new Map<HubMode,Promise<Data>>();

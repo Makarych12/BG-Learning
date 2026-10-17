@@ -1,9 +1,10 @@
 import { beforeEach, afterEach, it, expect } from "vitest";
-import { render, screen, waitFor, cleanup } from "@testing-library/react";
+import { render, screen, waitFor, cleanup, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { db, defaultSettings } from "./storage";
 import { grammarUnits } from "./grammar-units";
+import {academyCatalog} from './academy-catalog';
 beforeEach(async () => {
   await Promise.all([
     db.settings.clear(),
@@ -15,6 +16,24 @@ beforeEach(async () => {
   await db.settings.put(defaultSettings);
 });
 afterEach(() => cleanup());
+it('шесть больших карточек показывают полный доступный курс и открывают выбранный C2',async()=>{
+  const user=userEvent.setup();render(<App/>);
+  await user.click(await screen.findByRole('button',{name:'Академия A1–C2'}));
+  await screen.findByText('22 уроков · 367 заданий');
+  const cards=Array.from(document.querySelectorAll('.academy-card'));
+  expect(cards).toHaveLength(6);
+  for(const [index,level] of ['A1','A2','B1','B2','C1','C2'].entries()){
+    const units=[...grammarUnits,...academyCatalog].filter(unit=>unit.level===level);
+    const tasks=units.reduce((sum,unit)=>sum+(unit.taskCount??unit.tasks.length),0);
+    expect(within(cards[index] as HTMLElement).getByText(`${units.length} уроков · ${tasks} заданий`)).toBeTruthy();
+  }
+  await user.click(within(cards[5] as HTMLElement).getByRole('button',{name:'Начать урок'}));
+  await screen.findByRole('heading',{name:grammarUnits.find(unit=>unit.level==='C2')!.title,level:2});
+  await user.click(screen.getByRole('button',{name:/Закрепить тему/}));
+  await screen.findByText('1 / 24');
+  expect((await db.practice.get('current'))?.items.every(task=>task.level==='C2')).toBe(true);
+  expect(await db.sessions.get('active')).toBeUndefined();
+},15000);
 it("Основной вход открывает полный урок Академии и восстанавливает его после перезапуска", async () => {
   await db.settings.update('profile',{onboarded:true});
   const user = userEvent.setup();

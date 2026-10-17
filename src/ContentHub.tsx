@@ -47,6 +47,7 @@ import {
 import { mechanics } from "./mechanics";
 import { adaptTasks } from "./task-adaptation";
 import { useHubData } from "./hub-data";
+import {courseCounts} from "./academy-counts";
 async function generateTasks(...args:Parameters<typeof import('./practice')['generateTasks']>){return (await import('./practice')).generateTasks(...args);}
 
 import type { Dialogue } from "./curriculum";
@@ -863,7 +864,7 @@ export default function ContentHub({
             ))}
           </div>
           {mode === "grammar" && <VerbReference notify={notify} launch={launch} revision={installed} />}
-          {mode==='courses' && <p className="course-count">{grammarUnits.filter(u=>u.level===level).length} полных уроков · {grammarUnits.filter(u=>u.level===level).reduce((total,u)=>total+(u.taskCount??u.tasks.length),0)} заданий</p>}
+          {mode==='courses' && <p className="course-count">{courseCounts(grammarUnits,level).lessons} полных уроков · {courseCounts(grammarUnits,level).tasks} заданий</p>}
           <div className="unit-grid expandable-grid">
             {grammarUnits.filter(u => u.level === level).map(summary => { const u=lessonContent?.id===summary.id?lessonContent:summary; return <Fragment key={u.id}>
               <button className="panel unit-card" aria-expanded={activeUnit === u.id} aria-controls={`lesson-${u.id}`}
