@@ -1,6 +1,6 @@
 import {PhotoImage} from "./PhotoImage";
 import { railReviewReason } from "./content-quality";
-import { Fragment, useLayoutEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { railTerms } from './railway';
 import { professionalDialogues as dialogues } from './rail-conversations';
 import { shuffle } from './storage';
